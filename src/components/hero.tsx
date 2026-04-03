@@ -50,14 +50,14 @@ function ScrollMorphImage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"],
+    offset: ["start start", "end start"],
   });
 
-  const eagleOpacity = useTransform(scrollYProgress, [0.3, 0.5], [1, 0]);
-  const calcOpacity = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
-  const eagleScale = useTransform(scrollYProgress, [0.3, 0.5], [1, 0.8]);
-  const calcScale = useTransform(scrollYProgress, [0.4, 0.6], [0.8, 1]);
-  const rotateY = useTransform(scrollYProgress, [0.3, 0.6], [0, 180]);
+  // Eagle visible immediately, fades out as user scrolls
+  const eagleOpacity = useTransform(scrollYProgress, [0.0, 0.3], [1, 0]);
+  const calcOpacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]);
+  const eagleScale = useTransform(scrollYProgress, [0.0, 0.3], [1, 0.85]);
+  const calcScale = useTransform(scrollYProgress, [0.2, 0.4], [0.85, 1]);
 
   return (
     <div ref={containerRef} className="relative w-full h-[500px] lg:h-[600px]">
@@ -69,7 +69,7 @@ function ScrollMorphImage() {
         <Img
           src="/images/eagle.jpg"
           alt="Орёл — символ точности аудита"
-          className="w-full h-full object-contain drop-shadow-2xl"
+          className="w-full h-full object-contain drop-shadow-2xl mix-blend-multiply"
         />
       </motion.div>
 
@@ -81,7 +81,7 @@ function ScrollMorphImage() {
         <Img
           src="/images/calculator.png"
           alt="Калькулятор — точный расчёт"
-          className="w-full h-full object-contain drop-shadow-2xl"
+          className="w-full h-full object-contain drop-shadow-2xl mix-blend-multiply"
         />
       </motion.div>
     </div>
