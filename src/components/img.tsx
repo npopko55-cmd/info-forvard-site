@@ -1,13 +1,12 @@
-"use client";
-
-const PREFIX = process.env.NEXT_PUBLIC_BASE_PATH || "";
+const BASE = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 type ImgProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   fill?: boolean;
 };
 
 export function Img({ src, fill, className, style, ...props }: ImgProps) {
-  const fullSrc = src ? `${PREFIX}${src}` : "";
+  const s = typeof src === "string" ? src : "";
+  const fullSrc = s.startsWith("/") ? `${BASE}${s}` : s;
 
   if (fill) {
     return (
