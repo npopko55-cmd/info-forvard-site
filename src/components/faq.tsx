@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Img } from "@/components/img";
 import {
   Accordion,
   AccordionContent,
@@ -55,66 +54,55 @@ const faqItems = [
 export function FAQ() {
   return (
     <section className="py-20 sm:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-3 gap-12 items-start">
-          {/* Left — mascot */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="hidden lg:flex flex-col items-center sticky top-32"
-          >
-            <Img
-              src="/images/mascot.png"
-              alt="Аудитор"
-              className="drop-shadow-lg"
-            />
-            <p className="text-center text-sm text-muted-foreground mt-4 max-w-[240px]">
-              Не нашли ответа? Спросите на бесплатной консультации.
-            </p>
-            <a
-              href="#contact"
-              className="mt-4 inline-flex items-center justify-center rounded-full px-6 h-11 gradient-violet text-white text-sm font-medium transition-opacity hover:opacity-90"
-            >
-              Задать вопрос
-            </a>
-          </motion.div>
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-10"
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+            Вопросы, которые задают перед началом работы
+          </h2>
+        </motion.div>
 
-          {/* Right — FAQ */}
-          <div className="lg:col-span-2">
+        <Accordion className="space-y-3">
+          {faqItems.map((item, i) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="mb-10"
+              transition={{ delay: i * 0.05 }}
             >
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-                Вопросы, которые задают перед началом работы
-              </h2>
+              <AccordionItem className="bg-white rounded-2xl glass-border px-6 border">
+                <AccordionTrigger className="text-left font-medium py-5 hover:no-underline">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+                  {item.a}
+                </AccordionContent>
+              </AccordionItem>
             </motion.div>
+          ))}
+        </Accordion>
 
-            <Accordion className="space-y-3">
-              {faqItems.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
-                >
-                  <AccordionItem className="bg-white rounded-2xl glass-border px-6 border">
-                    <AccordionTrigger className="text-left font-medium py-5 hover:no-underline">
-                      {item.q}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
-                      {item.a}
-                    </AccordionContent>
-                  </AccordionItem>
-                </motion.div>
-              ))}
-            </Accordion>
-          </div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mt-8 text-center"
+        >
+          <p className="text-muted-foreground mb-4">
+            Не нашли ответа?
+          </p>
+          <a
+            href="#contact"
+            className="inline-flex items-center justify-center rounded-full px-8 h-12 gradient-violet text-white font-medium text-sm transition-opacity hover:opacity-90"
+          >
+            Спросить на консультации
+          </a>
+        </motion.div>
       </div>
     </section>
   );

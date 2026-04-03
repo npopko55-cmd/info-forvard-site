@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Img } from "@/components/img";
 import {
   Banknote,
   Clock,
@@ -46,7 +45,7 @@ const facts = [
 
 export function ForDirector() {
   return (
-    <section className="py-20 sm:py-28 bg-white relative overflow-hidden">
+    <section className="py-20 sm:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -65,39 +64,25 @@ export function ForDirector() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-8 items-start">
-          <div className="lg:col-span-2 grid sm:grid-cols-2 gap-4">
-            {facts.map((fact, i) => (
-              <motion.div
-                key={fact.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="rounded-2xl p-6 bg-gray-50 glass-border"
-              >
-                <fact.icon className="w-5 h-5 text-primary mb-4" />
-                <h3 className="font-semibold mb-2">{fact.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {fact.text}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Dashboard image */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="hidden lg:flex items-center justify-center"
-          >
-            <Img
-              src="/images/dashboard.png"
-              alt="Аналитика"
-              className="drop-shadow-xl"
-            />
-          </motion.div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {facts.map((fact, i) => (
+            <motion.div
+              key={fact.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="rounded-2xl p-6 bg-gray-50 glass-border"
+            >
+              <div className="w-12 h-12 rounded-2xl bg-violet-100 flex items-center justify-center mb-4">
+                <fact.icon className="w-5 h-5 text-primary" />
+              </div>
+              <h3 className="font-semibold mb-2">{fact.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {fact.text}
+              </p>
+            </motion.div>
+          ))}
         </div>
 
         <motion.div

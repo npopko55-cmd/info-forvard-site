@@ -1,8 +1,7 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, FileCheck, Calculator, Search, Handshake, Scale, MessageCircle } from "lucide-react";
 import { motion } from "framer-motion";
-import { Img } from "@/components/img";
 
 const services = [
   {
@@ -13,7 +12,7 @@ const services = [
     timeline: "от 2 недель",
     price: "от 80 000 ₽",
     popular: true,
-    icon: "/images/icon-audit.png",
+    icon: FileCheck,
   },
   {
     id: "tax",
@@ -23,7 +22,7 @@ const services = [
     timeline: "от 1 недели",
     price: "от 50 000 ₽",
     popular: true,
-    icon: "/images/icon-tax.png",
+    icon: Calculator,
   },
   {
     id: "initiative",
@@ -33,7 +32,7 @@ const services = [
     timeline: "от 2 недель",
     price: "от 60 000 ₽",
     popular: false,
-    icon: "/images/icon-initiative.png",
+    icon: Search,
   },
   {
     id: "dd",
@@ -43,7 +42,7 @@ const services = [
     timeline: "от 3 недель",
     price: "от 150 000 ₽",
     popular: false,
-    icon: "/images/icon-dd.png",
+    icon: Handshake,
   },
   {
     id: "forensic",
@@ -53,7 +52,7 @@ const services = [
     timeline: "индивидуально",
     price: "от 200 000 ₽",
     popular: false,
-    icon: "/images/icon-forensic.png",
+    icon: Scale,
   },
   {
     id: "consulting",
@@ -63,7 +62,7 @@ const services = [
     timeline: "",
     price: "от 5 000 ₽",
     popular: false,
-    icon: "/images/icon-consulting.png",
+    icon: MessageCircle,
   },
 ];
 
@@ -108,13 +107,10 @@ export function Services() {
                 </div>
               )}
 
-              <div className="mb-4 w-20 h-20 relative">
-                <Img
-                  src={service.icon}
-                  alt={service.title}
-                  fill
-                  className="object-contain"
-                />
+              <div className={`mb-5 w-14 h-14 rounded-2xl flex items-center justify-center ${
+                service.popular ? "bg-white/20" : "bg-violet-100"
+              }`}>
+                <service.icon className={`w-6 h-6 ${service.popular ? "text-white" : "text-primary"}`} />
               </div>
 
               <div className="space-y-3 flex-1 flex flex-col">
