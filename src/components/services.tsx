@@ -2,7 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { Img } from "@/components/img";
 
 const services = [
   {
@@ -109,7 +109,7 @@ export function Services() {
               )}
 
               <div className="mb-4 w-20 h-20 relative">
-                <Image
+                <Img
                   src={service.icon}
                   alt={service.title}
                   fill

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { Img } from "@/components/img";
 import {
   Banknote,
   Clock,
@@ -92,11 +92,9 @@ export function ForDirector() {
             viewport={{ once: true }}
             className="hidden lg:flex items-center justify-center"
           >
-            <Image
+            <Img
               src="/images/dashboard.png"
               alt="Аналитика"
-              width={400}
-              height={300}
               className="drop-shadow-xl"
             />
           </motion.div>

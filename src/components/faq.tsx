@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { Img } from "@/components/img";
 import {
   Accordion,
   AccordionContent,
@@ -64,11 +64,9 @@ export function FAQ() {
             viewport={{ once: true }}
             className="hidden lg:flex flex-col items-center sticky top-32"
           >
-            <Image
+            <Img
               src="/images/mascot.png"
               alt="Аудитор"
-              width={280}
-              height={280}
               className="drop-shadow-lg"
             />
             <p className="text-center text-sm text-muted-foreground mt-4 max-w-[240px]">

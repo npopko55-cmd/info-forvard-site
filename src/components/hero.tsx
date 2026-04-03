@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowDown } from "lucide-react";
 import { motion } from "framer-motion";
-import Image from "next/image";
+import { Img } from "@/components/img";
 
 function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -54,12 +54,12 @@ export function Hero() {
     >
       {/* Background image */}
       <div className="absolute inset-0 z-0">
-        <Image
+        <Img
           src="/images/hero-bg.jpg"
           alt=""
           fill
           className="object-cover"
-          priority
+          
         />
         <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/40 to-white/90" />
       </div>
@@ -113,11 +113,9 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="hidden lg:flex justify-center"
           >
-            <Image
+            <Img
               src="/images/dashboard.png"
               alt="Аналитика аудита"
-              width={500}
-              height={350}
               className="drop-shadow-2xl"
             />
           </motion.div>

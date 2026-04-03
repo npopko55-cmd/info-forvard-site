@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Award, Shield, Scale, BookOpen, Building2, Globe } from "lucide-react";
-import Image from "next/image";
+import { Img } from "@/components/img";
 
 const credentials = [
   { icon: Award, text: "Аттестат по общему аудиту № 042698" },
@@ -31,7 +31,7 @@ export function Team() {
     <section id="team" className="py-20 sm:py-28 bg-white relative overflow-hidden">
       {/* Subtle background texture */}
       <div className="absolute inset-0 opacity-30">
-        <Image
+        <Img
           src="/images/texture-bg.jpg"
           alt=""
           fill
@@ -62,7 +62,7 @@ export function Team() {
           >
             <div className="rounded-3xl overflow-hidden gradient-violet-soft p-8 flex flex-col items-center">
               <div className="relative w-full max-w-[320px] aspect-[3/4]">
-                <Image
+                <Img
                   src="/images/auditor-photo.png"
                   alt="Наталья Олейникова"
                   fill
