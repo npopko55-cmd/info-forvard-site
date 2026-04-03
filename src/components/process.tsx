@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 const steps = [
   {
     num: "01",
@@ -42,7 +43,7 @@ export function Process() {
   return (
     <section id="process" className="py-20 sm:py-28 bg-white relative overflow-hidden">
       <div className="absolute inset-0 opacity-20">
-        <img src="/images/texture-bg.jpg" alt="" className="w-full h-full object-cover" />
+        <Image src="/images/texture-bg.jpg" alt="" fill className="object-cover" />
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
