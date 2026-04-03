@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { Img } from "@/components/img";
-import { RainbowMatrixShader } from "@/components/ui/rainbow-matrix-shader";
 
 function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -53,10 +52,15 @@ export function Hero() {
       id="hero"
       className="relative min-h-screen flex items-center overflow-hidden pt-20"
     >
-      {/* Background shader */}
+      {/* Background image */}
       <div className="absolute inset-0 z-0">
-        <RainbowMatrixShader />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/50 to-white/90" />
+        <Img
+          src="/images/hero-bg.jpg"
+          alt=""
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/70 to-white/95" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
