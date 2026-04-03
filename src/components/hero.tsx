@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ArrowDown } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Img } from "@/components/img";
 
 function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
@@ -46,23 +46,54 @@ const stats = [
   { value: 15, suffix: " мин", label: "ответ на заявку" },
 ];
 
+function ScrollMorphImage() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const eagleOpacity = useTransform(scrollYProgress, [0.3, 0.5], [1, 0]);
+  const calcOpacity = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
+  const eagleScale = useTransform(scrollYProgress, [0.3, 0.5], [1, 0.8]);
+  const calcScale = useTransform(scrollYProgress, [0.4, 0.6], [0.8, 1]);
+  const rotateY = useTransform(scrollYProgress, [0.3, 0.6], [0, 180]);
+
+  return (
+    <div ref={containerRef} className="relative w-full h-[500px] lg:h-[600px]">
+      {/* Eagle */}
+      <motion.div
+        style={{ opacity: eagleOpacity, scale: eagleScale }}
+        className="absolute inset-0 flex items-center justify-center"
+      >
+        <Img
+          src="/images/eagle.jpg"
+          alt="Орёл — символ точности аудита"
+          className="w-full h-full object-contain drop-shadow-2xl"
+        />
+      </motion.div>
+
+      {/* Calculator */}
+      <motion.div
+        style={{ opacity: calcOpacity, scale: calcScale }}
+        className="absolute inset-0 flex items-center justify-center"
+      >
+        <Img
+          src="/images/calculator.png"
+          alt="Калькулятор — точный расчёт"
+          className="w-full h-full object-contain drop-shadow-2xl"
+        />
+      </motion.div>
+    </div>
+  );
+}
+
 export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden pt-20"
+      className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-white"
     >
-      {/* Background image */}
-      <div className="absolute inset-0 z-0">
-        <Img
-          src="/images/hero-bg.jpg"
-          alt=""
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-white/70 to-white/95" />
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left content */}
@@ -105,18 +136,14 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Right — dashboard image */}
+          {/* Right — Eagle morphing to Calculator on scroll */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="hidden lg:flex justify-center"
           >
-            <Img
-              src="/images/dashboard.png"
-              alt="Аналитика аудита"
-              className="drop-shadow-2xl"
-            />
+            <ScrollMorphImage />
           </motion.div>
         </div>
 
