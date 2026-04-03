@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ArrowDown } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Img } from "@/components/img";
 
 function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
@@ -46,44 +46,15 @@ const stats = [
   { value: 15, suffix: " мин", label: "ответ на заявку" },
 ];
 
-function ScrollMorphImage() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  // Eagle visible immediately, fades out as user scrolls
-  const eagleOpacity = useTransform(scrollYProgress, [0.0, 0.3], [1, 0]);
-  const calcOpacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]);
-  const eagleScale = useTransform(scrollYProgress, [0.0, 0.3], [1, 0.85]);
-  const calcScale = useTransform(scrollYProgress, [0.2, 0.4], [0.85, 1]);
-
+function EagleImage() {
   return (
-    <div ref={containerRef} className="relative w-full h-[500px] lg:h-[600px]">
-      {/* Eagle */}
-      <motion.div
-        style={{ opacity: eagleOpacity, scale: eagleScale }}
-        className="absolute inset-0 flex items-center justify-center"
-      >
-        <Img
-          src="/images/eagle.jpg"
-          alt="Орёл — символ точности аудита"
-          className="w-full h-full object-contain drop-shadow-2xl mix-blend-multiply"
-        />
-      </motion.div>
-
-      {/* Calculator */}
-      <motion.div
-        style={{ opacity: calcOpacity, scale: calcScale }}
-        className="absolute inset-0 flex items-center justify-center"
-      >
-        <Img
-          src="/images/calculator.png"
-          alt="Калькулятор — точный расчёт"
-          className="w-full h-full object-contain drop-shadow-2xl mix-blend-multiply"
-        />
-      </motion.div>
+    <div className="relative w-full h-full min-h-[500px] lg:min-h-[600px]">
+      <Img
+        src="/images/eagle.jpg"
+        alt="Орёл — символ точности аудита"
+        fill
+        className="object-cover object-center mix-blend-multiply"
+      />
     </div>
   );
 }
@@ -136,14 +107,14 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Right — Eagle morphing to Calculator on scroll */}
+          {/* Right — Eagle */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="hidden lg:flex justify-center"
+            className="hidden lg:block"
           >
-            <ScrollMorphImage />
+            <EagleImage />
           </motion.div>
         </div>
 
