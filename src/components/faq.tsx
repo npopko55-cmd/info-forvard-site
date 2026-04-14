@@ -1,12 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { AnimatedList } from "@/components/ui/animated-list";
 
 const faqItems = [
   {
@@ -53,7 +48,7 @@ const faqItems = [
 
 export function FAQ() {
   return (
-    <section className="py-20 sm:py-28">
+    <section className="py-20 sm:py-28 bg-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -64,38 +59,26 @@ export function FAQ() {
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
             До заявки обычно спрашивают это
           </h2>
+          <p className="text-lg text-muted-foreground">
+            Нажмите на вопрос, чтобы раскрыть ответ
+          </p>
         </motion.div>
 
-        <Accordion className="space-y-3">
-          {faqItems.map((item, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-            >
-              <AccordionItem className="bg-white rounded-xl border border-gray-200 px-6">
-                <AccordionTrigger className="text-left font-medium py-5 hover:no-underline">
-                  {item.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
-                  {item.a}
-                </AccordionContent>
-              </AccordionItem>
-            </motion.div>
-          ))}
-        </Accordion>
+        <AnimatedList
+          items={faqItems}
+          showGradients
+          enableArrowNavigation={false}
+          initialSelectedIndex={-1}
+          maxHeight="640px"
+        />
 
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-8 text-center"
+          className="mt-10 text-center"
         >
-          <p className="text-muted-foreground mb-4">
-            Не нашли ответа?
-          </p>
+          <p className="text-muted-foreground mb-4">Не нашли ответа?</p>
           <a
             href="#contact"
             className="inline-flex items-center justify-center rounded-xl px-8 h-12 gradient-violet text-white font-medium text-sm transition-opacity hover:opacity-90"
