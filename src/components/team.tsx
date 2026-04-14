@@ -131,6 +131,3 @@ export function Team() {
     </section>
   );
 }
-</section>
-  );
-}

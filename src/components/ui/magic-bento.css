@@ -1,0 +1,125 @@
+.bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  position: relative;
+  user-select: none;
+}
+
+@media (min-width: 640px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.bento-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+  padding: 1.75rem;
+  border-radius: 20px;
+  border: 1px solid rgba(91, 33, 182, 0.18);
+  background: #0E0B1A;
+  color: #fff;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  --glow-x: 50%;
+  --glow-y: 50%;
+  --glow-intensity: 0;
+  --glow-radius: 260px;
+}
+
+.bento-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(91, 33, 182, 0.3);
+}
+
+.bento-card__label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(196, 181, 253, 0.8);
+}
+
+.bento-card__value {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-top: 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bento-card__description {
+  font-size: 14px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.75rem;
+}
+
+.bento-card--border-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  background: radial-gradient(
+    var(--glow-radius) circle at var(--glow-x) var(--glow-y),
+    rgba(132, 0, 255, calc(var(--glow-intensity) * 0.9)) 0%,
+    rgba(132, 0, 255, calc(var(--glow-intensity) * 0.4)) 30%,
+    transparent 65%
+  );
+  border-radius: inherit;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.bento-section-wrapper {
+  position: relative;
+}
+
+.bento-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(132, 0, 255, 1);
+  box-shadow: 0 0 8px rgba(132, 0, 255, 0.7);
+  pointer-events: none;
+  z-index: 50;
+}
+
+.bento-global-spotlight {
+  position: fixed;
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 200;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
