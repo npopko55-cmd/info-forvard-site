@@ -60,18 +60,18 @@ export function Team() {
             viewport={{ once: true }}
             className="lg:col-span-2"
           >
-            <div className="rounded-3xl overflow-hidden gradient-violet-soft p-8 flex flex-col items-center">
-              <div className="relative w-full max-w-[320px] aspect-[3/4]">
+            <div className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-sm">
+              <div className="relative w-full aspect-[4/5]">
                 <Img
-                  src="/images/auditor-photo.png"
+                  src="/images/oleynikova.jpg"
                   alt="Наталья Олейникова"
                   fill
-                  className="object-contain object-bottom"
+                  className="object-cover"
                 />
               </div>
-              <div className="mt-6 text-center">
+              <div className="p-6">
                 <div className="text-xl font-bold">Наталья Олейникова</div>
-                <div className="text-sm text-muted-foreground mt-1">
+                <div className="text-sm text-muted-foreground mt-1.5">
                   Генеральный директор · Аттестованный аудитор · Судебный эксперт
                 </div>
               </div>

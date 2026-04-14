@@ -122,31 +122,18 @@ export function Hero() {
             </div>
           </motion.div>
 
-          {/* Right — Oleynikova */}
+          {/* Right — Dashboard */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="hidden lg:block"
+            className="hidden lg:flex justify-center"
           >
-            <div className="relative">
-              <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-gray-100">
-                <Img
-                  src="/images/oleynikova.jpg"
-                  alt="Наталья Олейникова — руководитель ИНФО ФОРВАРД"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-5 -left-5 right-6 bg-white rounded-2xl shadow-xl border border-gray-100 p-5">
-                <div className="font-semibold text-base">
-                  Наталья Олейникова
-                </div>
-                <div className="text-sm text-muted-foreground mt-1">
-                  Руководитель, аудитор с 25-летним опытом, судебный эксперт
-                </div>
-              </div>
-            </div>
+            <Img
+              src="/images/dashboard.png"
+              alt="Аналитика аудита"
+              className="drop-shadow-2xl"
+            />
           </motion.div>
         </div>
 
