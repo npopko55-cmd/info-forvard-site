@@ -7,7 +7,6 @@ import {
   ReactNode,
   CSSProperties,
 } from "react";
-import Lenis from "lenis";
 
 export const ScrollStackItem = ({
   children,
@@ -57,8 +56,7 @@ const ScrollStack = ({
 }: ScrollStackProps) => {
   const scrollerRef = useRef<HTMLDivElement>(null);
   const stackCompletedRef = useRef(false);
-  const animationFrameRef = useRef<number | null>(null);
-  const lenisRef = useRef<Lenis | null>(null);
+  const rafIdRef = useRef<number | null>(null);
   const cardsRef = useRef<HTMLElement[]>([]);
   const lastTransformsRef = useRef<Map<number, CachedTransform>>(new Map());
   const isUpdatingRef = useRef(false);
@@ -240,49 +238,29 @@ const ScrollStack = ({
       card.style.perspective = "1000px";
     });
 
-    const easing = (t: number) =>
-      Math.min(1, 1.001 - Math.pow(2, -10 * t));
-
-    const lenis = useWindowScroll
-      ? new Lenis({
-          duration: 1.2,
-          easing,
-          smoothWheel: true,
-          touchMultiplier: 2,
-          wheelMultiplier: 1,
-          lerp: 0.1,
-          syncTouch: true,
-          syncTouchLerp: 0.075,
-        })
-      : new Lenis({
-          wrapper: scroller,
-          content: scroller.querySelector(".scroll-stack-inner") as HTMLElement,
-          duration: 1.2,
-          easing,
-          smoothWheel: true,
-          touchMultiplier: 2,
-          wheelMultiplier: 1,
-          lerp: 0.1,
-          syncTouch: true,
-          syncTouchLerp: 0.075,
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        rafIdRef.current = requestAnimationFrame(() => {
+          updateCardTransforms();
+          ticking = false;
         });
-
-    lenis.on("scroll", updateCardTransforms);
-
-    const raf = (time: number) => {
-      lenis.raf(time);
-      animationFrameRef.current = requestAnimationFrame(raf);
+        ticking = true;
+      }
     };
-    animationFrameRef.current = requestAnimationFrame(raf);
-    lenisRef.current = lenis;
+
+    const target: Window | HTMLElement = useWindowScroll ? window : scroller;
+    target.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
 
     updateCardTransforms();
 
     return () => {
-      if (animationFrameRef.current !== null) {
-        cancelAnimationFrame(animationFrameRef.current);
+      target.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
       }
-      lenis.destroy();
       stackCompletedRef.current = false;
       cardsRef.current = [];
       transformsCache.clear();
