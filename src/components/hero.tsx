@@ -218,30 +218,30 @@ export function Hero() {
           </motion.div>
 
           {/* RIGHT — owl + floating cards */}
-          <div className="lg:col-span-6 relative h-[520px] lg:h-[560px]">
-            {/* Owl statue — inside bounds, fade top & bottom */}
+          <div className="lg:col-span-6 relative h-[560px] lg:h-[620px]">
+            {/* Owl statue — larger, fills column with top/bottom fade */}
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center"
+              className="absolute -top-8 -bottom-8 -left-8 -right-8 lg:-top-12 lg:-bottom-12 lg:-left-12 lg:-right-12 z-10 pointer-events-none flex items-center justify-center"
             >
               {/* Pedestal glow */}
               <div
                 aria-hidden
-                className="absolute bottom-[12%] left-1/2 -translate-x-1/2 w-[60%] h-[90px] rounded-full blur-2xl opacity-70"
+                className="absolute bottom-[14%] left-1/2 -translate-x-1/2 w-[60%] h-[100px] rounded-full blur-2xl opacity-70"
                 style={{
                   background:
-                    "radial-gradient(ellipse, rgba(91,33,182,0.28) 0%, rgba(91,33,182,0.08) 45%, transparent 78%)",
+                    "radial-gradient(ellipse, rgba(91,33,182,0.3) 0%, rgba(91,33,182,0.08) 45%, transparent 78%)",
                 }}
               />
               <div
                 className="relative w-full h-full"
                 style={{
                   maskImage:
-                    "linear-gradient(180deg, transparent 0%, #000 14%, #000 82%, transparent 100%)",
+                    "linear-gradient(180deg, transparent 0%, #000 12%, #000 84%, transparent 100%)",
                   WebkitMaskImage:
-                    "linear-gradient(180deg, transparent 0%, #000 14%, #000 82%, transparent 100%)",
+                    "linear-gradient(180deg, transparent 0%, #000 12%, #000 84%, transparent 100%)",
                 }}
               >
                 <Img
@@ -249,6 +249,7 @@ export function Hero() {
                   alt="Скульптура совы — символ точного взгляда аудитора"
                   fill
                   className="object-contain drop-shadow-[0_30px_60px_rgba(76,29,149,0.22)]"
+                  style={{ transform: "scale(1.25)" }}
                 />
               </div>
             </motion.div>
