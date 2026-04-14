@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, TrendingUp, Instagram, Send, Phone } from "lucide-react";
+import { ArrowUpRight, TrendingUp, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import { Img } from "@/components/img";
 
@@ -386,14 +386,18 @@ export function Hero() {
             aria-label="Telegram"
             className="w-10 h-10 rounded-full bg-white/70 hover:bg-white border border-[#16162B]/10 hover:border-primary/40 backdrop-blur-sm flex items-center justify-center text-foreground hover:text-primary transition-all"
           >
-            <Send className="w-4 h-4" />
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
+              <path d="M9.04 15.67l-.36 5.05c.51 0 .73-.22.99-.48l2.38-2.27 4.93 3.6c.9.5 1.55.24 1.79-.83l3.25-15.22h.01c.29-1.35-.49-1.88-1.37-1.55L2.07 9.88c-1.32.5-1.3 1.23-.22 1.56l4.85 1.51 11.26-7.1c.53-.32 1.02-.15.62.2L9.04 15.67z" />
+            </svg>
           </a>
           <a
             href="#"
-            aria-label="Instagram"
+            aria-label="WhatsApp"
             className="w-10 h-10 rounded-full bg-white/70 hover:bg-white border border-[#16162B]/10 hover:border-primary/40 backdrop-blur-sm flex items-center justify-center text-foreground hover:text-primary transition-all"
           >
-            <Instagram className="w-4 h-4" />
+            <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">
+              <path d="M17.47 14.38c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.48-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51l-.57-.01c-.2 0-.52.07-.79.37-.27.3-1.04 1.01-1.04 2.47 0 1.46 1.06 2.87 1.21 3.07.15.2 2.09 3.19 5.07 4.48.71.3 1.26.49 1.69.63.71.23 1.35.19 1.86.12.57-.08 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35M12.04 21.5c-1.69 0-3.34-.45-4.78-1.3l-.34-.2-3.55.93.95-3.46-.22-.36c-.94-1.49-1.43-3.21-1.43-4.98 0-5.16 4.2-9.36 9.37-9.36 2.5 0 4.85.98 6.62 2.75 1.77 1.77 2.74 4.12 2.74 6.62 0 5.16-4.2 9.36-9.36 9.36m7.95-17.31C17.9 2.1 15.08 1 12.04 1 5.73 1 .61 6.12.61 12.42c0 2.02.53 3.99 1.53 5.73L.52 24l6.01-1.58c1.68.92 3.57 1.4 5.5 1.4h.01c6.3 0 11.43-5.12 11.43-11.43 0-3.05-1.19-5.92-3.35-8.08" />
+            </svg>
           </a>
           <a
             href="tel:+79011841190"
