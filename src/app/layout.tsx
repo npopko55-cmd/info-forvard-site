@@ -31,6 +31,16 @@ export default function RootLayout({
       lang="ru"
       className={`${dmSans.variable} ${fraunces.variable} h-full antialiased`}
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+              if (!location.hash) window.scrollTo(0, 0);
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
   );

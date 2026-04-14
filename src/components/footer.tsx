@@ -6,7 +6,7 @@ export function Footer() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <img
-                src={`${process.env.NODE_ENV === "production" ? "/info-forvard-site" : ""}/images/logo.png`}
+                src={`${process.env.NODE_ENV === "production" ? "/info-forvard-site" : ""}/images/logo-v2.png`}
                 alt="ИНФО ФОРВАРД"
                 className="h-9 w-auto object-contain"
               />
