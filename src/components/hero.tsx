@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowDown, CheckCircle2 } from "lucide-react";
+import { ArrowRight, TrendingUp, Quote } from "lucide-react";
 import { motion } from "framer-motion";
 import { Img } from "@/components/img";
 
@@ -32,9 +32,7 @@ function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
       { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
     if (ref.current) observer.observe(ref.current);
-
     const fallback = setTimeout(run, 1500);
-
     return () => {
       observer.disconnect();
       clearTimeout(fallback);
@@ -42,120 +40,170 @@ function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   }, [target]);
 
   return (
-    <div ref={ref} className="text-3xl sm:text-4xl font-bold text-primary">
+    <span>
       {count}
       {suffix}
-    </div>
+    </span>
   );
 }
-
-const stats = [
-  { value: 25, suffix: "+", label: "лет практики" },
-  { value: 500, suffix: "+", label: "проведённых аудитов" },
-  { value: 15, suffix: " мин", label: "ответ на заявку" },
-];
-
-const trustPoints = [
-  "Цена в договоре = итоговый счёт",
-  "Заключение к согласованной дате",
-  "Работаете с аудитором, не со стажёром",
-  "Член СРО ААС · 25 лет практики",
-];
 
 export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16 bg-white"
+      className="relative min-h-screen flex items-center overflow-hidden pt-28 pb-20"
+      style={{
+        background:
+          "linear-gradient(180deg, #F5F2FB 0%, #FBFAFC 70%, #F5F2FB 100%)",
+      }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-12 gap-8 items-center">
           {/* Left content */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
-            className="space-y-7"
+            className="lg:col-span-6 space-y-8 relative z-20"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-50 border border-violet-100 text-sm text-primary font-medium">
-              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              Аттестат общего аудита · Член СРО ААС
-            </div>
-
-            <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.02]">
-              Вы готовите отчётность —{" "}
-              <span className="text-gradient-violet">мы её проверяем</span>
+            <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[0.98] tracking-tight">
+              Аудит,
+              <br />
+              которому
+              <br />
+              <span className="italic text-gradient-violet">доверяют</span>
             </h1>
 
-            <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-              Запросим только нужные документы, проверим удалённо, не сорвём
-              закрытие квартала. Заключение и управленческое письмо — к дате в
-              договоре.
+            <p className="text-base sm:text-lg text-muted-foreground max-w-md leading-relaxed">
+              Проверяем отчётность компаний с выручкой от 400 млн до 5 млрд ₽.
+              Заключение в срок, цена в договоре, аудитор — не стажёр.
             </p>
 
-            <ul className="space-y-2.5">
-              {trustPoints.map((p) => (
-                <li
-                  key={p}
-                  className="flex items-start gap-3 text-base text-foreground"
-                >
-                  <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                  <span>{p}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="flex flex-col sm:flex-row gap-3 pt-2">
+            <div className="flex flex-col sm:flex-row gap-3">
               <a
                 href="#contact"
-                className="inline-flex items-center justify-center rounded-xl px-8 text-base h-14 gradient-violet hover:opacity-90 text-white shadow-lg shadow-violet-500/20 font-medium transition-opacity"
+                className="group inline-flex items-center justify-center gap-2 rounded-full px-7 h-13 py-4 bg-[#16162B] hover:bg-[#2a2a48] text-white font-medium text-sm transition-colors"
               >
-                Узнать стоимость за 1 минуту
+                Узнать стоимость
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
               </a>
               <a
                 href="#services"
-                className="inline-flex items-center justify-center gap-2 rounded-xl px-6 text-base h-14 text-foreground hover:bg-gray-50 font-medium transition-colors"
+                className="inline-flex items-center justify-center rounded-full px-7 h-13 py-4 border border-gray-300 hover:border-primary hover:text-primary text-foreground font-medium text-sm transition-colors"
               >
                 Услуги и цены
-                <ArrowDown className="w-4 h-4" />
               </a>
             </div>
+
+            {/* Floating testimonial card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="hidden sm:block mt-10 bg-white rounded-2xl p-5 shadow-premium border border-gray-100 max-w-sm"
+            >
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-200 to-violet-300 flex items-center justify-center shrink-0">
+                  <Quote className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <div className="text-sm font-semibold">
+                    Ваша отчётность — наш фокус
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-1 leading-relaxed">
+                    25 лет опыта. 500+ проверок. Аудитор лично ведёт каждый
+                    проект.
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
-          {/* Right — Dashboard */}
+          {/* Center — Owl statue */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="hidden lg:flex justify-center"
+            transition={{ duration: 0.9, delay: 0.2 }}
+            className="lg:col-span-6 relative flex justify-center items-center"
           >
-            <Img
-              src="/images/dashboard.png"
-              alt="Аналитика аудита"
-              className="drop-shadow-2xl"
-            />
+            <div className="relative w-full max-w-[540px] aspect-[4/5]">
+              <Img
+                src="/images/owl.jpg"
+                alt="Сова — символ аудита: зоркость, мудрость, точность"
+                fill
+                className="object-contain"
+                style={{ mixBlendMode: "multiply" }}
+              />
+
+              {/* Floating stats card — top right */}
+              <motion.div
+                initial={{ opacity: 0, x: 20, y: -10 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.7 }}
+                className="absolute top-6 right-0 sm:-right-4 bg-white rounded-2xl p-4 shadow-premium-lg border border-gray-100 w-[220px]"
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <TrendingUp className="w-4 h-4 text-primary" />
+                    <span className="text-xs font-semibold">
+                      Проверено за 2025
+                    </span>
+                  </div>
+                </div>
+                {/* Mini chart */}
+                <svg viewBox="0 0 200 60" className="w-full h-12">
+                  <defs>
+                    <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#5B21B6" stopOpacity="0.3" />
+                      <stop offset="100%" stopColor="#5B21B6" stopOpacity="0" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M0,45 L25,38 L50,42 L75,28 L100,32 L125,20 L150,24 L175,12 L200,8 L200,60 L0,60 Z"
+                    fill="url(#chartFill)"
+                  />
+                  <path
+                    d="M0,45 L25,38 L50,42 L75,28 L100,32 L125,20 L150,24 L175,12 L200,8"
+                    fill="none"
+                    stroke="#5B21B6"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <div className="flex items-baseline gap-2 mt-1">
+                  <span className="text-xl font-bold">147</span>
+                  <span className="text-xs text-muted-foreground">
+                    аудитов сдано
+                  </span>
+                </div>
+              </motion.div>
+
+              {/* Floating clients badge — bottom right */}
+              <motion.div
+                initial={{ opacity: 0, x: 20, y: 10 }}
+                animate={{ opacity: 1, x: 0, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.9 }}
+                className="absolute bottom-8 right-0 sm:-right-6 bg-[#16162B] text-white rounded-2xl p-4 shadow-premium-lg w-[180px]"
+              >
+                <div className="text-3xl font-bold font-heading">
+                  <CountUp target={500} suffix="+" />
+                </div>
+                <div className="text-xs text-white/70 mt-1">
+                  довольных клиентов
+                </div>
+                <div className="flex -space-x-2 mt-3">
+                  {[0, 1, 2].map((i) => (
+                    <div
+                      key={i}
+                      className="w-7 h-7 rounded-full border-2 border-[#16162B] bg-gradient-to-br from-violet-300 to-violet-500"
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            </div>
           </motion.div>
         </div>
-
-        {/* Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl"
-        >
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="bg-white rounded-2xl p-5 shadow-[0_4px_20px_rgba(124,58,237,0.06)] border border-gray-100"
-            >
-              <CountUp target={stat.value} suffix={stat.suffix} />
-              <div className="text-sm text-muted-foreground mt-1">
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
