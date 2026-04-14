@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import ScrollStack, { ScrollStackItem } from "@/components/ui/scroll-stack";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const steps = [
   {
@@ -40,15 +40,87 @@ const steps = [
   },
 ];
 
+function StickyCard({
+  step,
+  index,
+  total,
+  containerRef,
+}: {
+  step: (typeof steps)[number];
+  index: number;
+  total: number;
+  containerRef: React.RefObject<HTMLDivElement | null>;
+}) {
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Scale down cards as they get "buried" by the next ones
+  const segment = 1 / total;
+  const scaleStart = index * segment;
+  const scaleEnd = (index + 1) * segment;
+  const targetScale = 1 - (total - index - 1) * 0.04;
+  const scale = useTransform(
+    scrollYProgress,
+    [scaleStart, scaleEnd],
+    [1, targetScale]
+  );
+
+  return (
+    <div
+      className="sticky"
+      style={{ top: `${90 + index * 20}px` }}
+    >
+      <motion.div
+        style={{ scale, transformOrigin: "top center" }}
+        className={`mx-auto max-w-3xl rounded-3xl p-8 sm:p-10 shadow-xl ${
+          step.accent
+            ? "gradient-violet text-white"
+            : "bg-white border border-gray-200"
+        }`}
+      >
+        <div className="flex gap-6 sm:gap-8">
+          <div
+            className={`text-5xl sm:text-6xl font-bold shrink-0 leading-none ${
+              step.accent ? "text-white/30" : "text-violet-200"
+            }`}
+          >
+            {step.num}
+          </div>
+          <div>
+            <h3
+              className={`text-xl sm:text-2xl font-semibold mb-3 ${
+                step.accent ? "text-white" : ""
+              }`}
+            >
+              {step.title}
+            </h3>
+            <p
+              className={`leading-relaxed ${
+                step.accent ? "text-white/85" : "text-muted-foreground"
+              }`}
+            >
+              {step.description}
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 export function Process() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   return (
     <section id="process" className="py-20 sm:py-28 bg-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mb-10"
+          className="max-w-3xl mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
             Аудит не должен парализовать бухгалтерию
@@ -57,63 +129,24 @@ export function Process() {
             5 шагов: от заявки до управленческого письма. 2–6 недель.
           </p>
         </motion.div>
-      </div>
 
-      <ScrollStack
-        useWindowScroll
-        itemDistance={60}
-        itemStackDistance={20}
-        itemScale={0.02}
-        baseScale={0.9}
-        stackPosition="22%"
-        scaleEndPosition="10%"
-      >
-        {steps.map((step) => (
-          <ScrollStackItem
-            key={step.num}
-            itemClassName={`mx-auto max-w-3xl rounded-3xl p-8 sm:p-10 ${
-              step.accent
-                ? "gradient-violet text-white"
-                : "bg-white border border-gray-200 shadow-xl"
-            }`}
-          >
-            <div className="flex gap-6 sm:gap-8">
-              <div
-                className={`text-5xl sm:text-6xl font-bold shrink-0 leading-none ${
-                  step.accent ? "text-white/30" : "text-violet-200"
-                }`}
-              >
-                {step.num}
-              </div>
-              <div>
-                <h3
-                  className={`text-xl sm:text-2xl font-semibold mb-3 ${
-                    step.accent ? "text-white" : ""
-                  }`}
-                >
-                  {step.title}
-                </h3>
-                <p
-                  className={`leading-relaxed ${
-                    step.accent
-                      ? "text-white/85"
-                      : "text-muted-foreground"
-                  }`}
-                >
-                  {step.description}
-                </p>
-              </div>
-            </div>
-          </ScrollStackItem>
-        ))}
-      </ScrollStack>
+        <div ref={containerRef} className="relative space-y-6">
+          {steps.map((step, i) => (
+            <StickyCard
+              key={step.num}
+              step={step}
+              index={i}
+              total={steps.length}
+              containerRef={containerRef}
+            />
+          ))}
+        </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-10 text-center"
+          className="mt-16 text-center"
         >
           <a
             href="#contact"
