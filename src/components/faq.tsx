@@ -83,7 +83,7 @@ export function FAQ() {
           <p className="text-muted-foreground mb-6">
             Не нашли ответа? Задайте вопрос напрямую.
           </p>
-          <CtaStrip />
+          <CtaStrip variant="express" />
         </motion.div>
       </div>
     </section>

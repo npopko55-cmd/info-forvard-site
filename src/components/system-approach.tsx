@@ -91,7 +91,7 @@ export function SystemApproach() {
           ))}
         </div>
 
-        <CtaStrip className="mt-14" />
+        <CtaStrip variant="express" className="mt-14" />
       </div>
     </section>
   );

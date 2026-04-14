@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, Shield, Scale, BookOpen, Building2, Globe } from "lucide-react";
+import { Award, Shield, Scale, BookOpen, Building2, Globe, Quote, ArrowUpRight } from "lucide-react";
 import { Img } from "@/components/img";
 import { CtaStrip } from "@/components/ui/cta-strip";
 
@@ -90,6 +90,38 @@ export function Team() {
               содержательность управленческого письма.»
             </blockquote>
 
+            {/* Client testimonial */}
+            <div className="relative rounded-2xl bg-gradient-to-br from-violet-50 via-white to-violet-50 border border-violet-100 p-6 sm:p-7">
+              <Quote className="absolute top-5 right-5 w-8 h-8 text-violet-200" />
+              <div className="text-xs font-semibold uppercase tracking-[0.12em] text-primary mb-3">
+                Отзыв клиента
+              </div>
+              <p className="text-base leading-relaxed text-foreground pr-6">
+                «Команда ИНФО-ФОРВАРД проявила исключительную оперативность. Все
+                этапы проверки проводились с максимальной тщательностью. Были
+                выявлены не только потенциальные риски, но и предложены
+                конструктивные пути их решения. Рекомендуем их услуги всем
+                компаниям, которые ценят качество, скорость и надежность.»
+              </p>
+              <div className="mt-5 flex items-end justify-between gap-4 flex-wrap">
+                <div>
+                  <div className="font-semibold text-sm">К. Ю. Рябцев</div>
+                  <div className="text-sm text-muted-foreground">
+                    Управляющий ТСЖ «Покровское-Глебово»
+                  </div>
+                </div>
+                <a
+                  href={`${process.env.NODE_ENV === "production" ? "/info-forvard-site" : ""}/review-tsj-glebovo.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2 transition-all"
+                >
+                  Читать полный отзыв
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
             <div>
               <div className="text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground mb-4">
                 Квалификация и членства
@@ -129,7 +161,7 @@ export function Team() {
           </motion.div>
         </div>
 
-        <CtaStrip className="mt-16" />
+        <CtaStrip variant="auditor" className="mt-16" />
       </div>
     </section>
   );

@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { MagicBento } from "@/components/ui/magic-bento";
-import { CtaStrip } from "@/components/ui/cta-strip";
 
 const stats = [
   {
@@ -45,13 +44,12 @@ export function ForDirector() {
             Команда ИНФО-ФОРВАРД в цифрах
           </h2>
           <p className="text-lg text-muted-foreground">
-            Четыре факта, которые стоит проверить перед выбором аудитора.
+            Четыре факта, на которые стоит обратить внимание перед выбором
+            аудитора.
           </p>
         </motion.div>
 
         <MagicBento items={stats} />
-
-        <CtaStrip className="mt-12" />
       </div>
     </section>
   );

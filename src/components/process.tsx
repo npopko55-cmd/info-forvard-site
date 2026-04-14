@@ -124,14 +124,12 @@ export function Process() {
           viewport={{ once: true }}
           className="max-w-3xl mb-16"
         >
-          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4">
-            Контролируем слабые места в учёте.
-            <br />
-            Отвечаем за каждую ошибку в отчёте.
+          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4 leading-[1.1]">
+            Пять этапов — каждый под контролем аудитора
           </h2>
           <p className="text-lg text-muted-foreground">
-            Пять шагов от заявки до управленческого письма. От 2 до 6 недель.
-            Ответственность застрахована и прописана в договоре.
+            От заявки до управленческого письма. 2–6 недель. Ответственность
+            застрахована и прописана в договоре.
           </p>
         </motion.div>
 
@@ -175,7 +173,7 @@ export function Process() {
           </div>
         </motion.div>
 
-        <CtaStrip className="mt-12" />
+        <CtaStrip variant="calc" className="mt-12" />
       </div>
     </section>
   );

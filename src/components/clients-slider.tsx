@@ -33,9 +33,9 @@ function SliderRow({ reverse = false }: { reverse?: boolean }) {
         {[...clients, ...clients].map((name, i) => (
           <div
             key={`${name}-${i}`}
-            className="shrink-0 px-8 py-4 rounded-2xl bg-white glass-border flex items-center"
+            className="shrink-0 px-6 py-3 rounded-xl bg-white border border-gray-200 flex items-center"
           >
-            <span className="text-base font-medium text-foreground/70 whitespace-nowrap">
+            <span className="text-sm font-medium text-foreground/70 whitespace-nowrap">
               {name}
             </span>
           </div>
@@ -47,13 +47,13 @@ function SliderRow({ reverse = false }: { reverse?: boolean }) {
 
 export function ClientsSlider() {
   return (
-    <section id="clients" className="py-16 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
+    <section id="clients" className="py-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-5">
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-center text-muted-foreground text-sm"
+          className="text-center text-muted-foreground text-xs uppercase tracking-[0.18em] font-semibold"
         >
           Среди проверенных объектов
         </motion.p>
