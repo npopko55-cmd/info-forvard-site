@@ -5,8 +5,8 @@ export function Footer() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl gradient-violet flex items-center justify-center">
-                <span className="text-white font-bold text-xs">ИФ</span>
+              <div className="w-9 h-9 rounded-xl gradient-violet flex items-center justify-center">
+                <span className="text-white font-bold text-sm">ИФ</span>
               </div>
               <span className="font-semibold tracking-tight">
                 ИНФО ФОРВАРД
@@ -47,10 +47,13 @@ export function Footer() {
             ООО «ИНФО ФОРВАРД» · ОГРН 1227700131933 · ИНН 9725077230
           </div>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-foreground transition-colors">
+            <a
+              href="/privacy"
+              className="hover:text-foreground transition-colors"
+            >
               Политика обработки персональных данных
             </a>
-            <span>© 2026</span>
+            <span>© {new Date().getFullYear()}</span>
           </div>
         </div>
       </div>

@@ -45,7 +45,7 @@ const features = [
     icon: Globe,
     title: "Отчётность по РСБУ и МСФО",
     description:
-      "Работаем с обоими стандартами. Знаем специфику компаний с консолидацией и иностранным участием.",
+      "Работаем с обоими стандартами. Есть опыт с консолидацией и иностранным участием.",
   },
 ];
 
@@ -59,10 +59,12 @@ export function SystemApproach() {
           viewport={{ once: true }}
           className="max-w-3xl mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
-            Фиксированная цена в договоре, конкретные сроки, работаете напрямую
-            с аудитором
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+            Цена в договоре. Срок в договоре. Аудитор — не стажёр.
           </h2>
+          <p className="text-lg text-muted-foreground">
+            Шесть принципов, по которым работаем 25 лет.
+          </p>
         </motion.div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -73,10 +75,10 @@ export function SystemApproach() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-white rounded-2xl p-6 sm:p-7 glass-border hover:border-violet-200 transition-all group"
+              className="bg-white rounded-2xl p-6 sm:p-7 border border-gray-200 hover:border-violet-300 hover:shadow-md transition-all group"
             >
-              <div className="w-12 h-12 rounded-2xl bg-violet-100 flex items-center justify-center mb-5 group-hover:bg-violet-200 transition-colors">
-                <feature.icon className="w-5 h-5 text-primary" />
+              <div className="w-12 h-12 rounded-xl gradient-violet flex items-center justify-center mb-5">
+                <feature.icon className="w-5 h-5 text-white" />
               </div>
               <h3 className="font-semibold text-base mb-2">{feature.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">

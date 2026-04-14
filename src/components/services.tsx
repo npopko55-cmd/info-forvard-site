@@ -38,7 +38,7 @@ const services = [
     id: "dd",
     title: "Due Diligence",
     description:
-      "Комплексная проверка перед сделкой: анализ БФО, налоговых рисков, правовая экспертиза.",
+      "Проверка перед сделкой: БФО, налоговые риски, правовая экспертиза. Одна команда.",
     timeline: "от 3 недель",
     price: "от 150 000 ₽",
     popular: false,
@@ -78,11 +78,10 @@ export function Services() {
           className="max-w-2xl mb-12"
         >
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-            Аудит под ключ — от консультации до заключения
+            Шесть услуг — от консультации за 5 000 ₽ до форензика
           </h2>
           <p className="text-lg text-muted-foreground">
-            Точную стоимость рассчитаем после оценки объёма отчётности и
-            зафиксируем в договоре. Доплат не будет.
+            Стоимость фиксируем в договоре после оценки объёма. Доплат не будет.
           </p>
         </motion.div>
 
@@ -95,56 +94,38 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className={`group relative rounded-3xl p-6 sm:p-7 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col ${
+              className={`group relative rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col bg-white ${
                 service.popular
-                  ? "gradient-violet text-white"
-                  : "bg-white glass-border hover:border-violet-200"
+                  ? "border-2 border-primary"
+                  : "border border-gray-200 hover:border-violet-200"
               }`}
             >
               {service.popular && (
-                <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-white/20 text-xs font-medium text-white">
-                  Популярное
+                <div className="absolute -top-3 left-6 px-3 py-1 rounded-full gradient-violet text-xs font-semibold text-white shadow-md shadow-violet-500/25">
+                  Рекомендуем
                 </div>
               )}
 
-              <div className={`mb-5 w-14 h-14 rounded-2xl flex items-center justify-center ${
-                service.popular ? "bg-white/20" : "bg-violet-100"
-              }`}>
-                <service.icon className={`w-6 h-6 ${service.popular ? "text-white" : "text-primary"}`} />
+              <div className="mb-5 w-12 h-12 rounded-xl gradient-violet flex items-center justify-center">
+                <service.icon className="w-6 h-6 text-white" />
               </div>
 
               <div className="space-y-3 flex-1 flex flex-col">
                 <h3 className="text-xl font-semibold">{service.title}</h3>
-                <p
-                  className={`text-sm leading-relaxed flex-1 ${
-                    service.popular
-                      ? "text-white/80"
-                      : "text-muted-foreground"
-                  }`}
-                >
+                <p className="text-sm leading-relaxed flex-1 text-muted-foreground">
                   {service.description}
                 </p>
 
-                <div className={`pt-4 border-t ${service.popular ? "border-white/20" : "border-border"}`}>
+                <div className="pt-4 border-t border-gray-100">
                   {service.timeline && (
-                    <div
-                      className={`text-xs mb-1 ${
-                        service.popular
-                          ? "text-white/60"
-                          : "text-muted-foreground"
-                      }`}
-                    >
+                    <div className="text-xs mb-1 text-muted-foreground">
                       {service.timeline}
                     </div>
                   )}
                   <div className="text-2xl font-bold">{service.price}</div>
                 </div>
 
-                <div
-                  className={`flex items-center gap-2 text-sm font-medium pt-2 ${
-                    service.popular ? "text-white" : "text-primary"
-                  }`}
-                >
+                <div className="flex items-center gap-2 text-sm font-medium pt-2 text-primary">
                   Рассчитать стоимость
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </div>

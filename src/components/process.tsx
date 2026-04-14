@@ -56,7 +56,7 @@ export function Process() {
             Аудит не должен парализовать бухгалтерию
           </h2>
           <p className="text-lg text-muted-foreground">
-            Проведём проверку по отработанной системе
+            5 шагов: от заявки до управленческого письма. 2–6 недель.
           </p>
         </motion.div>
 
@@ -71,7 +71,7 @@ export function Process() {
               className={`rounded-2xl p-6 sm:p-8 transition-all ${
                 step.accent
                   ? "gradient-violet text-white"
-                  : "bg-gray-50 glass-border"
+                  : "bg-white border border-gray-200"
               }`}
             >
               <div className="flex gap-5 sm:gap-8">
@@ -111,7 +111,7 @@ export function Process() {
         >
           <a
             href="#contact"
-            className="inline-flex items-center justify-center rounded-full px-8 h-14 gradient-violet text-white shadow-lg shadow-violet-500/25 font-medium text-base transition-opacity hover:opacity-90"
+            className="inline-flex items-center justify-center rounded-xl px-8 h-14 gradient-violet text-white shadow-lg shadow-violet-500/20 font-medium text-base transition-opacity hover:opacity-90"
           >
             Записаться на консультацию
           </a>

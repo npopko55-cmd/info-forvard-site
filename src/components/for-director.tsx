@@ -33,8 +33,8 @@ const facts = [
   },
   {
     icon: Users,
-    title: "Комплексная экспертиза",
-    text: "Аудит + налоговый консалтинг + правовая поддержка. Одна команда.",
+    title: "Одна команда",
+    text: "Аудит, налоговый консалтинг и правовая поддержка — в одной компании.",
   },
   {
     icon: ShieldCheck,
@@ -53,14 +53,11 @@ export function ForDirector() {
           viewport={{ once: true }}
           className="text-center max-w-2xl mx-auto mb-14"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-50 text-primary text-sm font-medium mb-6">
-            Для согласования с руководителем
-          </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-            Коротко для руководителя
+            Что показать директору за минуту
           </h2>
           <p className="text-lg text-muted-foreground">
-            Если нужно согласовать выбор аудитора — вот ключевое
+            Шесть фактов для согласования выбора аудитора
           </p>
         </motion.div>
 
@@ -72,10 +69,10 @@ export function ForDirector() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="rounded-2xl p-6 bg-gray-50 glass-border"
+              className="rounded-2xl p-6 bg-white border border-gray-200 hover:border-violet-300 hover:shadow-md transition-all"
             >
-              <div className="w-12 h-12 rounded-2xl bg-violet-100 flex items-center justify-center mb-4">
-                <fact.icon className="w-5 h-5 text-primary" />
+              <div className="w-12 h-12 rounded-xl gradient-violet flex items-center justify-center mb-4">
+                <fact.icon className="w-5 h-5 text-white" />
               </div>
               <h3 className="font-semibold mb-2">{fact.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -93,7 +90,7 @@ export function ForDirector() {
         >
           <a
             href="#contact"
-            className="inline-flex items-center justify-center rounded-full px-8 h-14 gradient-violet text-white shadow-lg shadow-violet-500/25 font-medium text-base transition-opacity hover:opacity-90"
+            className="inline-flex items-center justify-center rounded-xl px-8 h-14 gradient-violet text-white shadow-lg shadow-violet-500/20 font-medium text-base transition-opacity hover:opacity-90"
           >
             Обсудить задачу
           </a>

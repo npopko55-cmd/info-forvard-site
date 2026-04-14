@@ -62,7 +62,7 @@ export function FAQ() {
           className="mb-10"
         >
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
-            Вопросы, которые задают перед началом работы
+            До заявки обычно спрашивают это
           </h2>
         </motion.div>
 
@@ -75,7 +75,7 @@ export function FAQ() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.05 }}
             >
-              <AccordionItem className="bg-white rounded-2xl glass-border px-6 border">
+              <AccordionItem className="bg-white rounded-xl border border-gray-200 px-6">
                 <AccordionTrigger className="text-left font-medium py-5 hover:no-underline">
                   {item.q}
                 </AccordionTrigger>
@@ -98,7 +98,7 @@ export function FAQ() {
           </p>
           <a
             href="#contact"
-            className="inline-flex items-center justify-center rounded-full px-8 h-12 gradient-violet text-white font-medium text-sm transition-opacity hover:opacity-90"
+            className="inline-flex items-center justify-center rounded-xl px-8 h-12 gradient-violet text-white font-medium text-sm transition-opacity hover:opacity-90"
           >
             Спросить на консультации
           </a>
