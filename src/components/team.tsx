@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Award, Shield, Scale, BookOpen, Building2, Globe } from "lucide-react";
 import { Img } from "@/components/img";
+import { CtaStrip } from "@/components/ui/cta-strip";
 
 const credentials = [
   { icon: Award, text: "Аттестат по общему аудиту № 042698" },
@@ -28,42 +29,34 @@ const industries = [
 
 export function Team() {
   return (
-    <section id="team" className="py-20 sm:py-28 bg-white relative overflow-hidden">
-      {/* Subtle background texture */}
-      <div className="absolute inset-0 opacity-30">
-        <Img
-          src="/images/texture-bg.jpg"
-          alt=""
-          fill
-          className="object-cover"
-        />
-      </div>
-
+    <section
+      id="team"
+      className="py-20 sm:py-28 bg-white relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-14"
+          className="mb-14 max-w-3xl"
         >
-          <h2 className="font-heading text-4xl sm:text-5xl font-semibold max-w-3xl mb-4">
-            Руководитель аудиторской практики
+          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4 leading-[1.1]">
+            Главный аудитор, который отвечает за результат каждой проверки
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            30+ лет в аудите · 500+ проверок за карьеру · каждый проект ведёт
-            лично.
+          <p className="text-lg text-muted-foreground">
+            30+ лет опыта · 500+ проверок за карьеру · каждый проект ведёт лично
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
-          {/* Photo */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10">
+          {/* Photo card */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-2"
+            className="lg:col-span-4"
           >
-            <div className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-sm">
+            <div className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-premium sticky top-24">
               <div className="relative w-full aspect-[4/5]">
                 <Img
                   src="/images/oleynikova-v2.jpg"
@@ -73,60 +66,70 @@ export function Team() {
                 />
               </div>
               <div className="p-6">
-                <div className="text-xl font-bold">Наталья Олейникова</div>
-                <div className="text-sm text-muted-foreground mt-1.5">
+                <div className="text-xl font-semibold">Наталья Олейникова</div>
+                <div className="text-sm text-muted-foreground mt-1.5 leading-relaxed">
                   Генеральный директор · Аттестованный аудитор · Судебный эксперт
                 </div>
               </div>
             </div>
           </motion.div>
 
-          {/* Credentials + quote */}
+          {/* Right side: quote + credentials + industries */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-3 space-y-8"
+            transition={{ delay: 0.1 }}
+            className="lg:col-span-8 space-y-10"
           >
-            <blockquote className="text-lg leading-relaxed text-muted-foreground border-l-4 border-primary pl-6">
-              «За 25 лет мы провели более 500 аудитов — от небольших ООО до
+            <blockquote className="font-heading text-xl sm:text-2xl leading-[1.5] text-foreground border-l-2 border-primary pl-6">
+              «За 30+ лет мы провели более 500 аудитов — от небольших ООО до
               холдингов с консолидированной отчётностью. Производство, торговля,
               строительство, транспорт, медиа, медицина — знаем отраслевую
-              специфику учёта. Я лично контролирую каждый проект. Для меня
-              важно, чтобы управленческое письмо содержало конкретные
-              рекомендации по учёту, а не шаблонные формулировки.»
+              специфику учёта. Я лично веду каждый проект и отвечаю за
+              содержательность управленческого письма.»
             </blockquote>
 
-            <div className="grid sm:grid-cols-2 gap-3">
-              {credentials.map((cred) => (
-                <div
-                  key={cred.text}
-                  className="flex items-start gap-3 p-3 rounded-xl bg-white/80 glass-border"
-                >
-                  <cred.icon className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-                  <span className="text-sm">{cred.text}</span>
-                </div>
-              ))}
+            <div>
+              <div className="text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground mb-4">
+                Квалификация и членства
+              </div>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {credentials.map((cred) => (
+                  <div
+                    key={cred.text}
+                    className="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-200"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center shrink-0">
+                      <cred.icon className="w-4 h-4 text-primary" />
+                    </div>
+                    <span className="text-sm leading-relaxed">
+                      {cred.text}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div>
-              <h3 className="font-semibold mb-4">
-                Отрасли, в которых проводили аудит:
-              </h3>
+              <div className="text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground mb-4">
+                Отрасли, в которых проводили аудит
+              </div>
               <div className="flex flex-wrap gap-2">
                 {industries.map((ind) => (
                   <span
                     key={ind}
-                    className="px-4 py-2 rounded-full bg-violet-50 text-sm text-violet-700 border border-violet-100"
+                    className="px-4 py-2 rounded-full bg-violet-50 text-sm text-violet-800 border border-violet-100"
                   >
                     {ind}
                   </span>
                 ))}
               </div>
             </div>
-
           </motion.div>
         </div>
+
+        <CtaStrip className="mt-16" />
       </div>
     </section>
   );

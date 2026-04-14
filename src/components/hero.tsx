@@ -125,7 +125,7 @@ export function Hero() {
             >
               Обязательный аудит БФО{" "}
               <span className="italic text-gradient-violet">
-                в срок, прописанный в договоре
+                в срок, с гарантией по договору
               </span>
             </motion.h1>
 
@@ -137,7 +137,7 @@ export function Hero() {
               className="mt-6 text-base lg:text-lg text-muted-foreground max-w-md leading-relaxed"
             >
               Проверяем бухгалтерскую отчётность компаний с выручкой от 400 млн ₽.
-              От 80 000 ₽. Заключение принимают ФНС, банки и акционеры.
+              Готовим заключения, которые принимают ФНС, банки и акционеры.
             </motion.p>
 
             <motion.div
@@ -171,15 +171,12 @@ export function Hero() {
             >
               <div className="flex items-start gap-3.5">
                 <div className="relative shrink-0">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-100 via-violet-200 to-violet-300 flex items-center justify-center overflow-hidden">
-                    <svg
-                      viewBox="0 0 32 32"
-                      className="w-8 h-8 text-primary/70"
-                      fill="currentColor"
-                    >
-                      <circle cx="16" cy="11" r="5" />
-                      <path d="M6 27c0-5.5 4.5-10 10-10s10 4.5 10 10v2H6z" />
-                    </svg>
+                  <div className="w-12 h-12 rounded-xl overflow-hidden bg-gray-100">
+                    <Img
+                      src="/images/oleynikova-v2.jpg"
+                      alt="Наталья Олейникова"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                   <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-primary flex items-center justify-center shadow">
                     <svg
@@ -331,12 +328,13 @@ export function Hero() {
               </div>
             </motion.div>
 
-            {/* Clients stats card — bottom-right */}
-            <motion.div
+            {/* Clients stats card — bottom-right, clickable */}
+            <motion.a
+              href="#clients"
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.7, delay: 1 }}
-              className="absolute bottom-2 right-0 lg:right-4 w-[210px] bg-[#16162B] rounded-2xl p-5 shadow-[0_16px_48px_-10px_rgba(22,22,43,0.45)] z-20 overflow-hidden"
+              className="absolute bottom-2 right-0 lg:right-4 w-[210px] bg-[#16162B] rounded-2xl p-5 shadow-[0_16px_48px_-10px_rgba(22,22,43,0.45)] z-20 overflow-hidden hover:scale-[1.03] transition-transform cursor-pointer"
             >
               <div
                 aria-hidden
@@ -372,7 +370,7 @@ export function Hero() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </motion.a>
           </div>
         </div>
 

@@ -47,7 +47,7 @@ function SliderRow({ reverse = false }: { reverse?: boolean }) {
 
 export function ClientsSlider() {
   return (
-    <section className="py-16 overflow-hidden">
+    <section id="clients" className="py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8">
         <motion.p
           initial={{ opacity: 0 }}

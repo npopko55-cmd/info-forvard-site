@@ -2,6 +2,8 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { ShieldCheck } from "lucide-react";
+import { CtaStrip } from "@/components/ui/cta-strip";
 
 const steps = [
   {
@@ -123,10 +125,13 @@ export function Process() {
           className="max-w-3xl mb-16"
         >
           <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4">
-            Как проходит аудит
+            Контролируем слабые места в учёте.
+            <br />
+            Отвечаем за каждую ошибку в отчёте.
           </h2>
           <p className="text-lg text-muted-foreground">
             Пять шагов от заявки до управленческого письма. От 2 до 6 недель.
+            Ответственность застрахована и прописана в договоре.
           </p>
         </motion.div>
 
@@ -142,19 +147,35 @@ export function Process() {
           ))}
         </div>
 
+        {/* Guarantee block */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 text-center"
+          className="mt-16 max-w-3xl mx-auto rounded-3xl bg-gradient-to-br from-violet-50 via-white to-violet-50 border border-violet-100 p-8 sm:p-10"
         >
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center rounded-xl px-8 h-14 gradient-violet text-white shadow-lg shadow-violet-500/20 font-medium text-base transition-opacity hover:opacity-90"
-          >
-            Записаться на консультацию
-          </a>
+          <div className="flex items-start gap-5">
+            <div className="w-12 h-12 rounded-xl gradient-violet flex items-center justify-center shrink-0">
+              <ShieldCheck className="w-6 h-6 text-white" />
+            </div>
+            <div>
+              <div className="text-xs font-semibold uppercase tracking-[0.15em] text-primary mb-2">
+                Гарантия аудитора
+              </div>
+              <h3 className="font-heading text-2xl sm:text-3xl font-semibold leading-tight mb-3">
+                Отвечаем за заключение рублём
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Ответственность аудиторской компании застрахована в соответствии
+                с требованиями ФЗ-307 и СРО ААС. Если ФНС доначислит налоги
+                из-за ошибок в нашем заключении — компенсируем ущерб в рамках
+                страхового покрытия.
+              </p>
+            </div>
+          </div>
         </motion.div>
+
+        <CtaStrip className="mt-12" />
       </div>
     </section>
   );

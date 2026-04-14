@@ -19,13 +19,13 @@ export default function Home() {
       <main>
         <Hero />
         <Services />
+        <Team />
         <Process />
         <SystemApproach />
-        <Team />
         <ClientsSlider />
         <ForDirector />
-        <FAQ />
         <ContactForm />
+        <FAQ />
       </main>
       <Footer />
     </>

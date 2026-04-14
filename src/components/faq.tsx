@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { AnimatedList } from "@/components/ui/animated-list";
+import { CtaStrip } from "@/components/ui/cta-strip";
 
 const faqItems = [
   {
@@ -56,11 +57,12 @@ export function FAQ() {
           viewport={{ once: true }}
           className="mb-10"
         >
-          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4">
-            До заявки обычно спрашивают это
+          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4 leading-[1.1]">
+            У меня есть вопрос...
           </h2>
           <p className="text-lg text-muted-foreground">
-            Нажмите на вопрос, чтобы раскрыть ответ
+            Давайте разберём часто задаваемые вопросы. Нажмите, чтобы раскрыть
+            ответ.
           </p>
         </motion.div>
 
@@ -78,13 +80,10 @@ export function FAQ() {
           viewport={{ once: true }}
           className="mt-10 text-center"
         >
-          <p className="text-muted-foreground mb-4">Не нашли ответа?</p>
-          <a
-            href="#contact"
-            className="inline-flex items-center justify-center rounded-xl px-8 h-12 gradient-violet text-white font-medium text-sm transition-opacity hover:opacity-90"
-          >
-            Спросить на консультации
-          </a>
+          <p className="text-muted-foreground mb-6">
+            Не нашли ответа? Задайте вопрос напрямую.
+          </p>
+          <CtaStrip />
         </motion.div>
       </div>
     </section>

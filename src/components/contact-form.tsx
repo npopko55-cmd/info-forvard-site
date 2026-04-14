@@ -6,11 +6,25 @@ import { Phone, Mail, MapPin, Clock, CheckCircle2, Send } from "lucide-react";
 
 const revenueOptions = ["до 400 млн", "до 800 млн", "до 2 млрд", "2+ млрд"];
 const accountingOptions = ["1–2", "3–4", "5 и более"];
+const serviceOptions = [
+  "Обязательный аудит БФО",
+  "Налоговый аудит",
+  "Инициативный аудит",
+  "Due Diligence",
+  "Судебная экспертиза и форензик",
+  "Обзорная проверка отчётности",
+  "Трансформация РСБУ → МСФО",
+  "Восстановление учёта",
+  "Аутсорсинг главного бухгалтера",
+  "Консультации и сопровождение",
+  "Другое / уточню на консультации",
+];
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
   const [revenue, setRevenue] = useState(revenueOptions[1]);
   const [accounting, setAccounting] = useState(accountingOptions[0]);
+  const [service, setService] = useState(serviceOptions[0]);
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [telegram, setTelegram] = useState(false);
@@ -33,7 +47,8 @@ export function ContactForm() {
             Рассчитаем стоимость за 15 минут
           </h2>
           <p className="text-lg text-muted-foreground">
-            Оценим объём работы и вышлем диапазон цен с примерами ТЗ на почту
+            В течение 15 минут свяжемся с вами по указанным контактам и пришлём
+            диапазон цен с примерами ТЗ на почту.
           </p>
         </motion.div>
 
@@ -81,6 +96,37 @@ export function ContactForm() {
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Service type */}
+                <div>
+                  <label className="block text-sm font-medium mb-3">
+                    Интересующая услуга
+                  </label>
+                  <div className="relative">
+                    <select
+                      value={service}
+                      onChange={(e) => setService(e.target.value)}
+                      className="w-full h-12 px-4 pr-10 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-2 focus:ring-violet-100 outline-none transition-all text-base appearance-none cursor-pointer"
+                    >
+                      {serviceOptions.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path
+                          d="M3.5 5.25L7 8.75L10.5 5.25"
+                          stroke="currentColor"
+                          strokeWidth="1.75"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Revenue */}
                 <div>
                   <label className="block text-sm font-medium mb-3">

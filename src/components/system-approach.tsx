@@ -9,6 +9,7 @@ import {
   ClipboardCheck,
   Globe,
 } from "lucide-react";
+import { CtaStrip } from "@/components/ui/cta-strip";
 
 const features = [
   {
@@ -59,11 +60,13 @@ export function SystemApproach() {
           viewport={{ once: true }}
           className="max-w-3xl mb-14"
         >
-          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4">
-            Почему клиенты возвращаются к нам
+          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4 leading-[1.1]">
+            За 500+ проверок мы поняли, как сделать аудит легким и прозрачным
+            для компании
           </h2>
           <p className="text-lg text-muted-foreground">
-            Шесть принципов работы, которые отличают нас от типового аудита.
+            Шесть принципов, на которых выстроен процесс — от первой заявки до
+            управленческого письма.
           </p>
         </motion.div>
 
@@ -87,6 +90,8 @@ export function SystemApproach() {
             </motion.div>
           ))}
         </div>
+
+        <CtaStrip className="mt-14" />
       </div>
     </section>
   );
