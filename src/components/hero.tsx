@@ -119,32 +119,37 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Center — Owl statue in podium */}
+          {/* Center — Owl statue full-body cropped with fade */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="lg:col-span-6 relative flex justify-center items-center min-h-[520px]"
+            className="lg:col-span-6 relative flex justify-center items-end min-h-[620px] self-end"
           >
-            {/* Podium circle backdrop */}
+            {/* Soft radial glow backdrop */}
             <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(196,181,253,0.35) 0%, rgba(221,209,243,0.18) 50%, rgba(245,242,251,0) 70%)",
+                  "radial-gradient(circle, rgba(167,139,250,0.25) 0%, rgba(196,181,253,0.12) 40%, rgba(245,242,251,0) 70%)",
               }}
             />
-            {/* Decorative ring */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full border border-violet-200/60" />
 
-            {/* Owl — small focal piece */}
-            <div className="relative w-[280px] h-[340px] z-10">
+            {/* Owl — large, cropped bottom with fade */}
+            <div
+              className="relative w-[440px] h-[560px] z-10"
+              style={{
+                maskImage:
+                  "linear-gradient(180deg, #000 0%, #000 75%, transparent 98%)",
+                WebkitMaskImage:
+                  "linear-gradient(180deg, #000 0%, #000 75%, transparent 98%)",
+              }}
+            >
               <Img
-                src="/images/owl.jpg"
+                src="/images/owl-v2.png"
                 alt="Сова — символ аудита: зоркость, мудрость, точность"
                 fill
-                className="object-contain"
-                style={{ mixBlendMode: "multiply" }}
+                className="object-contain object-bottom"
               />
             </div>
 
@@ -153,7 +158,7 @@ export function Hero() {
               initial={{ opacity: 0, x: 20, y: -10 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="absolute top-4 right-4 sm:right-8 bg-white rounded-2xl p-4 shadow-premium-lg border border-gray-100 w-[210px] z-20"
+              className="absolute top-8 right-0 sm:-right-4 bg-white rounded-2xl p-4 shadow-premium-lg border border-gray-100 w-[220px] z-20"
             >
               <div className="flex items-center gap-2 mb-2">
                 <TrendingUp className="w-4 h-4 text-primary" />
@@ -194,7 +199,7 @@ export function Hero() {
               initial={{ opacity: 0, x: -20, y: 10 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="absolute top-20 left-0 sm:left-4 bg-white rounded-2xl p-4 shadow-premium border border-gray-100 w-[160px] z-20"
+              className="absolute top-32 left-0 sm:-left-6 bg-white rounded-2xl p-4 shadow-premium border border-gray-100 w-[160px] z-20"
             >
               <div className="text-3xl font-bold font-heading text-primary">
                 <CountUp target={25} suffix="+" />
@@ -209,7 +214,7 @@ export function Hero() {
               initial={{ opacity: 0, x: 20, y: 10 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.6, delay: 0.9 }}
-              className="absolute bottom-6 right-2 sm:right-6 bg-[#16162B] text-white rounded-2xl p-4 shadow-premium-lg w-[175px] z-20"
+              className="absolute bottom-16 right-0 sm:-right-2 bg-[#16162B] text-white rounded-2xl p-4 shadow-premium-lg w-[180px] z-20"
             >
               <div className="text-3xl font-bold font-heading">
                 <CountUp target={500} suffix="+" />
