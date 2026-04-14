@@ -113,7 +113,7 @@ export function Hero() {
               className="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-sm border border-violet-200/80 text-xs font-medium text-primary mb-7"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              Аудиторская компания · с 2000 года
+              Аудиторская компания · Москва · Вся Россия
             </motion.div>
 
             <motion.h1
@@ -151,7 +151,7 @@ export function Hero() {
                 href="#contact"
                 className="group inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 bg-[#16162B] hover:bg-[#26263F] text-white font-medium text-sm transition-all shadow-[0_8px_24px_rgba(22,22,43,0.25)] hover:shadow-[0_12px_32px_rgba(22,22,43,0.35)]"
               >
-                Узнать стоимость
+                Рассчитать стоимость
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a
@@ -199,7 +199,7 @@ export function Hero() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-[13px] font-semibold leading-tight text-foreground">
-                    25 лет в аудите · Член СРО ААС · Судэксперт
+                    30+ лет опыта · Член СРО ААС · Судэксперт
                   </div>
                   <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
                     Аудит, налоговый консалтинг и правовая экспертиза — одной командой.
@@ -316,7 +316,7 @@ export function Hero() {
               </div>
             </motion.div>
 
-            {/* 25+ years micro-badge — middle left */}
+            {/* 30+ years micro-badge — middle left */}
             <motion.div
               initial={{ opacity: 0, x: -12, scale: 0.95 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
@@ -324,10 +324,10 @@ export function Hero() {
               className="hidden lg:block absolute top-[42%] left-0 bg-white/95 backdrop-blur-sm rounded-2xl px-5 py-3.5 shadow-[0_12px_40px_-8px_rgba(76,29,149,0.18)] border border-white z-20"
             >
               <div className="text-2xl font-heading font-semibold text-primary leading-none">
-                <CountUp target={25} suffix="+" />
+                <CountUp target={30} suffix="+" />
               </div>
               <div className="text-[10px] text-muted-foreground uppercase tracking-[0.12em] mt-1.5 font-semibold">
-                лет практики
+                лет опыта
               </div>
             </motion.div>
 

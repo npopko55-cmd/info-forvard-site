@@ -18,7 +18,7 @@ const fraunces = Fraunces({
 export const metadata: Metadata = {
   title: "Аудит БФО от 80 000 ₽ — ИНФО ФОРВАРД | Консультация аудитора бесплатно",
   description:
-    "Обязательный аудит бухгалтерской отчётности, налоговый аудит, Due Diligence. 25+ лет практики, 500+ проверок. Заключение в срок. Перезвоним за 15 минут.",
+    "Обязательный аудит БФО, налоговый аудит, Due Diligence. 30+ лет опыта руководителя практики. 500+ аудиторских проверок. Перезвоним за 15 минут.",
 };
 
 export default function RootLayout({
@@ -33,5 +33,8 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
+  );
+}
+ </html>
   );
 }

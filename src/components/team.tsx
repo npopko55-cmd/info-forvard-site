@@ -50,8 +50,8 @@ export function Team() {
             Руководитель аудиторской практики
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            25+ лет практики · 500+ аудиторских проверок · каждый проект
-            сопровождает лично.
+            30+ лет в аудите · 500+ проверок за карьеру · каждый проект ведёт
+            лично.
           </p>
         </motion.div>
 
@@ -129,5 +129,8 @@ export function Team() {
         </div>
       </div>
     </section>
+  );
+}
+</section>
   );
 }

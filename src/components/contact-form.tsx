@@ -30,10 +30,10 @@ export function ContactForm() {
           className="text-center max-w-2xl mx-auto mb-10"
         >
           <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-3">
-            Узнайте цену за 1 минуту
+            Рассчитаем стоимость за 15 минут
           </h2>
           <p className="text-lg text-muted-foreground">
-            Пришлём диапазон стоимости и примеры технических заданий на почту
+            Оценим объём работы и вышлем диапазон цен с примерами ТЗ на почту
           </p>
         </motion.div>
 
