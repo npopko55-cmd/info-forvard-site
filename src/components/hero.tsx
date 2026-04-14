@@ -1,20 +1,20 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, TrendingUp, Quote } from "lucide-react";
+import { ArrowUpRight, TrendingUp, Instagram, Send, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import { Img } from "@/components/img";
 
 function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
 
   useEffect(() => {
     const run = () => {
       if (started.current) return;
       started.current = true;
-      const duration = 2000;
+      const duration = 2200;
       const start = performance.now();
       const step = (now: number) => {
         const progress = Math.min((now - start) / duration, 1);
@@ -24,15 +24,12 @@ function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
       };
       requestAnimationFrame(step);
     };
-
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) run();
-      },
+      ([entry]) => entry.isIntersecting && run(),
       { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
     );
     if (ref.current) observer.observe(ref.current);
-    const fallback = setTimeout(run, 1500);
+    const fallback = setTimeout(run, 1200);
     return () => {
       observer.disconnect();
       clearTimeout(fallback);
@@ -40,7 +37,7 @@ function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   }, [target]);
 
   return (
-    <span>
+    <span ref={ref}>
       {count}
       {suffix}
     </span>
@@ -51,138 +48,234 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden pt-28 pb-20"
+      className="relative overflow-hidden"
       style={{
         background:
-          "linear-gradient(180deg, #F5F2FB 0%, #FBFAFC 70%, #F5F2FB 100%)",
+          "radial-gradient(120% 60% at 50% 0%, #F5F2FB 0%, #FBFAFC 55%, #F5F2FB 100%)",
       }}
     >
-      {/* Cloud fade — top */}
+      {/* Ambient violet blob behind owl */}
       <div
-        className="absolute top-0 left-0 right-0 h-40 z-[5] pointer-events-none"
+        aria-hidden
+        className="absolute top-[-120px] right-[3%] w-[620px] h-[620px] rounded-full pointer-events-none opacity-65 blur-3xl"
         style={{
           background:
-            "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 100%)",
+            "radial-gradient(circle, rgba(167,139,250,0.4) 0%, rgba(196,181,253,0.15) 45%, transparent 72%)",
+        }}
+      />
+
+      {/* Cloud fade — top */}
+      <div
+        aria-hidden
+        className="absolute top-0 left-0 right-0 h-28 z-[5] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.55) 45%, transparent 100%)",
         }}
       />
       {/* Cloud fade — bottom */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-40 z-[5] pointer-events-none"
+        aria-hidden
+        className="absolute bottom-0 left-0 right-0 h-28 z-[5] pointer-events-none"
         style={{
           background:
-            "linear-gradient(0deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 100%)",
+            "linear-gradient(0deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.55) 45%, transparent 100%)",
         }}
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid lg:grid-cols-12 gap-8 items-center">
-          {/* Left content */}
+
+      {/* Grain overlay */}
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none opacity-[0.03] mix-blend-multiply z-[4]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        }}
+      />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 lg:pt-36 lg:pb-24">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start min-h-[680px] lg:min-h-[760px]">
+          {/* LEFT — text */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="lg:col-span-6 space-y-8 relative z-20"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              visible: {
+                transition: { staggerChildren: 0.08, delayChildren: 0.05 },
+              },
+            }}
+            className="lg:col-span-6 relative z-20 flex flex-col lg:pt-20"
           >
-            <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[0.98] tracking-tight">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 12 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+              }}
+              className="inline-flex items-center gap-2 self-start px-3 py-1.5 rounded-full bg-white/70 backdrop-blur-sm border border-violet-200/80 text-xs font-medium text-primary mb-7"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              Аудиторская компания · с 2000 года
+            </motion.div>
+
+            <motion.h1
+              variants={{
+                hidden: { opacity: 0, y: 16 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
+              }}
+              className="font-heading font-semibold leading-[0.94] tracking-[-0.02em] text-[clamp(2.75rem,6.8vw,5.5rem)] text-foreground"
+            >
               Аудит,
               <br />
               которому
               <br />
-              <span className="italic text-gradient-violet">доверяют</span>
-            </h1>
+              <span className="italic text-gradient-violet">доверяют.</span>
+            </motion.h1>
 
-            <p className="text-base sm:text-lg text-muted-foreground max-w-md leading-relaxed">
+            <motion.p
+              variants={{
+                hidden: { opacity: 0, y: 12 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+              }}
+              className="mt-7 text-base lg:text-lg text-muted-foreground max-w-md leading-relaxed"
+            >
               Проверяем отчётность компаний с выручкой от 400 млн до 5 млрд ₽.
               Заключение в срок, цена в договоре, аудитор — не стажёр.
-            </p>
+            </motion.p>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <motion.div
+              variants={{
+                hidden: { opacity: 0, y: 12 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+              }}
+              className="mt-9 flex flex-col sm:flex-row gap-3"
+            >
               <a
                 href="#contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-full px-7 h-13 py-4 bg-[#16162B] hover:bg-[#2a2a48] text-white font-medium text-sm transition-colors"
+                className="group inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 bg-[#16162B] hover:bg-[#26263F] text-white font-medium text-sm transition-all shadow-[0_8px_24px_rgba(22,22,43,0.25)] hover:shadow-[0_12px_32px_rgba(22,22,43,0.35)]"
               >
                 Узнать стоимость
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+                <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
               <a
                 href="#services"
-                className="inline-flex items-center justify-center rounded-full px-7 h-13 py-4 border border-gray-300 hover:border-primary hover:text-primary text-foreground font-medium text-sm transition-colors"
+                className="inline-flex items-center justify-center rounded-full px-7 py-3.5 border border-[#16162B]/15 hover:border-[#16162B]/40 bg-white/60 hover:bg-white/90 backdrop-blur-sm text-foreground font-medium text-sm transition-all"
               >
                 Услуги и цены
               </a>
-            </div>
+            </motion.div>
 
-            {/* Floating testimonial card */}
+            {/* Testimonial-style floating card */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.5 }}
-              className="hidden sm:block mt-10 bg-white rounded-2xl p-5 shadow-premium border border-gray-100 max-w-sm"
+              initial={{ opacity: 0, y: 24, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.7, delay: 0.95 }}
+              className="mt-12 lg:mt-16 bg-white/95 backdrop-blur-sm rounded-2xl p-5 shadow-[0_12px_40px_-8px_rgba(76,29,149,0.18)] border border-white max-w-[340px]"
             >
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-violet-200 to-violet-300 flex items-center justify-center shrink-0">
-                  <Quote className="w-5 h-5 text-primary" />
+              <div className="flex items-start gap-3.5">
+                <div className="relative shrink-0">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-100 via-violet-200 to-violet-300 flex items-center justify-center overflow-hidden">
+                    <svg
+                      viewBox="0 0 32 32"
+                      className="w-8 h-8 text-primary/70"
+                      fill="currentColor"
+                    >
+                      <circle cx="16" cy="11" r="5" />
+                      <path d="M6 27c0-5.5 4.5-10 10-10s10 4.5 10 10v2H6z" />
+                    </svg>
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-primary flex items-center justify-center shadow">
+                    <svg
+                      className="w-3 h-3 text-white"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                    >
+                      <path
+                        d="M3 8L6.5 11.5L13 5"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
                 </div>
-                <div>
-                  <div className="text-sm font-semibold">
+                <div className="flex-1 min-w-0">
+                  <div className="text-[13px] font-semibold leading-tight text-foreground">
                     Ваша отчётность — наш фокус
                   </div>
-                  <div className="text-xs text-muted-foreground mt-1 leading-relaxed">
-                    25 лет опыта. 500+ проверок. Аудитор лично ведёт каждый
-                    проект.
-                  </div>
+                  <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
+                    25 лет. 500+ проверок. Аудитор лично ведёт каждый проект.
+                  </p>
+                  <a
+                    href="#team"
+                    className="mt-2.5 inline-flex items-center gap-1 text-[11px] font-semibold uppercase tracking-wider text-primary hover:gap-1.5 transition-all"
+                  >
+                    Подробнее
+                    <ArrowUpRight className="w-3 h-3" />
+                  </a>
                 </div>
               </div>
             </motion.div>
           </motion.div>
 
-          {/* Center — Owl statue, large, background blended out */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.2 }}
-            className="lg:col-span-6 relative flex justify-center items-center min-h-[640px]"
-          >
-            {/* Soft radial glow backdrop */}
-            <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[55%] w-[560px] h-[560px] rounded-full pointer-events-none"
-              style={{
-                background:
-                  "radial-gradient(circle, rgba(167,139,250,0.28) 0%, rgba(196,181,253,0.12) 45%, rgba(245,242,251,0) 70%)",
-              }}
-            />
-
-            {/* Owl — cutout, large, cropped waist-up via mask */}
-            <div
-              className="relative w-[560px] h-[700px] z-10 -ml-16 lg:-ml-24"
-              style={{
-                maskImage:
-                  "linear-gradient(180deg, transparent 0%, #000 10%, #000 78%, transparent 100%)",
-                WebkitMaskImage:
-                  "linear-gradient(180deg, transparent 0%, #000 10%, #000 78%, transparent 100%)",
-              }}
-            >
-              <Img
-                src="/images/owl-cutout.png"
-                alt="Сова — символ аудита: зоркость, мудрость, точность"
-                fill
-                className="object-contain object-top"
-              />
-            </div>
-
-            {/* Floating stats card — top right */}
+          {/* RIGHT — owl + floating cards */}
+          <div className="lg:col-span-6 relative min-h-[520px] lg:min-h-[680px]">
+            {/* Owl statue — extends above grid */}
             <motion.div
-              initial={{ opacity: 0, x: 20, y: -10 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
-              className="absolute top-8 right-0 sm:-right-4 bg-white rounded-2xl p-4 shadow-premium-lg border border-gray-100 w-[220px] z-20"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute left-1/2 -translate-x-1/2 top-[-120px] lg:top-[-160px] w-[340px] sm:w-[460px] lg:w-[580px] aspect-[4/5] z-10 pointer-events-none"
             >
-              <div className="flex items-center gap-2 mb-2">
-                <TrendingUp className="w-4 h-4 text-primary" />
-                <span className="text-xs font-semibold">
-                  Проверено за 2025
+              {/* Pedestal glow */}
+              <div
+                aria-hidden
+                className="absolute bottom-[7%] left-1/2 -translate-x-1/2 w-[65%] h-[90px] rounded-full blur-2xl opacity-70"
+                style={{
+                  background:
+                    "radial-gradient(ellipse, rgba(91,33,182,0.28) 0%, rgba(91,33,182,0.08) 45%, transparent 78%)",
+                }}
+              />
+              <div className="relative w-full h-full">
+                <Img
+                  src="/images/owl-cutout.png"
+                  alt="Скульптура совы — символ точного взгляда аудитора"
+                  fill
+                  className="object-contain drop-shadow-[0_30px_60px_rgba(76,29,149,0.22)]"
+                  style={{
+                    maskImage:
+                      "linear-gradient(180deg, #000 0%, #000 86%, transparent 100%)",
+                    WebkitMaskImage:
+                      "linear-gradient(180deg, #000 0%, #000 86%, transparent 100%)",
+                  }}
+                />
+              </div>
+            </motion.div>
+
+            {/* Chart card — top-right */}
+            <motion.div
+              initial={{ opacity: 0, x: 24, y: -8 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.7 }}
+              className="absolute top-[60px] lg:top-[100px] right-0 lg:-right-4 w-[230px] bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-[0_12px_40px_-8px_rgba(76,29,149,0.2)] border border-white z-20"
+            >
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-lg bg-violet-100 flex items-center justify-center">
+                    <TrendingUp className="w-3.5 h-3.5 text-primary" />
+                  </div>
+                  <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+                    Проверено
+                  </span>
+                </div>
+                <span className="text-[10px] text-muted-foreground font-medium">
+                  2025
                 </span>
               </div>
-              <svg viewBox="0 0 200 60" className="w-full h-10">
+              <svg
+                viewBox="0 0 200 60"
+                className="w-full h-11"
+                preserveAspectRatio="none"
+              >
                 <defs>
                   <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="#5B21B6" stopOpacity="0.3" />
@@ -190,65 +283,126 @@ export function Hero() {
                   </linearGradient>
                 </defs>
                 <path
-                  d="M0,45 L25,38 L50,42 L75,28 L100,32 L125,20 L150,24 L175,12 L200,8 L200,60 L0,60 Z"
+                  d="M0,48 L25,40 L50,44 L75,28 L100,34 L125,18 L150,22 L175,10 L200,6 L200,60 L0,60 Z"
                   fill="url(#chartFill)"
                 />
                 <path
-                  d="M0,45 L25,38 L50,42 L75,28 L100,32 L125,20 L150,24 L175,12 L200,8"
+                  d="M0,48 L25,40 L50,44 L75,28 L100,34 L125,18 L150,22 L175,10 L200,6"
                   fill="none"
                   stroke="#5B21B6"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
+                <circle cx="200" cy="6" r="3.5" fill="#5B21B6" />
+                <circle cx="200" cy="6" r="7" fill="#5B21B6" opacity="0.2" />
               </svg>
-              <div className="flex items-baseline gap-2 mt-1">
-                <span className="text-xl font-bold">147</span>
-                <span className="text-xs text-muted-foreground">
-                  аудитов сдано
-                </span>
+              <div className="flex items-end justify-between mt-2.5">
+                <div>
+                  <div className="flex items-baseline gap-1.5">
+                    <span className="text-2xl font-heading font-semibold">
+                      147
+                    </span>
+                    <span className="text-[11px] font-semibold text-green-600">
+                      +24%
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-muted-foreground">
+                    аудитов сдано
+                  </span>
+                </div>
               </div>
             </motion.div>
 
-            {/* Floating 25+ years badge — top left */}
+            {/* 25+ years micro-badge — middle left */}
             <motion.div
-              initial={{ opacity: 0, x: -20, y: 10 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              className="absolute top-32 left-0 sm:-left-6 bg-white rounded-2xl p-4 shadow-premium border border-gray-100 w-[160px] z-20"
+              initial={{ opacity: 0, x: -12, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.7, delay: 1.2 }}
+              className="hidden lg:block absolute top-[44%] left-0 bg-white/95 backdrop-blur-sm rounded-2xl px-5 py-3.5 shadow-[0_12px_40px_-8px_rgba(76,29,149,0.18)] border border-white z-20"
             >
-              <div className="text-3xl font-bold font-heading text-primary">
+              <div className="text-2xl font-heading font-semibold text-primary leading-none">
                 <CountUp target={25} suffix="+" />
               </div>
-              <div className="text-xs text-muted-foreground mt-0.5">
+              <div className="text-[10px] text-muted-foreground uppercase tracking-[0.12em] mt-1.5 font-semibold">
                 лет практики
               </div>
             </motion.div>
 
-            {/* Floating clients badge — bottom right */}
+            {/* Clients stats card — bottom-right */}
             <motion.div
-              initial={{ opacity: 0, x: 20, y: 10 }}
-              animate={{ opacity: 1, x: 0, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.9 }}
-              className="absolute bottom-16 right-0 sm:-right-2 bg-[#16162B] text-white rounded-2xl p-4 shadow-premium-lg w-[180px] z-20"
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.7, delay: 1 }}
+              className="absolute bottom-0 right-0 lg:right-4 w-[210px] bg-[#16162B] rounded-2xl p-5 shadow-[0_16px_48px_-10px_rgba(22,22,43,0.45)] z-20 overflow-hidden"
             >
-              <div className="text-3xl font-bold font-heading">
-                <CountUp target={500} suffix="+" />
-              </div>
-              <div className="text-xs text-white/70 mt-0.5">
-                довольных клиентов
-              </div>
-              <div className="flex -space-x-2 mt-3">
-                {[0, 1, 2].map((i) => (
-                  <div
-                    key={i}
-                    className="w-7 h-7 rounded-full border-2 border-[#16162B] bg-gradient-to-br from-violet-300 to-violet-500"
-                  />
-                ))}
+              <div
+                aria-hidden
+                className="absolute inset-0 opacity-55 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(90% 60% at 0% 0%, rgba(91,33,182,0.5), transparent)",
+                }}
+              />
+              <div className="relative">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/50 mb-2">
+                  Клиенты
+                </div>
+                <div className="text-4xl font-heading font-semibold text-white leading-none">
+                  <CountUp target={500} suffix="+" />
+                </div>
+                <div className="text-[11px] text-white/60 mt-1.5">
+                  довольных компаний
+                </div>
+                <div className="flex -space-x-2 mt-4">
+                  {[
+                    "from-violet-300 to-violet-500",
+                    "from-fuchsia-300 to-violet-400",
+                    "from-violet-200 to-violet-400",
+                  ].map((grad, i) => (
+                    <div
+                      key={i}
+                      className={`w-7 h-7 rounded-full border-2 border-[#16162B] bg-gradient-to-br ${grad}`}
+                    />
+                  ))}
+                  <div className="w-7 h-7 rounded-full border-2 border-[#16162B] bg-white/15 backdrop-blur-sm flex items-center justify-center text-[9px] font-semibold text-white">
+                    +497
+                  </div>
+                </div>
               </div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
+
+        {/* Social / contact strip */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.4 }}
+          className="mt-10 lg:mt-14 flex items-center justify-center gap-2.5 relative z-20"
+        >
+          <a
+            href="#"
+            aria-label="Telegram"
+            className="w-10 h-10 rounded-full bg-white/70 hover:bg-white border border-[#16162B]/10 hover:border-primary/40 backdrop-blur-sm flex items-center justify-center text-foreground hover:text-primary transition-all"
+          >
+            <Send className="w-4 h-4" />
+          </a>
+          <a
+            href="#"
+            aria-label="Instagram"
+            className="w-10 h-10 rounded-full bg-white/70 hover:bg-white border border-[#16162B]/10 hover:border-primary/40 backdrop-blur-sm flex items-center justify-center text-foreground hover:text-primary transition-all"
+          >
+            <Instagram className="w-4 h-4" />
+          </a>
+          <a
+            href="tel:+79011841190"
+            className="ml-2 inline-flex items-center gap-2 px-4 h-10 rounded-full bg-white/70 hover:bg-white border border-[#16162B]/10 hover:border-primary/40 backdrop-blur-sm text-[13px] font-medium text-foreground hover:text-primary transition-all"
+          >
+            <Phone className="w-3.5 h-3.5" />
+            +7 (901) 184-11-90
+          </a>
+        </motion.div>
       </div>
     </section>
   );
