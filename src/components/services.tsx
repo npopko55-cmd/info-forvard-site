@@ -78,10 +78,11 @@ export function Services() {
           className="max-w-2xl mb-12"
         >
           <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4">
-            Шесть услуг — от консультации за 5 000 ₽ до форензика
+            Услуги и стоимость
           </h2>
           <p className="text-lg text-muted-foreground">
-            Стоимость фиксируем в договоре после оценки объёма. Доплат не будет.
+            Цену назовём после оценки объёма отчётности и зафиксируем в договоре.
+            Дополнительных счетов за превышение часов не будет.
           </p>
         </motion.div>
 

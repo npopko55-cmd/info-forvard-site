@@ -46,10 +46,13 @@ export function Team() {
           viewport={{ once: true }}
           className="mb-14"
         >
-          <h2 className="font-heading text-4xl sm:text-5xl font-semibold max-w-3xl">
-            25+ лет аудиторской практики. 500+ проверок. Руководитель лично
-            контролирует каждый проект.
+          <h2 className="font-heading text-4xl sm:text-5xl font-semibold max-w-3xl mb-4">
+            Руководитель аудиторской практики
           </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl">
+            25+ лет практики · 500+ аудиторских проверок · каждый проект
+            сопровождает лично.
+          </p>
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">

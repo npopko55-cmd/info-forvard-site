@@ -123,10 +123,10 @@ export function Process() {
           className="max-w-3xl mb-16"
         >
           <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4">
-            Аудит не должен парализовать бухгалтерию
+            Как проходит аудит
           </h2>
           <p className="text-lg text-muted-foreground">
-            5 шагов: от заявки до управленческого письма. 2–6 недель.
+            Пять шагов от заявки до управленческого письма. От 2 до 6 недель.
           </p>
         </motion.div>
 

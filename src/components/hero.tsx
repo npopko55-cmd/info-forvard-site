@@ -121,13 +121,12 @@ export function Hero() {
                 hidden: { opacity: 0, y: 16 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
               }}
-              className="font-heading font-semibold leading-[0.94] tracking-[-0.02em] text-[clamp(2.75rem,6.8vw,5.5rem)] text-foreground"
+              className="font-heading font-semibold leading-[1.02] tracking-[-0.02em] text-[clamp(2.25rem,5.2vw,4rem)] text-foreground"
             >
-              Аудит,
-              <br />
-              которому
-              <br />
-              <span className="italic text-gradient-violet">доверяют.</span>
+              Обязательный аудит БФО{" "}
+              <span className="italic text-gradient-violet">
+                в срок, прописанный в договоре
+              </span>
             </motion.h1>
 
             <motion.p
@@ -135,10 +134,10 @@ export function Hero() {
                 hidden: { opacity: 0, y: 12 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
               }}
-              className="mt-7 text-base lg:text-lg text-muted-foreground max-w-md leading-relaxed"
+              className="mt-6 text-base lg:text-lg text-muted-foreground max-w-md leading-relaxed"
             >
-              Проверяем отчётность компаний с выручкой от 400 млн до 5 млрд ₽.
-              Заключение в срок, цена в договоре, аудитор — не стажёр.
+              Проверяем бухгалтерскую отчётность компаний с выручкой от 400 млн ₽.
+              От 80 000 ₽. Заключение принимают ФНС, банки и акционеры.
             </motion.p>
 
             <motion.div
@@ -200,10 +199,10 @@ export function Hero() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="text-[13px] font-semibold leading-tight text-foreground">
-                    Ваша отчётность — наш фокус
+                    25 лет в аудите · Член СРО ААС · Судэксперт
                   </div>
                   <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">
-                    25 лет. 500+ проверок. Аудитор лично ведёт каждый проект.
+                    Аудит, налоговый консалтинг и правовая экспертиза — одной командой.
                   </p>
                   <a
                     href="#team"
