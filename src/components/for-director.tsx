@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Quote, ArrowUpRight } from "lucide-react";
 import { MagicBento } from "@/components/ui/magic-bento";
 
 const stats = [
@@ -30,16 +31,57 @@ export function ForDirector() {
   return (
     <section className="py-20 sm:py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Client testimonial as preamble */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mb-12 text-center mx-auto"
+          className="max-w-3xl mx-auto mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-violet-100 text-xs font-medium text-primary mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            Команда в цифрах
+          <div className="text-center mb-6">
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-3">
+              Отзыв клиента
+            </div>
+            <h3 className="font-heading text-2xl sm:text-3xl font-semibold leading-tight">
+              Что говорит о нашей команде один из клиентов
+            </h3>
           </div>
+
+          <div className="relative rounded-3xl bg-white border border-violet-100 shadow-premium p-7 sm:p-9">
+            <Quote className="absolute -top-3 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
+            <p className="text-base sm:text-lg leading-relaxed text-foreground">
+              «Команда ИНФО-ФОРВАРД проявила исключительную оперативность. Все
+              этапы проверки проводились с максимальной тщательностью. Были
+              выявлены не только потенциальные риски, но и предложены
+              конструктивные пути их решения. Рекомендуем их услуги всем
+              компаниям, которые ценят качество, скорость и надежность.»
+            </p>
+            <div className="mt-5 pt-5 border-t border-gray-100 flex items-end justify-between gap-4 flex-wrap">
+              <div>
+                <div className="font-semibold text-sm">К. Ю. Рябцев</div>
+                <div className="text-sm text-muted-foreground">
+                  Управляющий ТСЖ «Покровское-Глебово»
+                </div>
+              </div>
+              <a
+                href={`${process.env.NODE_ENV === "production" ? "/info-forvard-site" : ""}/review-tsj-glebovo.pdf`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2 transition-all"
+              >
+                Читать полный отзыв
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mb-10 text-center mx-auto"
+        >
           <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4 leading-[1.1]">
             Команда ИНФО-ФОРВАРД в цифрах
           </h2>

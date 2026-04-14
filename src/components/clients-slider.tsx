@@ -55,7 +55,7 @@ export function ClientsSlider() {
           viewport={{ once: true }}
           className="text-center text-muted-foreground text-xs uppercase tracking-[0.18em] font-semibold"
         >
-          Среди проверенных объектов
+          Среди проверенных клиентов
         </motion.p>
       </div>
       <SliderRow />

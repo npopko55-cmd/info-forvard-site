@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Award, Shield, Scale, BookOpen, Building2, Globe, Quote, ArrowUpRight } from "lucide-react";
+import { Award, Shield, Scale, BookOpen, Building2, Globe } from "lucide-react";
 import { Img } from "@/components/img";
 import { CtaStrip } from "@/components/ui/cta-strip";
 
@@ -31,32 +31,31 @@ export function Team() {
   return (
     <section
       id="team"
-      className="py-20 sm:py-28 bg-white relative overflow-hidden"
+      className="py-16 sm:py-20 bg-white relative overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-14 max-w-3xl"
+          className="mb-10 max-w-3xl"
         >
-          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4 leading-[1.1]">
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold mb-3 leading-[1.1]">
             Главный аудитор, который отвечает за результат каждой проверки
           </h2>
-          <p className="text-lg text-muted-foreground">
-            30+ лет опыта · 500+ проверок за карьеру · каждый проект ведёт лично
+          <p className="text-base sm:text-lg text-muted-foreground">
+            30+ лет опыта · 500+ проверок · каждый проект ведёт лично
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-10">
+        <div className="grid lg:grid-cols-[320px_1fr] gap-6 lg:gap-10 items-start">
           {/* Photo card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-4"
           >
-            <div className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-premium sticky top-24">
+            <div className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-premium">
               <div className="relative w-full aspect-[4/5]">
                 <Img
                   src="/images/oleynikova-v2.jpg"
@@ -65,10 +64,13 @@ export function Team() {
                   className="object-cover"
                 />
               </div>
-              <div className="p-6">
-                <div className="text-xl font-semibold">Наталья Олейникова</div>
-                <div className="text-sm text-muted-foreground mt-1.5 leading-relaxed">
-                  Генеральный директор · Аттестованный аудитор · Судебный эксперт
+              <div className="p-5">
+                <div className="text-lg font-semibold leading-tight">
+                  Наталья Олейникова
+                </div>
+                <div className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
+                  Генеральный директор · Аттестованный аудитор · Судебный
+                  эксперт
                 </div>
               </div>
             </div>
@@ -80,62 +82,29 @@ export function Team() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="lg:col-span-8 space-y-10"
+            className="space-y-7"
           >
-            <blockquote className="font-heading text-xl sm:text-2xl leading-[1.5] text-foreground border-l-2 border-primary pl-6">
-              «За 30+ лет мы провели более 500 аудитов — от небольших ООО до
-              холдингов с консолидированной отчётностью. Производство, торговля,
-              строительство, транспорт, медиа, медицина — знаем отраслевую
-              специфику учёта. Я лично веду каждый проект и отвечаю за
-              содержательность управленческого письма.»
+            <blockquote className="font-heading text-lg sm:text-xl leading-[1.5] text-foreground border-l-2 border-primary pl-5">
+              «За 30+ лет мы провели более 500 аудитов — от ООО до холдингов с
+              консолидированной отчётностью. Знаем отраслевую специфику учёта.
+              Я лично веду каждый проект и отвечаю за содержательность
+              управленческого письма.»
             </blockquote>
 
-            {/* Client testimonial */}
-            <div className="relative rounded-2xl bg-gradient-to-br from-violet-50 via-white to-violet-50 border border-violet-100 p-6 sm:p-7">
-              <Quote className="absolute top-5 right-5 w-8 h-8 text-violet-200" />
-              <div className="text-xs font-semibold uppercase tracking-[0.12em] text-primary mb-3">
-                Отзыв клиента
-              </div>
-              <p className="text-base leading-relaxed text-foreground pr-6">
-                «Команда ИНФО-ФОРВАРД проявила исключительную оперативность. Все
-                этапы проверки проводились с максимальной тщательностью. Были
-                выявлены не только потенциальные риски, но и предложены
-                конструктивные пути их решения. Рекомендуем их услуги всем
-                компаниям, которые ценят качество, скорость и надежность.»
-              </p>
-              <div className="mt-5 flex items-end justify-between gap-4 flex-wrap">
-                <div>
-                  <div className="font-semibold text-sm">К. Ю. Рябцев</div>
-                  <div className="text-sm text-muted-foreground">
-                    Управляющий ТСЖ «Покровское-Глебово»
-                  </div>
-                </div>
-                <a
-                  href={`${process.env.NODE_ENV === "production" ? "/info-forvard-site" : ""}/review-tsj-glebovo.pdf`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2 transition-all"
-                >
-                  Читать полный отзыв
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-
             <div>
-              <div className="text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground mb-4">
+              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground mb-3">
                 Квалификация и членства
               </div>
-              <div className="grid sm:grid-cols-2 gap-3">
+              <div className="grid sm:grid-cols-2 gap-2.5">
                 {credentials.map((cred) => (
                   <div
                     key={cred.text}
-                    className="flex items-start gap-3 p-4 rounded-xl bg-white border border-gray-200"
+                    className="flex items-start gap-3 p-3.5 rounded-xl bg-gray-50 border border-gray-100"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-violet-50 flex items-center justify-center shrink-0">
-                      <cred.icon className="w-4 h-4 text-primary" />
+                    <div className="w-7 h-7 rounded-lg bg-violet-100 flex items-center justify-center shrink-0">
+                      <cred.icon className="w-3.5 h-3.5 text-primary" />
                     </div>
-                    <span className="text-sm leading-relaxed">
+                    <span className="text-[13px] leading-snug">
                       {cred.text}
                     </span>
                   </div>
@@ -144,24 +113,24 @@ export function Team() {
             </div>
 
             <div>
-              <div className="text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground mb-4">
+              <div className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground mb-3">
                 Отрасли, в которых проводили аудит
               </div>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5">
                 {industries.map((ind) => (
                   <span
                     key={ind}
-                    className="px-4 py-2 rounded-full bg-violet-50 text-sm text-violet-800 border border-violet-100"
+                    className="px-3.5 py-1.5 rounded-full bg-violet-50 text-xs text-violet-800 border border-violet-100 font-medium"
                   >
                     {ind}
                   </span>
                 ))}
               </div>
             </div>
+
+            <CtaStrip variant="auditor" className="pt-2" />
           </motion.div>
         </div>
-
-        <CtaStrip variant="auditor" className="mt-16" />
       </div>
     </section>
   );

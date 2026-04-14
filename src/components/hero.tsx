@@ -330,7 +330,7 @@ export function Hero() {
 
             {/* Clients stats card — bottom-right, clickable */}
             <motion.a
-              href="#clients"
+              href="#team"
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.7, delay: 1 }}
