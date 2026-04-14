@@ -119,14 +119,26 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Center — Owl statue */}
+          {/* Center — Owl statue in podium */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="lg:col-span-6 relative flex justify-center items-center"
+            className="lg:col-span-6 relative flex justify-center items-center min-h-[520px]"
           >
-            <div className="relative w-full max-w-[540px] aspect-[4/5]">
+            {/* Podium circle backdrop */}
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(196,181,253,0.35) 0%, rgba(221,209,243,0.18) 50%, rgba(245,242,251,0) 70%)",
+              }}
+            />
+            {/* Decorative ring */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full border border-violet-200/60" />
+
+            {/* Owl — small focal piece */}
+            <div className="relative w-[280px] h-[340px] z-10">
               <Img
                 src="/images/owl.jpg"
                 alt="Сова — символ аудита: зоркость, мудрость, точность"
@@ -134,74 +146,86 @@ export function Hero() {
                 className="object-contain"
                 style={{ mixBlendMode: "multiply" }}
               />
-
-              {/* Floating stats card — top right */}
-              <motion.div
-                initial={{ opacity: 0, x: 20, y: -10 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.7 }}
-                className="absolute top-6 right-0 sm:-right-4 bg-white rounded-2xl p-4 shadow-premium-lg border border-gray-100 w-[220px]"
-              >
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <TrendingUp className="w-4 h-4 text-primary" />
-                    <span className="text-xs font-semibold">
-                      Проверено за 2025
-                    </span>
-                  </div>
-                </div>
-                {/* Mini chart */}
-                <svg viewBox="0 0 200 60" className="w-full h-12">
-                  <defs>
-                    <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#5B21B6" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="#5B21B6" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M0,45 L25,38 L50,42 L75,28 L100,32 L125,20 L150,24 L175,12 L200,8 L200,60 L0,60 Z"
-                    fill="url(#chartFill)"
-                  />
-                  <path
-                    d="M0,45 L25,38 L50,42 L75,28 L100,32 L125,20 L150,24 L175,12 L200,8"
-                    fill="none"
-                    stroke="#5B21B6"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-                <div className="flex items-baseline gap-2 mt-1">
-                  <span className="text-xl font-bold">147</span>
-                  <span className="text-xs text-muted-foreground">
-                    аудитов сдано
-                  </span>
-                </div>
-              </motion.div>
-
-              {/* Floating clients badge — bottom right */}
-              <motion.div
-                initial={{ opacity: 0, x: 20, y: 10 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.9 }}
-                className="absolute bottom-8 right-0 sm:-right-6 bg-[#16162B] text-white rounded-2xl p-4 shadow-premium-lg w-[180px]"
-              >
-                <div className="text-3xl font-bold font-heading">
-                  <CountUp target={500} suffix="+" />
-                </div>
-                <div className="text-xs text-white/70 mt-1">
-                  довольных клиентов
-                </div>
-                <div className="flex -space-x-2 mt-3">
-                  {[0, 1, 2].map((i) => (
-                    <div
-                      key={i}
-                      className="w-7 h-7 rounded-full border-2 border-[#16162B] bg-gradient-to-br from-violet-300 to-violet-500"
-                    />
-                  ))}
-                </div>
-              </motion.div>
             </div>
+
+            {/* Floating stats card — top right */}
+            <motion.div
+              initial={{ opacity: 0, x: 20, y: -10 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.7 }}
+              className="absolute top-4 right-4 sm:right-8 bg-white rounded-2xl p-4 shadow-premium-lg border border-gray-100 w-[210px] z-20"
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <TrendingUp className="w-4 h-4 text-primary" />
+                <span className="text-xs font-semibold">
+                  Проверено за 2025
+                </span>
+              </div>
+              <svg viewBox="0 0 200 60" className="w-full h-10">
+                <defs>
+                  <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#5B21B6" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#5B21B6" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M0,45 L25,38 L50,42 L75,28 L100,32 L125,20 L150,24 L175,12 L200,8 L200,60 L0,60 Z"
+                  fill="url(#chartFill)"
+                />
+                <path
+                  d="M0,45 L25,38 L50,42 L75,28 L100,32 L125,20 L150,24 L175,12 L200,8"
+                  fill="none"
+                  stroke="#5B21B6"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <div className="flex items-baseline gap-2 mt-1">
+                <span className="text-xl font-bold">147</span>
+                <span className="text-xs text-muted-foreground">
+                  аудитов сдано
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Floating 25+ years badge — top left */}
+            <motion.div
+              initial={{ opacity: 0, x: -20, y: 10 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="absolute top-20 left-0 sm:left-4 bg-white rounded-2xl p-4 shadow-premium border border-gray-100 w-[160px] z-20"
+            >
+              <div className="text-3xl font-bold font-heading text-primary">
+                <CountUp target={25} suffix="+" />
+              </div>
+              <div className="text-xs text-muted-foreground mt-0.5">
+                лет практики
+              </div>
+            </motion.div>
+
+            {/* Floating clients badge — bottom right */}
+            <motion.div
+              initial={{ opacity: 0, x: 20, y: 10 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.9 }}
+              className="absolute bottom-6 right-2 sm:right-6 bg-[#16162B] text-white rounded-2xl p-4 shadow-premium-lg w-[175px] z-20"
+            >
+              <div className="text-3xl font-bold font-heading">
+                <CountUp target={500} suffix="+" />
+              </div>
+              <div className="text-xs text-white/70 mt-0.5">
+                довольных клиентов
+              </div>
+              <div className="flex -space-x-2 mt-3">
+                {[0, 1, 2].map((i) => (
+                  <div
+                    key={i}
+                    className="w-7 h-7 rounded-full border-2 border-[#16162B] bg-gradient-to-br from-violet-300 to-violet-500"
+                  />
+                ))}
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>
