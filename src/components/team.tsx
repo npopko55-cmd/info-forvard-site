@@ -122,15 +122,6 @@ export function Team() {
               </div>
             </div>
 
-            <div className="p-6 rounded-2xl gradient-violet-soft">
-              <h3 className="font-semibold mb-3">Команда</h3>
-              <p className="text-sm text-muted-foreground">
-                В команде: аттестованные аудиторы, налоговые консультанты,
-                юристы, финансовые аналитики. Аудит, налоговый консалтинг и
-                правовая экспертиза — одна команда. Не нужно привлекать
-                специалистов со стороны.
-              </p>
-            </div>
           </motion.div>
         </div>
       </div>
