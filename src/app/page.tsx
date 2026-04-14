@@ -1,4 +1,5 @@
 import { Navbar } from "@/components/navbar";
+import { ScrollToTop } from "@/components/scroll-to-top";
 import { Hero } from "@/components/hero";
 import { Services } from "@/components/services";
 import { Process } from "@/components/process";
@@ -13,6 +14,7 @@ import { ClientsSlider } from "@/components/clients-slider";
 export default function Home() {
   return (
     <>
+      <ScrollToTop />
       <Navbar />
       <main>
         <Hero />

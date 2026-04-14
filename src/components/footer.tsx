@@ -20,7 +20,7 @@ export function Footer() {
             </div>
           </div>
 
-          <nav className="flex gap-6 text-sm">
+          <nav className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm">
             <a
               href="#services"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -39,6 +39,14 @@ export function Footer() {
             >
               Контакты
             </a>
+            <a
+              href={`${process.env.NODE_ENV === "production" ? "/info-forvard-site" : ""}/disclosure.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Раскрытие информации
+            </a>
           </nav>
         </div>
 
@@ -46,7 +54,15 @@ export function Footer() {
           <div>
             ООО «ИНФО ФОРВАРД» · ОГРН 1227700131933 · ИНН 9725077230
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
+            <a
+              href={`${process.env.NODE_ENV === "production" ? "/info-forvard-site" : ""}/disclosure.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors"
+            >
+              Раскрытие информации аудиторскими организациями
+            </a>
             <a
               href="/privacy"
               className="hover:text-foreground transition-colors"

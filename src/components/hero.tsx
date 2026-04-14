@@ -92,8 +92,8 @@ export function Hero() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-16 lg:pt-36 lg:pb-24">
-        <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-start min-h-[680px] lg:min-h-[760px]">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10 lg:pt-28 lg:pb-14">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           {/* LEFT — text */}
           <motion.div
             initial="hidden"
@@ -103,7 +103,7 @@ export function Hero() {
                 transition: { staggerChildren: 0.08, delayChildren: 0.05 },
               },
             }}
-            className="lg:col-span-6 relative z-20 flex flex-col lg:pt-20"
+            className="lg:col-span-6 relative z-20 flex flex-col"
           >
             <motion.div
               variants={{
@@ -168,7 +168,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 24, scale: 0.96 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.7, delay: 0.95 }}
-              className="mt-12 lg:mt-16 bg-white/95 backdrop-blur-sm rounded-2xl p-5 shadow-[0_12px_40px_-8px_rgba(76,29,149,0.18)] border border-white max-w-[340px]"
+              className="mt-10 bg-white/95 backdrop-blur-sm rounded-2xl p-5 shadow-[0_12px_40px_-8px_rgba(76,29,149,0.18)] border border-white max-w-[340px]"
             >
               <div className="flex items-start gap-3.5">
                 <div className="relative shrink-0">
@@ -218,35 +218,37 @@ export function Hero() {
           </motion.div>
 
           {/* RIGHT — owl + floating cards */}
-          <div className="lg:col-span-6 relative min-h-[520px] lg:min-h-[680px]">
-            {/* Owl statue — extends above grid */}
+          <div className="lg:col-span-6 relative h-[520px] lg:h-[560px]">
+            {/* Owl statue — inside bounds, fade top & bottom */}
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute left-1/2 -translate-x-1/2 top-[-120px] lg:top-[-160px] w-[340px] sm:w-[460px] lg:w-[580px] aspect-[4/5] z-10 pointer-events-none"
+              className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center"
             >
               {/* Pedestal glow */}
               <div
                 aria-hidden
-                className="absolute bottom-[7%] left-1/2 -translate-x-1/2 w-[65%] h-[90px] rounded-full blur-2xl opacity-70"
+                className="absolute bottom-[12%] left-1/2 -translate-x-1/2 w-[60%] h-[90px] rounded-full blur-2xl opacity-70"
                 style={{
                   background:
                     "radial-gradient(ellipse, rgba(91,33,182,0.28) 0%, rgba(91,33,182,0.08) 45%, transparent 78%)",
                 }}
               />
-              <div className="relative w-full h-full">
+              <div
+                className="relative w-full h-full"
+                style={{
+                  maskImage:
+                    "linear-gradient(180deg, transparent 0%, #000 14%, #000 82%, transparent 100%)",
+                  WebkitMaskImage:
+                    "linear-gradient(180deg, transparent 0%, #000 14%, #000 82%, transparent 100%)",
+                }}
+              >
                 <Img
                   src="/images/owl-cutout.png"
                   alt="Скульптура совы — символ точного взгляда аудитора"
                   fill
                   className="object-contain drop-shadow-[0_30px_60px_rgba(76,29,149,0.22)]"
-                  style={{
-                    maskImage:
-                      "linear-gradient(180deg, #000 0%, #000 86%, transparent 100%)",
-                    WebkitMaskImage:
-                      "linear-gradient(180deg, #000 0%, #000 86%, transparent 100%)",
-                  }}
                 />
               </div>
             </motion.div>
@@ -256,7 +258,7 @@ export function Hero() {
               initial={{ opacity: 0, x: 24, y: -8 }}
               animate={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 0.7, delay: 0.7 }}
-              className="absolute top-[60px] lg:top-[100px] right-0 lg:-right-4 w-[230px] bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-[0_12px_40px_-8px_rgba(76,29,149,0.2)] border border-white z-20"
+              className="absolute top-2 right-0 lg:-right-4 w-[230px] bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-[0_12px_40px_-8px_rgba(76,29,149,0.2)] border border-white z-20"
             >
               <div className="flex items-center justify-between mb-3">
                 <div className="flex items-center gap-2">
@@ -319,7 +321,7 @@ export function Hero() {
               initial={{ opacity: 0, x: -12, scale: 0.95 }}
               animate={{ opacity: 1, x: 0, scale: 1 }}
               transition={{ duration: 0.7, delay: 1.2 }}
-              className="hidden lg:block absolute top-[44%] left-0 bg-white/95 backdrop-blur-sm rounded-2xl px-5 py-3.5 shadow-[0_12px_40px_-8px_rgba(76,29,149,0.18)] border border-white z-20"
+              className="hidden lg:block absolute top-[42%] left-0 bg-white/95 backdrop-blur-sm rounded-2xl px-5 py-3.5 shadow-[0_12px_40px_-8px_rgba(76,29,149,0.18)] border border-white z-20"
             >
               <div className="text-2xl font-heading font-semibold text-primary leading-none">
                 <CountUp target={25} suffix="+" />
@@ -334,7 +336,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 0.7, delay: 1 }}
-              className="absolute bottom-0 right-0 lg:right-4 w-[210px] bg-[#16162B] rounded-2xl p-5 shadow-[0_16px_48px_-10px_rgba(22,22,43,0.45)] z-20 overflow-hidden"
+              className="absolute bottom-2 right-0 lg:right-4 w-[210px] bg-[#16162B] rounded-2xl p-5 shadow-[0_16px_48px_-10px_rgba(22,22,43,0.45)] z-20 overflow-hidden"
             >
               <div
                 aria-hidden
@@ -379,7 +381,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.4 }}
-          className="mt-10 lg:mt-14 flex items-center justify-center gap-2.5 relative z-20"
+          className="mt-8 flex items-center justify-center gap-2.5 relative z-20"
         >
           <a
             href="#"
