@@ -57,6 +57,22 @@ export function Hero() {
           "linear-gradient(180deg, #F5F2FB 0%, #FBFAFC 70%, #F5F2FB 100%)",
       }}
     >
+      {/* Cloud fade — top */}
+      <div
+        className="absolute top-0 left-0 right-0 h-40 z-[5] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 100%)",
+        }}
+      />
+      {/* Cloud fade — bottom */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-40 z-[5] pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(0deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 100%)",
+        }}
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div className="grid lg:grid-cols-12 gap-8 items-center">
           {/* Left content */}
@@ -135,22 +151,21 @@ export function Hero() {
               }}
             />
 
-            {/* Owl — large, bg blended out via multiply, soft bottom fade */}
+            {/* Owl — cutout, large, cropped waist-up via mask */}
             <div
-              className="relative w-[520px] h-[640px] z-10 -ml-10 lg:-ml-20"
+              className="relative w-[560px] h-[700px] z-10 -ml-16 lg:-ml-24"
               style={{
                 maskImage:
-                  "linear-gradient(180deg, #000 0%, #000 80%, transparent 100%)",
+                  "linear-gradient(180deg, transparent 0%, #000 10%, #000 78%, transparent 100%)",
                 WebkitMaskImage:
-                  "linear-gradient(180deg, #000 0%, #000 80%, transparent 100%)",
+                  "linear-gradient(180deg, transparent 0%, #000 10%, #000 78%, transparent 100%)",
               }}
             >
               <Img
-                src="/images/owl-v2.png"
+                src="/images/owl-cutout.png"
                 alt="Сова — символ аудита: зоркость, мудрость, точность"
                 fill
-                className="object-contain object-bottom"
-                style={{ mixBlendMode: "multiply" }}
+                className="object-contain object-top"
               />
             </div>
 
