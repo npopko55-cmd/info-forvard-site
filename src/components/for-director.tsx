@@ -31,24 +31,42 @@ export function ForDirector() {
   return (
     <section className="py-20 sm:py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Client testimonial as preamble */}
+        {/* Main heading */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto mb-16"
+          className="max-w-3xl mx-auto mb-10 text-center"
         >
-          <div className="text-center mb-6">
-            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-primary mb-3">
-              Отзыв клиента
+          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4 leading-[1.1]">
+            Команда ИНФО-ФОРВАРД в цифрах
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Четыре факта, на которые стоит обратить внимание перед выбором
+            аудитора.
+          </p>
+        </motion.div>
+
+        {/* Stats */}
+        <MagicBento items={stats} />
+
+        {/* Testimonial block */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto mt-16"
+        >
+          <div className="flex items-center gap-3 mb-5">
+            <div className="h-px flex-1 bg-gray-300" />
+            <div className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+              Отзывы клиентов говорят сами за себя
             </div>
-            <h3 className="font-heading text-2xl sm:text-3xl font-semibold leading-tight">
-              Что говорит о нашей команде один из клиентов
-            </h3>
+            <div className="h-px flex-1 bg-gray-300" />
           </div>
 
           <div className="relative rounded-3xl bg-white border border-violet-100 shadow-premium p-7 sm:p-9">
-            <Quote className="absolute -top-3 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
+            <Quote className="absolute -top-4 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
             <p className="text-base sm:text-lg leading-relaxed text-foreground">
               «Команда ИНФО-ФОРВАРД проявила исключительную оперативность. Все
               этапы проверки проводились с максимальной тщательностью. Были
@@ -75,23 +93,6 @@ export function ForDirector() {
             </div>
           </div>
         </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="max-w-3xl mb-10 text-center mx-auto"
-        >
-          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4 leading-[1.1]">
-            Команда ИНФО-ФОРВАРД в цифрах
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Четыре факта, на которые стоит обратить внимание перед выбором
-            аудитора.
-          </p>
-        </motion.div>
-
-        <MagicBento items={stats} />
       </div>
     </section>
   );
