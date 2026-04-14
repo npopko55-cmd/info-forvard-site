@@ -29,7 +29,7 @@ export function ContactForm() {
           viewport={{ once: true }}
           className="text-center max-w-2xl mx-auto mb-10"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3">
+          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-3">
             Узнайте цену за 1 минуту
           </h2>
           <p className="text-lg text-muted-foreground">

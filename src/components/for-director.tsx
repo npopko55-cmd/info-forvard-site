@@ -53,7 +53,7 @@ export function ForDirector() {
           viewport={{ once: true }}
           className="text-center max-w-2xl mx-auto mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4">
             Что показать директору за минуту
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -69,7 +69,7 @@ export function ForDirector() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="rounded-2xl p-6 bg-white border border-gray-200 hover:border-violet-300 hover:shadow-md transition-all"
+              className="rounded-2xl p-6 bg-white border border-gray-200 hover:border-violet-300 hover:shadow-premium transition-all"
             >
               <div className="w-12 h-12 rounded-xl gradient-violet flex items-center justify-center mb-4">
                 <fact.icon className="w-5 h-5 text-white" />

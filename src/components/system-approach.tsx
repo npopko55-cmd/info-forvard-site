@@ -59,7 +59,7 @@ export function SystemApproach() {
           viewport={{ once: true }}
           className="max-w-3xl mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4">
             Цена в договоре. Срок в договоре. Аудитор — не стажёр.
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -75,7 +75,7 @@ export function SystemApproach() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="bg-white rounded-2xl p-6 sm:p-7 border border-gray-200 hover:border-violet-300 hover:shadow-md transition-all group"
+              className="bg-white rounded-2xl p-6 sm:p-7 border border-gray-200 hover:border-violet-300 hover:shadow-premium transition-all group"
             >
               <div className="w-12 h-12 rounded-xl gradient-violet flex items-center justify-center mb-5">
                 <feature.icon className="w-5 h-5 text-white" />

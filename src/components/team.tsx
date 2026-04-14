@@ -46,7 +46,7 @@ export function Team() {
           viewport={{ once: true }}
           className="mb-14"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight max-w-3xl">
+          <h2 className="font-heading text-4xl sm:text-5xl font-semibold max-w-3xl">
             25+ лет аудиторской практики. 500+ проверок. Руководитель лично
             контролирует каждый проект.
           </h2>
@@ -63,7 +63,7 @@ export function Team() {
             <div className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-sm">
               <div className="relative w-full aspect-[4/5]">
                 <Img
-                  src="/images/oleynikova.jpg"
+                  src="/images/oleynikova-v2.jpg"
                   alt="Наталья Олейникова"
                   fill
                   className="object-cover"

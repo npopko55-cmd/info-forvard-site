@@ -56,7 +56,7 @@ export function FAQ() {
           viewport={{ once: true }}
           className="mb-10"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4">
             До заявки обычно спрашивают это
           </h2>
           <p className="text-lg text-muted-foreground">

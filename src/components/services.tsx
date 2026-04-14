@@ -77,7 +77,7 @@ export function Services() {
           transition={{ duration: 0.5 }}
           className="max-w-2xl mb-12"
         >
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">
+          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4">
             Шесть услуг — от консультации за 5 000 ₽ до форензика
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -94,7 +94,7 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className={`group relative rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex flex-col bg-white ${
+              className={`group relative rounded-2xl p-6 sm:p-7 transition-all duration-300 hover:shadow-premium-lg hover:-translate-y-1 flex flex-col bg-white ${
                 service.popular
                   ? "border-2 border-primary"
                   : "border border-gray-200 hover:border-violet-200"

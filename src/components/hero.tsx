@@ -82,7 +82,7 @@ export function Hero() {
               Аттестат общего аудита · Член СРО ААС
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.05]">
+            <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.02]">
               Вы готовите отчётность —{" "}
               <span className="text-gradient-violet">мы её проверяем</span>
             </h1>
