@@ -119,30 +119,30 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Center — Owl statue full-body cropped with fade */}
+          {/* Center — Owl statue, large, background blended out */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="lg:col-span-6 relative flex justify-center items-end min-h-[620px] self-end"
+            className="lg:col-span-6 relative flex justify-center items-center min-h-[640px]"
           >
             {/* Soft radial glow backdrop */}
             <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full pointer-events-none"
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[55%] w-[560px] h-[560px] rounded-full pointer-events-none"
               style={{
                 background:
-                  "radial-gradient(circle, rgba(167,139,250,0.25) 0%, rgba(196,181,253,0.12) 40%, rgba(245,242,251,0) 70%)",
+                  "radial-gradient(circle, rgba(167,139,250,0.28) 0%, rgba(196,181,253,0.12) 45%, rgba(245,242,251,0) 70%)",
               }}
             />
 
-            {/* Owl — large, cropped bottom with fade */}
+            {/* Owl — large, bg blended out via multiply, soft bottom fade */}
             <div
-              className="relative w-[440px] h-[560px] z-10"
+              className="relative w-[520px] h-[640px] z-10 -ml-10 lg:-ml-20"
               style={{
                 maskImage:
-                  "linear-gradient(180deg, #000 0%, #000 75%, transparent 98%)",
+                  "linear-gradient(180deg, #000 0%, #000 80%, transparent 100%)",
                 WebkitMaskImage:
-                  "linear-gradient(180deg, #000 0%, #000 75%, transparent 98%)",
+                  "linear-gradient(180deg, #000 0%, #000 80%, transparent 100%)",
               }}
             >
               <Img
@@ -150,6 +150,7 @@ export function Hero() {
                 alt="Сова — символ аудита: зоркость, мудрость, точность"
                 fill
                 className="object-contain object-bottom"
+                style={{ mixBlendMode: "multiply" }}
               />
             </div>
 
