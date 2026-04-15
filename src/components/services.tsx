@@ -132,7 +132,7 @@ export function Services() {
           transition={{ duration: 0.5 }}
           className="max-w-2xl mb-12"
         >
-          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4">
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 leading-[1.1]">
             Услуги и стоимость
           </h2>
           <p className="text-lg text-muted-foreground">

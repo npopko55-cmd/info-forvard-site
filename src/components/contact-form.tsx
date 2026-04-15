@@ -43,7 +43,7 @@ export function ContactForm() {
           viewport={{ once: true }}
           className="text-center max-w-2xl mx-auto mb-10"
         >
-          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-3">
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold mb-3 leading-[1.1]">
             Рассчитаем стоимость за 15 минут
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -58,7 +58,7 @@ export function ContactForm() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white rounded-2xl p-8 sm:p-10 border border-gray-100 shadow-sm"
+            className="bg-white rounded-2xl p-5 sm:p-8 lg:p-10 border border-gray-100 shadow-sm"
           >
             {/* Steps */}
             <div className="flex flex-col sm:flex-row gap-3 mb-8">
@@ -73,7 +73,7 @@ export function ContactForm() {
                   2
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  За 1 минуту на почту: диапазон цен и примеры ТЗ
+                  В течение 15 минут — связь + диапазон цен на почту
                 </div>
               </div>
             </div>

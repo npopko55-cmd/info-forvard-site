@@ -92,7 +92,7 @@ export function Hero() {
         }}
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-10 lg:pt-28 lg:pb-14">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 lg:pt-28 lg:pb-14">
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-center">
           {/* LEFT — text */}
           <motion.div
@@ -213,8 +213,8 @@ export function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* RIGHT — owl + floating cards */}
-          <div className="lg:col-span-6 relative h-[560px] lg:h-[620px]">
+          {/* RIGHT — owl + floating cards (desktop only) */}
+          <div className="hidden lg:block lg:col-span-6 relative h-[620px]">
             {/* Owl statue — larger, fills column with top/bottom fade */}
             <motion.div
               initial={{ opacity: 0, scale: 0.96 }}

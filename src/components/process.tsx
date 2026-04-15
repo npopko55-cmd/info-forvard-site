@@ -71,12 +71,12 @@ function StickyCard({
 
   return (
     <div
-      className="sticky"
+      className="md:sticky"
       style={{ top: `${90 + index * 20}px` }}
     >
       <motion.div
         style={{ scale, transformOrigin: "top center" }}
-        className={`mx-auto max-w-3xl rounded-3xl p-8 sm:p-10 shadow-xl ${
+        className={`mx-auto max-w-3xl rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-xl ${
           step.accent
             ? "gradient-violet text-white"
             : "bg-white border border-gray-200"
@@ -124,7 +124,7 @@ export function Process() {
           viewport={{ once: true }}
           className="max-w-3xl mb-16"
         >
-          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4 leading-[1.1]">
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 leading-[1.1]">
             Пять этапов — каждый под контролем аудитора
           </h2>
           <p className="text-lg text-muted-foreground">
@@ -133,7 +133,7 @@ export function Process() {
           </p>
         </motion.div>
 
-        <div ref={containerRef} className="relative space-y-6">
+        <div ref={containerRef} className="relative space-y-4 md:space-y-6">
           {steps.map((step, i) => (
             <StickyCard
               key={step.num}

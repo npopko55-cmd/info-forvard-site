@@ -60,7 +60,7 @@ export function SystemApproach() {
           viewport={{ once: true }}
           className="max-w-3xl mb-14"
         >
-          <h2 className="font-heading text-4xl sm:text-5xl font-semibold mb-4 leading-[1.1]">
+          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 leading-[1.1]">
             За 500+ проверок мы поняли, как сделать аудит легким и прозрачным
             для компании
           </h2>
