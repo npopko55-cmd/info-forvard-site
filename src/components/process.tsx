@@ -125,11 +125,12 @@ export function Process() {
           className="max-w-3xl mb-16"
         >
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 leading-[1.1]">
-            Пять этапов — каждый под контролем аудитора
+            Проверяем отчётность,
+            <br className="hidden sm:inline" /> не парализуя бухгалтерию
           </h2>
           <p className="text-lg text-muted-foreground">
-            От заявки до управленческого письма. 2–6 недель. Ответственность
-            застрахована и прописана в договоре.
+            Пять этапов от заявки до управленческого письма. 2–6 недель.
+            Ответственность застрахована и прописана в договоре.
           </p>
         </motion.div>
 
