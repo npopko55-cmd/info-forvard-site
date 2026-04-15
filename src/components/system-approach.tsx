@@ -61,7 +61,7 @@ export function SystemApproach() {
           className="max-w-3xl mb-14"
         >
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold mb-4 leading-[1.1]">
-            За 500+ проверок мы поняли, как сделать аудит легким и прозрачным
+            За 500+ проверок мы поняли, как сделать аудит максимально прозрачным
             для компании
           </h2>
           <p className="text-lg text-muted-foreground">
