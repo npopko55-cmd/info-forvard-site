@@ -7,6 +7,7 @@ import { Phone, Mail, MapPin, Clock, CheckCircle2, Send } from "lucide-react";
 const revenueOptions = ["до 400 млн", "до 800 млн", "до 2 млрд", "2+ млрд"];
 const accountingOptions = ["1–2", "3–4", "5 и более"];
 const serviceOptions = [
+  "Обратный звонок / обсудить задачу",
   "Обязательный аудит БФО",
   "Налоговый аудит",
   "Инициативный аудит",
@@ -44,11 +45,11 @@ export function ContactForm() {
           className="text-center max-w-2xl mx-auto mb-10"
         >
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold mb-3 leading-[1.1]">
-            Рассчитаем стоимость за 15 минут
+            Перезвоним за 15 минут
           </h2>
           <p className="text-lg text-muted-foreground">
-            В течение 15 минут свяжемся с вами по указанным контактам и пришлём
-            диапазон цен с примерами ТЗ на почту.
+            Оставьте заявку — обсудим вашу задачу на бесплатной консультации и
+            договоримся о следующем шаге. Без обязательств.
           </p>
         </motion.div>
 
@@ -73,7 +74,7 @@ export function ContactForm() {
                   2
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  В течение 15 минут — связь + диапазон цен на почту
+                  Перезвоним за 15 минут в рабочее время
                 </div>
               </div>
             </div>
@@ -87,8 +88,8 @@ export function ContactForm() {
                 <CheckCircle2 className="w-14 h-14 mx-auto mb-4 text-white/90" />
                 <h3 className="text-2xl font-bold mb-2">Заявка принята</h3>
                 <p className="text-white/85">
-                  В течение минуты пришлём диапазон цен и примеры ТЗ. Если
-                  срочно — звоните{" "}
+                  Перезвоним в течение 15 минут в рабочее время и обсудим вашу
+                  задачу. Если срочно —{" "}
                   <a href="tel:+79011841190" className="underline">
                     +7 (901) 184-11-90
                   </a>
@@ -99,7 +100,7 @@ export function ContactForm() {
                 {/* Service type */}
                 <div>
                   <label className="block text-sm font-medium mb-3">
-                    Интересующая услуга
+                    С какой задачей обратиться?
                   </label>
                   <div className="relative">
                     <select
