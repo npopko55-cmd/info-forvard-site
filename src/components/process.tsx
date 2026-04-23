@@ -2,7 +2,6 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ShieldCheck } from "lucide-react";
 import { CtaStrip } from "@/components/ui/cta-strip";
 
 const steps = [
@@ -128,8 +127,7 @@ export function Process() {
             Каждая проверка — лёгкий и предсказуемый процесс
           </h2>
           <p className="text-lg text-muted-foreground">
-            Пять этапов от заявки до итогового отчёта. 2–6 недель.
-            Ответственность за результаты аудита закрепляется в договоре.
+            Пять этапов от заявки до итогового отчёта. Обычно 2–6 недель.
           </p>
         </motion.div>
 
@@ -144,33 +142,6 @@ export function Process() {
             />
           ))}
         </div>
-
-        {/* Guarantee block */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-16 max-w-3xl mx-auto rounded-3xl bg-gradient-to-br from-violet-50 via-white to-violet-50 border border-violet-100 p-8 sm:p-10"
-        >
-          <div className="flex items-start gap-5">
-            <div className="w-12 h-12 rounded-xl gradient-violet flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-6 h-6 text-white" />
-            </div>
-            <div>
-              <div className="text-xs font-semibold uppercase tracking-[0.15em] text-primary mb-2">
-                Гарантия по договору
-              </div>
-              <h3 className="font-heading text-2xl sm:text-3xl font-semibold leading-tight mb-3">
-                Отвечаем за качество заключения
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Работаем по ФЗ-307 и стандартам СРО ААС. Условия ответственности
-                за результаты аудита и порядок их урегулирования закрепляются в
-                договоре с заказчиком.
-              </p>
-            </div>
-          </div>
-        </motion.div>
 
         <CtaStrip variant="calc" className="mt-12" />
       </div>
