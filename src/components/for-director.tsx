@@ -82,7 +82,7 @@ export function ForDirector() {
                 </div>
               </div>
               <a
-                href={`${process.env.NODE_ENV === "production" ? "/info-forvard-site" : ""}/review-tsj-glebovo.pdf`}
+                href={`/review-tsj-glebovo.pdf`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2 transition-all"

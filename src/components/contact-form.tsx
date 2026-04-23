@@ -21,8 +21,12 @@ const serviceOptions = [
   "Другое / уточню на консультации",
 ];
 
+const WEBHOOK_URL = process.env.NEXT_PUBLIC_FORM_WEBHOOK || "";
+
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [revenue, setRevenue] = useState(revenueOptions[1]);
   const [accounting, setAccounting] = useState(accountingOptions[0]);
   const [service, setService] = useState(serviceOptions[0]);
@@ -30,9 +34,42 @@ export function ContactForm() {
   const [email, setEmail] = useState("");
   const [telegram, setTelegram] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setError(null);
+    setSubmitting(true);
+
+    const payload = {
+      service,
+      revenue,
+      accounting,
+      phone,
+      email,
+      telegram: telegram ? "да" : "нет",
+      page: typeof window !== "undefined" ? window.location.href : "",
+      timestamp: new Date().toISOString(),
+    };
+
+    try {
+      if (WEBHOOK_URL) {
+        // Apps Script webhook — no-cors to bypass CORS preflight for google script
+        await fetch(WEBHOOK_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(payload),
+        });
+      } else {
+        // fallback: log payload so nothing is lost in dev
+        console.warn("[ContactForm] NEXT_PUBLIC_FORM_WEBHOOK not set", payload);
+      }
+      setSubmitted(true);
+    } catch (err) {
+      console.error("[ContactForm] submit failed", err);
+      setError("Не удалось отправить заявку. Позвоните: +7 (901) 184-11-90");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -221,11 +258,18 @@ export function ContactForm() {
                   </span>
                 </label>
 
+                {error && (
+                  <div className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-xl p-3">
+                    {error}
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="w-full rounded-xl h-14 text-base gradient-violet text-white shadow-lg shadow-violet-500/25 font-semibold transition-opacity hover:opacity-90"
+                  disabled={submitting}
+                  className="w-full rounded-xl h-14 text-base gradient-violet text-white shadow-lg shadow-violet-500/25 font-semibold transition-opacity hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Отправить заявку
+                  {submitting ? "Отправляем…" : "Отправить заявку"}
                 </button>
               </form>
             )}

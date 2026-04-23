@@ -6,7 +6,7 @@ export function Footer() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <img
-                src={`${process.env.NODE_ENV === "production" ? "/info-forvard-site" : ""}/images/logo-v2.png`}
+                src={`/images/logo-v2.png`}
                 alt="ИНФО ФОРВАРД"
                 className="h-9 w-auto object-contain"
               />
@@ -39,7 +39,7 @@ export function Footer() {
               Контакты
             </a>
             <a
-              href={`${process.env.NODE_ENV === "production" ? "/info-forvard-site" : ""}/disclosure.pdf`}
+              href={`/disclosure.pdf`}
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -55,7 +55,7 @@ export function Footer() {
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
             <a
-              href={`${process.env.NODE_ENV === "production" ? "/info-forvard-site" : ""}/disclosure.pdf`}
+              href={`/disclosure.pdf`}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-foreground transition-colors"

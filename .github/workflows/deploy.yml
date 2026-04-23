@@ -21,6 +21,8 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - run: bun install
       - run: bun run build
+        env:
+          NEXT_PUBLIC_FORM_WEBHOOK: ${{ vars.NEXT_PUBLIC_FORM_WEBHOOK }}
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out

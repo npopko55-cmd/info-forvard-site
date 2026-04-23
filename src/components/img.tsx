@@ -4,7 +4,7 @@ type ImgProps = React.ImgHTMLAttributes<HTMLImageElement> & {
 
 export function Img({ src, fill, className, style, ...props }: ImgProps) {
   const s = typeof src === "string" ? src : "";
-  const fullSrc = s.startsWith("/") ? `/info-forvard-site${s}` : s;
+  const fullSrc = s;
 
   if (fill) {
     return (
