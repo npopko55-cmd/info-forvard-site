@@ -11,7 +11,6 @@ import {
   MessageCircle,
   FileSearch,
   ClipboardList,
-  BookOpenCheck,
   Building2,
   ChevronDown,
 } from "lucide-react";
@@ -89,15 +88,6 @@ const moreServices = [
     timeline: "от 3 дней",
     price: "от 40 000 ₽",
     icon: FileSearch,
-  },
-  {
-    id: "msfo",
-    title: "Трансформация РСБУ → МСФО",
-    description:
-      "Перевод отчётности в МСФО. Для банков, инвесторов, иностранных акционеров.",
-    timeline: "от 2 недель",
-    price: "от 120 000 ₽",
-    icon: BookOpenCheck,
   },
   {
     id: "recovery",
@@ -254,7 +244,7 @@ export function Services() {
             onClick={() => setExpanded((v) => !v)}
             className="inline-flex items-center gap-2 rounded-full px-6 h-12 bg-white border border-gray-300 hover:border-primary hover:bg-violet-50 text-foreground font-medium text-sm transition-all"
           >
-            {expanded ? "Свернуть" : "Показать ещё 4 услуги"}
+            {expanded ? "Свернуть" : "Показать ещё 3 услуги"}
             <ChevronDown
               className={`w-4 h-4 transition-transform ${expanded ? "rotate-180" : ""}`}
             />
