@@ -123,7 +123,7 @@ export function Hero() {
               }}
               className="font-heading font-semibold leading-[1.02] tracking-[-0.02em] text-[clamp(2.25rem,5.2vw,4rem)] text-foreground"
             >
-              Обязательный аудит БФО{" "}
+              Обязательный аудит бухгалтерской отчётности{" "}
               <span className="italic text-gradient-violet">
                 в срок, с гарантией по договору
               </span>
