@@ -125,7 +125,7 @@ export function Hero() {
             >
               Обязательный аудит бухгалтерской отчётности{" "}
               <span className="italic text-gradient-violet">
-                в срок, с гарантией по договору
+                в срок и без доплат
               </span>
             </motion.h1>
 
