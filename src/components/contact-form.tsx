@@ -5,7 +5,21 @@ import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, CheckCircle2, Send } from "lucide-react";
 
 const revenueOptions = ["до 400 млн", "до 800 млн", "до 2 млрд", "2+ млрд"];
-const accountingOptions = ["1–2", "3–4", "5 и более"];
+const accountingOptions = ["1", "2", "3", "4 и более"];
+const headcountOptions = ["до 50", "50–250", "250–1000", "1000+"];
+const industryOptions = [
+  "Производство",
+  "Торговля",
+  "Строительство",
+  "IT / Связь",
+  "Транспорт / Логистика",
+  "Медицина",
+  "Финансы",
+  "Услуги",
+  "Медиа",
+  "НКО",
+  "Другое",
+];
 const serviceOptions = [
   "Обратный звонок / обсудить задачу",
   "Обязательный аудит БФО",
@@ -29,6 +43,8 @@ export function ContactForm() {
   const [error, setError] = useState<string | null>(null);
   const [revenue, setRevenue] = useState(revenueOptions[1]);
   const [accounting, setAccounting] = useState(accountingOptions[0]);
+  const [headcount, setHeadcount] = useState(headcountOptions[0]);
+  const [industry, setIndustry] = useState(industryOptions[0]);
   const [service, setService] = useState(serviceOptions[0]);
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -41,7 +57,9 @@ export function ContactForm() {
 
     const payload = {
       service,
+      industry,
       revenue,
+      headcount,
       accounting,
       phone,
       email,
@@ -165,6 +183,37 @@ export function ContactForm() {
                   </div>
                 </div>
 
+                {/* Industry */}
+                <div>
+                  <label className="block text-sm font-medium mb-3">
+                    Отрасль
+                  </label>
+                  <div className="relative">
+                    <select
+                      value={industry}
+                      onChange={(e) => setIndustry(e.target.value)}
+                      className="w-full h-12 px-4 pr-10 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-2 focus:ring-violet-100 outline-none transition-all text-base appearance-none cursor-pointer"
+                    >
+                      {industryOptions.map((opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">
+                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path
+                          d="M3.5 5.25L7 8.75L10.5 5.25"
+                          stroke="currentColor"
+                          strokeWidth="1.75"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Revenue */}
                 <div>
                   <label className="block text-sm font-medium mb-3">
@@ -188,10 +237,33 @@ export function ContactForm() {
                   </div>
                 </div>
 
+                {/* Headcount */}
+                <div>
+                  <label className="block text-sm font-medium mb-3">
+                    Сотрудников в компании
+                  </label>
+                  <div className="flex flex-wrap gap-2">
+                    {headcountOptions.map((opt) => (
+                      <button
+                        key={opt}
+                        type="button"
+                        onClick={() => setHeadcount(opt)}
+                        className={`px-5 h-11 rounded-xl text-sm font-medium transition-all ${
+                          headcount === opt
+                            ? "gradient-violet text-white shadow-md shadow-violet-500/20"
+                            : "bg-gray-50 text-foreground hover:bg-gray-100 border border-gray-200"
+                        }`}
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 {/* Accounting team */}
                 <div>
                   <label className="block text-sm font-medium mb-3">
-                    Бухгалтерия, чел.
+                    Бухгалтеров в штате
                   </label>
                   <div className="flex flex-wrap gap-2">
                     {accountingOptions.map((opt) => (

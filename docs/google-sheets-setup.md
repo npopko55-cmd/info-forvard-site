@@ -7,7 +7,7 @@
 1. Открой <https://sheets.new> → назови «ИНФО ФОРВАРД — Заявки»
 2. Первая строка — заголовки колонок:
 
-| timestamp | service | revenue | accounting | phone | email | telegram | page |
+| timestamp | service | industry | revenue | headcount | accounting | phone | email | telegram | page |
 
 ## Шаг 2. Открыть редактор скриптов
 
@@ -23,7 +23,9 @@ function doPost(e) {
   sheet.appendRow([
     data.timestamp || new Date().toISOString(),
     data.service || "",
+    data.industry || "",
     data.revenue || "",
+    data.headcount || "",
     data.accounting || "",
     data.phone || "",
     data.email || "",

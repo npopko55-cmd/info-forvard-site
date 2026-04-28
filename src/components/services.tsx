@@ -23,7 +23,7 @@ const services = [
     description:
       "Проверка бухгалтерской отчётности по ФЗ-307. Аудиторское заключение для ФНС, банков и акционеров. Сдаём в срок.",
     timeline: "от 2 недель",
-    price: "от 80 000 ₽",
+    price: "от 175 000 ₽",
     popular: true,
     icon: FileCheck,
   },
@@ -33,7 +33,7 @@ const services = [
     description:
       "Проверка налогового учёта и первички. Выявим риски доначислений до камералки.",
     timeline: "от 1 недели",
-    price: "от 50 000 ₽",
+    price: "от 200 000 ₽",
     popular: true,
     icon: Calculator,
   },
@@ -43,7 +43,7 @@ const services = [
     description:
       "Проверка отчётности и учётной политики по вашей инициативе — до внешней проверки.",
     timeline: "от 2 недель",
-    price: "от 60 000 ₽",
+    price: "от 160 000 ₽",
     popular: false,
     icon: Search,
   },
@@ -72,8 +72,8 @@ const services = [
     title: "Консультации и сопровождение",
     description:
       "Разовые консультации аудитора, абонентское сопровождение, восстановление учёта, проверка проводок.",
-    timeline: "",
-    price: "от 5 000 ₽",
+    timeline: "почасовая оплата",
+    price: "от 20 000 ₽/час",
     popular: false,
     icon: MessageCircle,
   },
