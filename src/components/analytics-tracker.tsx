@@ -2,9 +2,12 @@
 
 import { useEffect } from "react";
 import { ymGoal } from "@/lib/metrika";
+import { captureUtm } from "@/lib/utm";
 
 export function AnalyticsTracker() {
   useEffect(() => {
+    captureUtm();
+
     // Phone clicks
     const onClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;

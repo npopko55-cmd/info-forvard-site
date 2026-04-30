@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, CheckCircle2, Send } from "lucide-react";
 import { ymGoal } from "@/lib/metrika";
+import { readUtm } from "@/lib/utm";
 
 const revenueOptions = ["до 400 млн", "до 800 млн", "до 2 млрд", "2+ млрд"];
 const accountingOptions = ["1", "2", "3", "4 и более"];
@@ -56,6 +57,7 @@ export function ContactForm() {
     setError(null);
     setSubmitting(true);
 
+    const utm = readUtm();
     const payload = {
       service,
       industry,
@@ -67,6 +69,13 @@ export function ContactForm() {
       telegram: telegram ? "да" : "нет",
       page: typeof window !== "undefined" ? window.location.href : "",
       timestamp: new Date().toISOString(),
+      utm_source: utm.utm_source,
+      utm_medium: utm.utm_medium,
+      utm_campaign: utm.utm_campaign,
+      utm_term: utm.utm_term,
+      utm_content: utm.utm_content,
+      referrer: utm.referrer,
+      landing_page: utm.landing_page,
     };
 
     try {

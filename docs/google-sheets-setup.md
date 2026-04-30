@@ -1,25 +1,34 @@
-# Настройка формы заявок → Google Таблица
+# Настройка формы заявок → Google Таблица + Email
 
 Заявки с сайта собираются в Google Таблицу через Google Apps Script (бесплатно, без сервера).
+Дополнительно — каждая заявка приходит на почту.
 
 ## Шаг 1. Создать таблицу
 
 1. Открой <https://sheets.new> → назови «ИНФО ФОРВАРД — Заявки»
 2. Первая строка — заголовки колонок:
 
-| timestamp | service | industry | revenue | headcount | accounting | phone | email | telegram | page |
+```
+timestamp	service	industry	revenue	headcount	accounting	phone	email	telegram	utm_source	utm_medium	utm_campaign	utm_term	utm_content	referrer	landing_page	page
+```
+
+(вставь как одну строку — таблица сама разнесёт по колонкам)
 
 ## Шаг 2. Открыть редактор скриптов
 
 В таблице: **Расширения → Apps Script**.
 
-Вставить код ниже (заменив содержимое файла `Код.gs`):
+Удали всё что есть. Вставь:
 
 ```javascript
+// Куда слать письма с заявками. Можно несколько через запятую.
+const NOTIFY_EMAIL = "info@iforvard.ru";
+
 function doPost(e) {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
   const data = JSON.parse(e.postData.contents);
 
+  // 1. Записываем строку в таблицу
   sheet.appendRow([
     data.timestamp || new Date().toISOString(),
     data.service || "",
@@ -30,8 +39,46 @@ function doPost(e) {
     data.phone || "",
     data.email || "",
     data.telegram || "",
+    data.utm_source || "",
+    data.utm_medium || "",
+    data.utm_campaign || "",
+    data.utm_term || "",
+    data.utm_content || "",
+    data.referrer || "",
+    data.landing_page || "",
     data.page || ""
   ]);
+
+  // 2. Отправляем email-уведомление
+  try {
+    const subject = "Новая заявка с сайта — " + (data.service || "обратный звонок");
+    const lines = [
+      "Услуга: " + (data.service || ""),
+      "Отрасль: " + (data.industry || ""),
+      "Выручка: " + (data.revenue || ""),
+      "Сотрудников: " + (data.headcount || ""),
+      "Бухгалтеров: " + (data.accounting || ""),
+      "",
+      "Телефон: " + (data.phone || ""),
+      "Email: " + (data.email || ""),
+      "Telegram: " + (data.telegram || ""),
+      "",
+      "— UTM —",
+      "Источник: " + (data.utm_source || "—"),
+      "Канал: " + (data.utm_medium || "—"),
+      "Кампания: " + (data.utm_campaign || "—"),
+      "Ключ.слово: " + (data.utm_term || "—"),
+      "Объявление: " + (data.utm_content || "—"),
+      "Реферер: " + (data.referrer || "—"),
+      "Лендинг: " + (data.landing_page || "—"),
+      "Страница отправки: " + (data.page || "—"),
+      "Время: " + (data.timestamp || "")
+    ];
+    MailApp.sendEmail(NOTIFY_EMAIL, subject, lines.join("\n"));
+  } catch (err) {
+    // не валим запись в таблицу из-за ошибки почты
+    console.error("mail error:", err);
+  }
 
   return ContentService
     .createTextOutput(JSON.stringify({ ok: true }))
@@ -39,65 +86,46 @@ function doPost(e) {
 }
 ```
 
-Сохрани (⌘S) — назови проект «Infoforvard Forms».
+⚠️ В переменной `NOTIFY_EMAIL` сверху замени на свой адрес если нужен другой (можно несколько через запятую: `"a@b.ru, c@d.ru"`).
 
-## Шаг 3. Развернуть как веб-приложение
+Сохрани (⌘S или Ctrl+S).
 
-1. Кнопка **Развернуть → Новое развёртывание**
-2. Тип развёртывания → **Веб-приложение**
-3. Настройки:
-   - Описание: `Infoforvard form webhook v1`
-   - Выполнять от имени: **Моего имени**
-   - Кому доступно: **Всем** (так обязательно, иначе сайт не сможет писать)
-4. Нажать **Развернуть** → пройти авторизацию (Google спросит доступ к таблицам)
-5. Скопировать URL вида `https://script.google.com/macros/s/AKfyc.../exec`
+## Шаг 3. Обновить развёртывание
 
-## Шаг 4. Вставить URL в сайт
+Если развёртывание уже было — нужно опубликовать новую версию:
 
-В корне репо создать файл `.env.production`:
+1. Кнопка **«Развернуть» → «Управление развёртываниями»**
+2. Нажми ✏️ (карандаш) рядом со старым развёртыванием
+3. В поле «Версия» выбери **«Новая версия»**
+4. Описание: `v2 — добавлены UTM и email`
+5. **«Развернуть»**
+6. URL остаётся прежним — менять в GitHub не нужно
+
+При первом запуске Google спросит разрешение на отправку почты — нажми «Разрешить».
+
+## Шаг 4. Проверка
+
+1. На сайте оставь тестовую заявку → должна прийти строка в таблицу + письмо на `info@iforvard.ru`
+2. Если хочешь проверить UTM — открой сайт с параметрами:
+   `https://info-forvard.ru/?utm_source=test&utm_medium=cpc&utm_campaign=manual_check`
+   → отправь форму → в таблице и в письме увидишь эти значения
+
+## Если письма не приходят
+
+- Проверь папку «Спам»
+- В Apps Script слева → **«Выполнения»** → посмотри логи последнего запуска (там видно ошибку)
+- Лимит Google: 100 писем в сутки на бесплатном аккаунте — для аудита достаточно с запасом
+
+## UTM для рекламы
+
+Стандартные параметры для Яндекс.Директа:
 
 ```
-NEXT_PUBLIC_FORM_WEBHOOK=https://script.google.com/macros/s/AKfyc.../exec
+?utm_source=yandex
+&utm_medium=cpc
+&utm_campaign=audit_oblig
+&utm_term={keyword}
+&utm_content={ad_id}
 ```
 
-Или задать переменную в настройках GitHub Actions (Repository → Settings → Secrets and variables → Actions → New variable):
-
-- Name: `NEXT_PUBLIC_FORM_WEBHOOK`
-- Value: URL из шага 3
-
-И в `.github/workflows/deploy.yml` в шаге `bun run build` добавить env:
-
-```yaml
-- run: bun run build
-  env:
-    NEXT_PUBLIC_FORM_WEBHOOK: ${{ vars.NEXT_PUBLIC_FORM_WEBHOOK }}
-```
-
-## Проверка
-
-1. На сайте оставить тестовую заявку
-2. Открыть Google Таблицу — новая строка должна появиться в течение пары секунд
-
-## Если что-то не так
-
-- **Ошибка 403 в консоли** — в шаге 3 не выбрано «Кому доступно: Всем»
-- **Заявка отправляется но строка не появляется** — проверить логи: в Apps Script → слева «Выполнения»
-- **При изменении кода** — нужно создавать новое развёртывание или выбрать `Управление развёртываниями → редактировать → версия: Новая`
-
-## Повышение уровня
-
-Если захочется уведомлений на почту или в Telegram — допиши в `doPost`:
-
-```javascript
-// Email
-MailApp.sendEmail("you@example.com", "Новая заявка", JSON.stringify(data, null, 2));
-
-// Telegram (нужен бот и chat_id)
-UrlFetchApp.fetch(`https://api.telegram.org/bot<TOKEN>/sendMessage`, {
-  method: "post",
-  payload: {
-    chat_id: "<CHAT_ID>",
-    text: `Новая заявка:\n${data.service}\n${data.phone}\n${data.email}`
-  }
-});
-```
+В Директе при создании кампании в шаблоне ссылок вставь это — `{keyword}` и `{ad_id}` подставятся автоматически на стороне Яндекса.
