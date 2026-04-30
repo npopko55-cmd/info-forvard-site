@@ -76,7 +76,7 @@ export function ForDirector() {
                 конструктивные пути их решения. Рекомендуем их услуги всем
                 компаниям, которые ценят качество, скорость и надежность.»
               </p>
-              <div className="mt-5 pt-5 border-t border-gray-100 flex items-end justify-between gap-4 flex-wrap">
+              <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <div className="font-semibold text-sm">К. Ю. Рябцев</div>
                   <div className="text-sm text-muted-foreground">
@@ -87,10 +87,10 @@ export function ForDirector() {
                   href="/review-tsj-glebovo.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2 transition-all"
+                  className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-primary self-start sm:self-end whitespace-nowrap"
                 >
                   Читать полный отзыв
-                  <ArrowUpRight className="w-4 h-4" />
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                 </a>
               </div>
             </div>
@@ -105,7 +105,7 @@ export function ForDirector() {
                 законодательства. Полученные рекомендации оказались практичными
                 и уже помогли оптимизировать процессы учёта и налогообложения.»
               </p>
-              <div className="mt-5 pt-5 border-t border-gray-100 flex items-end justify-between gap-4 flex-wrap">
+              <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <div className="font-semibold text-sm">В. А. Иванов</div>
                   <div className="text-sm text-muted-foreground">
@@ -116,10 +116,10 @@ export function ForDirector() {
                   href="/review-mir-vesov.pdf"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2 transition-all"
+                  className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-primary self-start sm:self-end whitespace-nowrap"
                 >
                   Читать полный отзыв
-                  <ArrowUpRight className="w-4 h-4" />
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
                 </a>
               </div>
             </div>
