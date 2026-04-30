@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/navbar";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { AnalyticsTracker } from "@/components/analytics-tracker";
 import { Hero } from "@/components/hero";
 import { Services } from "@/components/services";
 import { Process } from "@/components/process";
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <>
       <ScrollToTop />
+      <AnalyticsTracker />
       <Navbar />
       <main>
         <Hero />

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, CheckCircle2, Send } from "lucide-react";
+import { ymGoal } from "@/lib/metrika";
 
 const revenueOptions = ["до 400 млн", "до 800 млн", "до 2 млрд", "2+ млрд"];
 const accountingOptions = ["1", "2", "3", "4 и более"];
@@ -81,6 +82,7 @@ export function ContactForm() {
         // fallback: log payload so nothing is lost in dev
         console.warn("[ContactForm] NEXT_PUBLIC_FORM_WEBHOOK not set", payload);
       }
+      ymGoal("form_submit", { service, industry });
       setSubmitted(true);
     } catch (err) {
       console.error("[ContactForm] submit failed", err);
