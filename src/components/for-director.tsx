@@ -50,12 +50,12 @@ export function ForDirector() {
         {/* Stats */}
         <MagicBento items={stats} />
 
-        {/* Testimonial block */}
+        {/* Testimonials */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto mt-16"
+          className="max-w-6xl mx-auto mt-16"
         >
           <div className="flex items-center gap-3 mb-5">
             <div className="h-px flex-1 bg-gray-300" />
@@ -65,31 +65,63 @@ export function ForDirector() {
             <div className="h-px flex-1 bg-gray-300" />
           </div>
 
-          <div className="relative rounded-3xl bg-white border border-violet-100 shadow-premium p-7 sm:p-9">
-            <Quote className="absolute -top-4 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
-            <p className="text-base sm:text-lg leading-relaxed text-foreground">
-              «Команда ИНФО-ФОРВАРД проявила исключительную оперативность. Все
-              этапы проверки проводились с максимальной тщательностью. Были
-              выявлены не только потенциальные риски, но и предложены
-              конструктивные пути их решения. Рекомендуем их услуги всем
-              компаниям, которые ценят качество, скорость и надежность.»
-            </p>
-            <div className="mt-5 pt-5 border-t border-gray-100 flex items-end justify-between gap-4 flex-wrap">
-              <div>
-                <div className="font-semibold text-sm">К. Ю. Рябцев</div>
-                <div className="text-sm text-muted-foreground">
-                  Управляющий ТСЖ «Покровское-Глебово»
+          <div className="grid md:grid-cols-2 gap-5">
+            {/* Review 1 — TSJ Pokrovskoye-Glebovo */}
+            <div className="relative rounded-3xl bg-white border border-violet-100 shadow-premium p-7 sm:p-8 flex flex-col">
+              <Quote className="absolute -top-4 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
+              <p className="text-base leading-relaxed text-foreground flex-1">
+                «Команда ИНФО-ФОРВАРД проявила исключительную оперативность.
+                Все этапы проверки проводились с максимальной тщательностью.
+                Были выявлены не только потенциальные риски, но и предложены
+                конструктивные пути их решения. Рекомендуем их услуги всем
+                компаниям, которые ценят качество, скорость и надежность.»
+              </p>
+              <div className="mt-5 pt-5 border-t border-gray-100 flex items-end justify-between gap-4 flex-wrap">
+                <div>
+                  <div className="font-semibold text-sm">К. Ю. Рябцев</div>
+                  <div className="text-sm text-muted-foreground">
+                    Управляющий ТСЖ «Покровское-Глебово»
+                  </div>
                 </div>
+                <a
+                  href="/review-tsj-glebovo.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2 transition-all"
+                >
+                  Читать полный отзыв
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
               </div>
-              <a
-                href={`/review-tsj-glebovo.pdf`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2 transition-all"
-              >
-                Читать полный отзыв
-                <ArrowUpRight className="w-4 h-4" />
-              </a>
+            </div>
+
+            {/* Review 2 — Mir Vesov */}
+            <div className="relative rounded-3xl bg-white border border-violet-100 shadow-premium p-7 sm:p-8 flex flex-col">
+              <Quote className="absolute -top-4 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
+              <p className="text-base leading-relaxed text-foreground flex-1">
+                «Выражаем благодарность за качественную и профессиональную
+                оценку налоговых и бухгалтерских рисков. Высокая компетентность,
+                внимание к деталям, глубокое понимание актуальных требований
+                законодательства. Полученные рекомендации оказались практичными
+                и уже помогли оптимизировать процессы учёта и налогообложения.»
+              </p>
+              <div className="mt-5 pt-5 border-t border-gray-100 flex items-end justify-between gap-4 flex-wrap">
+                <div>
+                  <div className="font-semibold text-sm">В. А. Иванов</div>
+                  <div className="text-sm text-muted-foreground">
+                    Генеральный директор ООО «Мир Весов»
+                  </div>
+                </div>
+                <a
+                  href="/review-mir-vesov.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-2 transition-all"
+                >
+                  Читать полный отзыв
+                  <ArrowUpRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>
