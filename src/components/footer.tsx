@@ -11,8 +11,20 @@ export function Footer() {
                 className="h-9 w-auto object-contain"
               />
             </div>
-            <div className="text-sm text-muted-foreground">
-              +7 (901) 184-11-90 · info@iforvard.ru
+            <div className="text-sm text-muted-foreground flex flex-wrap items-center gap-x-1.5 gap-y-1">
+              <a
+                href="tel:+79011841190"
+                className="hover:text-foreground transition-colors"
+              >
+                +7 (901) 184-11-90
+              </a>
+              <span aria-hidden="true">·</span>
+              <a
+                href="mailto:info@iforvard.ru"
+                className="hover:text-foreground transition-colors"
+              >
+                info@iforvard.ru
+              </a>
             </div>
             <div className="text-sm text-muted-foreground">
               Москва, ул. Ленинская Слобода, 26, БЦ ОМЕГА-2
