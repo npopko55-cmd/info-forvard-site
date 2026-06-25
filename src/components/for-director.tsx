@@ -123,6 +123,98 @@ export function ForDirector() {
                 </a>
               </div>
             </div>
+
+            {/* Review 3 — Armada */}
+            <div className="relative rounded-3xl bg-white border border-violet-100 shadow-premium p-7 sm:p-8 flex flex-col">
+              <Quote className="absolute -top-4 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
+              <p className="text-base leading-relaxed text-foreground flex-1">
+                «Выражаем благодарность команде аудиторов за профессиональное и
+                качественное проведение проверки бухгалтерской отчётности. Высокая
+                компетентность, внимательность к деталям и глубокое понимание
+                специфики нашей деятельности. Отдельно отмечаем доброжелательное
+                отношение и готовность консультировать. Рекомендуем «Инфо
+                Форвард» как надёжного и профессионального партнёра.»
+              </p>
+              <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <div className="font-semibold text-sm">С. В. Бодунов</div>
+                  <div className="text-sm text-muted-foreground">
+                    Генеральный директор АО «АРМАДА»
+                  </div>
+                </div>
+                <a
+                  href="/review-armada.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-primary self-start sm:self-end whitespace-nowrap"
+                >
+                  Читать полный отзыв
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Review 4 — Estate Management */}
+            <div className="relative rounded-3xl bg-white border border-violet-100 shadow-premium p-7 sm:p-8 flex flex-col">
+              <Quote className="absolute -top-4 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
+              <p className="text-base leading-relaxed text-foreground flex-1">
+                «Выражаем искреннюю благодарность за высокий профессионализм,
+                ответственный подход и внимательное отношение к деталям при
+                проведении аудиторской проверки за 2025 год. Отмечаем чёткую
+                организацию процесса, оперативное предоставление разъяснений и
+                развёрнутые рекомендации. Считаем сотрудничество исключительно
+                положительным и рекомендуем вас как надёжного и компетентного
+                партнёра.»
+              </p>
+              <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <div className="font-semibold text-sm">Е. О. Альховка</div>
+                  <div className="text-sm text-muted-foreground">
+                    Генеральный директор АО «Эстейт менеджмент»
+                  </div>
+                </div>
+                <a
+                  href="/review-estate-management.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-primary self-start sm:self-end whitespace-nowrap"
+                >
+                  Читать полный отзыв
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Review 5 — Kolibri */}
+            <div className="relative rounded-3xl bg-white border border-violet-100 shadow-premium p-7 sm:p-8 flex flex-col">
+              <Quote className="absolute -top-4 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
+              <p className="text-base leading-relaxed text-foreground flex-1">
+                «Выражаем искреннюю благодарность и признательность за высокий
+                профессионализм и компетентность при проведении аудиторской
+                проверки бухгалтерской отчётности за 2025 год. Работа выполнена
+                профессионально, в полном объёме и в установленные сроки. Все
+                вопросы решались оперативно, а взаимодействие с командой оставило
+                только положительные впечатления. Рекомендуем вашу компанию как
+                надёжного партнёра.»
+              </p>
+              <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <div className="font-semibold text-sm">К. Н. Колунова</div>
+                  <div className="text-sm text-muted-foreground">
+                    Главный бухгалтер ООО «Колибри»
+                  </div>
+                </div>
+                <a
+                  href="/review-kolibri.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-primary self-start sm:self-end whitespace-nowrap"
+                >
+                  Читать полный отзыв
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                </a>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
