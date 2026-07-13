@@ -215,6 +215,67 @@ export function ForDirector() {
                 </a>
               </div>
             </div>
+
+            {/* Review 6 — Kursky Bitumny Terminal */}
+            <div className="relative rounded-3xl bg-white border border-violet-100 shadow-premium p-7 sm:p-8 flex flex-col">
+              <Quote className="absolute -top-4 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
+              <p className="text-base leading-relaxed text-foreground flex-1">
+                «Благодарим за качественную аудиторскую проверку бухгалтерской
+                отчётности. Отмечаем высокий уровень коммуникации: взаимодействие
+                с аудитором проходило легко и конструктивно. Специалисты не просто
+                указывали на ошибки, а предлагали практические решения для их
+                устранения. Весь процесс был чётко структурирован и прошёл
+                максимально эффективно и комфортно для всей бухгалтерской службы.»
+              </p>
+              <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <div className="font-semibold text-sm">М. И. Савченков</div>
+                  <div className="text-sm text-muted-foreground">
+                    Генеральный директор ООО «Курский Битумный Терминал»
+                  </div>
+                </div>
+                <a
+                  href="/review-kbt.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-primary self-start sm:self-end whitespace-nowrap"
+                >
+                  Читать полный отзыв
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Review 7 — Servisterminalgrupp */}
+            <div className="relative rounded-3xl bg-white border border-violet-100 shadow-premium p-7 sm:p-8 flex flex-col">
+              <Quote className="absolute -top-4 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
+              <p className="text-base leading-relaxed text-foreground flex-1">
+                «Выражаем искреннюю благодарность за профессиональный подход к
+                проведению аудиторской проверки за 2025 год. Аудиторы проявили
+                глубокое знание законодательства и специфики нашей отрасли.
+                Особенно ценно, что проверка не ограничилась подтверждением цифр:
+                мы получили исчерпывающие рекомендации по оптимизации внутренних
+                процессов и минимизации налоговых рисков. Работа выполнена точно в
+                срок. Рекомендуем как надёжных и компетентных партнёров.»
+              </p>
+              <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                <div>
+                  <div className="font-semibold text-sm">Ю. Е. Лукьянов</div>
+                  <div className="text-sm text-muted-foreground">
+                    Генеральный директор ООО «Сервистерминалгрупп»
+                  </div>
+                </div>
+                <a
+                  href="/review-stg.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-primary self-start sm:self-end whitespace-nowrap"
+                >
+                  Читать полный отзыв
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                </a>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
