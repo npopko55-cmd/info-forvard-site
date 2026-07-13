@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# секреты формы (SMTP-пароль) — только на сервере, никогда в git
+config.local.php
+public/config.local.php
+
 # vercel
 .vercel
 

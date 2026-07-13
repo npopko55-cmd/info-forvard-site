@@ -75,7 +75,7 @@ export function Footer() {
               Раскрытие информации аудиторскими организациями
             </a>
             <a
-              href="/privacy"
+              href="/privacy/"
               className="hover:text-foreground transition-colors"
             >
               Политика обработки персональных данных

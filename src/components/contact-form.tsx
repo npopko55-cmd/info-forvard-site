@@ -37,7 +37,8 @@ const serviceOptions = [
   "Другое / уточню на консультации",
 ];
 
-const WEBHOOK_URL = process.env.NEXT_PUBLIC_FORM_WEBHOOK || "";
+// Same-origin PHP endpoint на РФ-хостинге (reg.ru). Данные не уходят за рубеж.
+const FORM_ENDPOINT = "/send.php";
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -51,6 +52,8 @@ export function ContactForm() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [telegram, setTelegram] = useState(false);
+  const [consent, setConsent] = useState(false);
+  const [botcheck, setBotcheck] = useState(""); // honeypot: люди не заполняют
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,6 +70,8 @@ export function ContactForm() {
       phone,
       email,
       telegram: telegram ? "да" : "нет",
+      consent: consent ? "да" : "нет",
+      botcheck, // honeypot
       page: typeof window !== "undefined" ? window.location.href : "",
       timestamp: new Date().toISOString(),
       utm_source: utm.utm_source,
@@ -79,17 +84,14 @@ export function ContactForm() {
     };
 
     try {
-      if (WEBHOOK_URL) {
-        // Apps Script webhook — no-cors to bypass CORS preflight for google script
-        await fetch(WEBHOOK_URL, {
-          method: "POST",
-          mode: "no-cors",
-          headers: { "Content-Type": "text/plain;charset=utf-8" },
-          body: JSON.stringify(payload),
-        });
-      } else {
-        // fallback: log payload so nothing is lost in dev
-        console.warn("[ContactForm] NEXT_PUBLIC_FORM_WEBHOOK not set", payload);
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || `HTTP ${res.status}`);
       }
       ymGoal("form_submit", { service, industry });
       setSubmitted(true);
@@ -163,6 +165,23 @@ export function ContactForm() {
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {/* honeypot — скрытое поле от ботов, люди его не заполняют */}
+                <input
+                  type="text"
+                  name="botcheck"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  value={botcheck}
+                  onChange={(e) => setBotcheck(e.target.value)}
+                  style={{
+                    position: "absolute",
+                    left: "-9999px",
+                    width: 1,
+                    height: 1,
+                    opacity: 0,
+                  }}
+                />
                 {/* Service type */}
                 <div>
                   <label className="block text-sm font-medium mb-3">
@@ -333,11 +352,20 @@ export function ContactForm() {
                   <input
                     type="checkbox"
                     required
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
                     className="mt-0.5 w-4 h-4 accent-primary"
                   />
                   <span>
-                    Я согласен на обработку персональных данных и ознакомлен с
-                    политикой в отношении обработки персональных данных
+                    Я согласен на обработку персональных данных и ознакомлен с{" "}
+                    <a
+                      href="/privacy/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline hover:text-foreground"
+                    >
+                      политикой в отношении обработки персональных данных
+                    </a>
                   </span>
                 </label>
 
