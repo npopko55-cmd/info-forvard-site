@@ -1,106 +1,53 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Clock, CheckCircle2, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Check, X } from "lucide-react";
 import { ymGoal } from "@/lib/metrika";
-import { readUtm } from "@/lib/utm";
 
-const revenueOptions = ["до 400 млн", "до 800 млн", "до 2 млрд", "2+ млрд"];
-const accountingOptions = ["1", "2", "3", "4 и более"];
-const headcountOptions = ["до 50", "50–250", "250–1000", "1000+"];
-const industryOptions = [
-  "Производство",
-  "Торговля",
-  "Строительство",
-  "IT / Связь",
-  "Транспорт / Логистика",
-  "Медицина",
-  "Финансы",
-  "Услуги",
-  "Медиа",
-  "НКО",
-  "Другое",
-];
-const serviceOptions = [
-  "Обратный звонок / обсудить задачу",
-  "Обязательный аудит БФО",
-  "Налоговый аудит",
-  "Инициативный аудит",
-  "Due Diligence",
-  "Судебная экспертиза и форензик",
-  "Обзорная проверка отчётности",
-  "Задача по МСФО (обсудить)",
-  "Восстановление учёта",
-  "Аутсорсинг главного бухгалтера",
-  "Консультации и сопровождение",
-  "Другое / уточню на консультации",
-];
+// Форма заявок — Яндекс Формы (РФ, данные хранятся в Яндексе). Открывается в модальном окне.
+const YANDEX_FORM_ID = "6a58f4a902848f3f2ed77079";
+const YANDEX_FORM_SRC = `https://forms.yandex.ru/u/${YANDEX_FORM_ID}?iframe=1`;
 
-// Same-origin PHP endpoint на РФ-хостинге (reg.ru). Данные не уходят за рубеж.
-const FORM_ENDPOINT = "/send.php";
+const benefits = [
+  "Бесплатная консультация — обсудим задачу и сроки",
+  "Перезвоним за 15 минут в рабочее время",
+  "Без обязательств",
+];
 
 export function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [revenue, setRevenue] = useState(revenueOptions[1]);
-  const [accounting, setAccounting] = useState(accountingOptions[0]);
-  const [headcount, setHeadcount] = useState(headcountOptions[0]);
-  const [industry, setIndustry] = useState(industryOptions[0]);
-  const [service, setService] = useState(serviceOptions[0]);
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [telegram, setTelegram] = useState(false);
-  const [consent, setConsent] = useState(false);
-  const [botcheck, setBotcheck] = useState(""); // honeypot: люди не заполняют
+  const [open, setOpen] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError(null);
-    setSubmitting(true);
-
-    const utm = readUtm();
-    const payload = {
-      service,
-      industry,
-      revenue,
-      headcount,
-      accounting,
-      phone,
-      email,
-      telegram: telegram ? "да" : "нет",
-      consent: consent ? "да" : "нет",
-      botcheck, // honeypot
-      page: typeof window !== "undefined" ? window.location.href : "",
-      timestamp: new Date().toISOString(),
-      utm_source: utm.utm_source,
-      utm_medium: utm.utm_medium,
-      utm_campaign: utm.utm_campaign,
-      utm_term: utm.utm_term,
-      utm_content: utm.utm_content,
-      referrer: utm.referrer,
-      landing_page: utm.landing_page,
-    };
-
-    try {
-      const res = await fetch(FORM_ENDPOINT, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok || !data.success) {
-        throw new Error(data.error || `HTTP ${res.status}`);
-      }
-      ymGoal("form_submit", { service, industry });
-      setSubmitted(true);
-    } catch (err) {
-      console.error("[ContactForm] submit failed", err);
-      setError("Не удалось отправить заявку. Позвоните: +7 (901) 184-11-90");
-    } finally {
-      setSubmitting(false);
+  // Скрипт авто-ресайза формы Яндекса (подтягиваем при первом открытии)
+  useEffect(() => {
+    if (!open) return;
+    const id = "ya-forms-embed";
+    if (!document.getElementById(id)) {
+      const s = document.createElement("script");
+      s.id = id;
+      s.src = "https://forms.yandex.ru/_static/embed.js";
+      s.async = true;
+      document.body.appendChild(s);
     }
+  }, [open]);
+
+  // Закрытие по Esc + блокировка прокрутки фона, пока окно открыто
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  const openForm = () => {
+    ymGoal("form_open");
+    setOpen(true);
   };
 
   return (
@@ -121,13 +68,13 @@ export function ContactForm() {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-[1fr_400px] gap-6">
-          {/* Form */}
+        <div className="grid lg:grid-cols-[1fr_400px] gap-6 items-stretch">
+          {/* CTA card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white rounded-2xl p-5 sm:p-8 lg:p-10 border border-gray-100 shadow-sm"
+            className="bg-white rounded-2xl p-5 sm:p-8 lg:p-10 border border-gray-100 shadow-sm flex flex-col"
           >
             {/* Steps */}
             <div className="flex flex-col sm:flex-row gap-3 mb-8">
@@ -147,243 +94,29 @@ export function ContactForm() {
               </div>
             </div>
 
-            {submitted ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="rounded-2xl gradient-violet p-8 sm:p-12 text-white text-center"
+            <ul className="space-y-3 mb-8">
+              {benefits.map((b) => (
+                <li key={b} className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded-full bg-violet-50 flex items-center justify-center shrink-0 mt-0.5">
+                    <Check className="w-3.5 h-3.5 text-primary" />
+                  </div>
+                  <span className="text-base text-foreground">{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-auto">
+              <button
+                type="button"
+                onClick={openForm}
+                className="w-full rounded-xl h-14 text-base gradient-violet text-white shadow-lg shadow-violet-500/25 font-semibold transition-opacity hover:opacity-90"
               >
-                <CheckCircle2 className="w-14 h-14 mx-auto mb-4 text-white/90" />
-                <h3 className="text-2xl font-bold mb-2">Заявка принята</h3>
-                <p className="text-white/85">
-                  Перезвоним в течение 15 минут в рабочее время и обсудим вашу
-                  задачу. Если срочно —{" "}
-                  <a href="tel:+79011841190" className="underline">
-                    +7 (901) 184-11-90
-                  </a>
-                </p>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* honeypot — скрытое поле от ботов, люди его не заполняют */}
-                <input
-                  type="text"
-                  name="botcheck"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  aria-hidden="true"
-                  value={botcheck}
-                  onChange={(e) => setBotcheck(e.target.value)}
-                  style={{
-                    position: "absolute",
-                    left: "-9999px",
-                    width: 1,
-                    height: 1,
-                    opacity: 0,
-                  }}
-                />
-                {/* Service type */}
-                <div>
-                  <label className="block text-sm font-medium mb-3">
-                    С какой задачей обратиться?
-                  </label>
-                  <div className="relative">
-                    <select
-                      value={service}
-                      onChange={(e) => setService(e.target.value)}
-                      className="w-full h-12 px-4 pr-10 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-2 focus:ring-violet-100 outline-none transition-all text-base appearance-none cursor-pointer"
-                    >
-                      {serviceOptions.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path
-                          d="M3.5 5.25L7 8.75L10.5 5.25"
-                          stroke="currentColor"
-                          strokeWidth="1.75"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Industry */}
-                <div>
-                  <label className="block text-sm font-medium mb-3">
-                    Отрасль
-                  </label>
-                  <div className="relative">
-                    <select
-                      value={industry}
-                      onChange={(e) => setIndustry(e.target.value)}
-                      className="w-full h-12 px-4 pr-10 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-2 focus:ring-violet-100 outline-none transition-all text-base appearance-none cursor-pointer"
-                    >
-                      {industryOptions.map((opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground">
-                      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path
-                          d="M3.5 5.25L7 8.75L10.5 5.25"
-                          stroke="currentColor"
-                          strokeWidth="1.75"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Revenue */}
-                <div>
-                  <label className="block text-sm font-medium mb-3">
-                    Выручка, руб./год
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {revenueOptions.map((opt) => (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => setRevenue(opt)}
-                        className={`px-5 h-11 rounded-xl text-sm font-medium transition-all ${
-                          revenue === opt
-                            ? "gradient-violet text-white shadow-md shadow-violet-500/20"
-                            : "bg-gray-50 text-foreground hover:bg-gray-100 border border-gray-200"
-                        }`}
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Headcount */}
-                <div>
-                  <label className="block text-sm font-medium mb-3">
-                    Сотрудников в компании
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {headcountOptions.map((opt) => (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => setHeadcount(opt)}
-                        className={`px-5 h-11 rounded-xl text-sm font-medium transition-all ${
-                          headcount === opt
-                            ? "gradient-violet text-white shadow-md shadow-violet-500/20"
-                            : "bg-gray-50 text-foreground hover:bg-gray-100 border border-gray-200"
-                        }`}
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Accounting team */}
-                <div>
-                  <label className="block text-sm font-medium mb-3">
-                    Бухгалтеров в штате
-                  </label>
-                  <div className="flex flex-wrap gap-2">
-                    {accountingOptions.map((opt) => (
-                      <button
-                        key={opt}
-                        type="button"
-                        onClick={() => setAccounting(opt)}
-                        className={`px-5 h-11 rounded-xl text-sm font-medium transition-all ${
-                          accounting === opt
-                            ? "gradient-violet text-white shadow-md shadow-violet-500/20"
-                            : "bg-gray-50 text-foreground hover:bg-gray-100 border border-gray-200"
-                        }`}
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Contacts */}
-                <div>
-                  <label className="block text-sm font-medium mb-3">
-                    Контакты
-                  </label>
-                  <div className="grid sm:grid-cols-2 gap-3">
-                    <input
-                      type="tel"
-                      placeholder="+7"
-                      required
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="h-12 px-4 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-2 focus:ring-violet-100 outline-none transition-all text-base"
-                    />
-                    <input
-                      type="email"
-                      placeholder="Электронная почта"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="h-12 px-4 rounded-xl bg-gray-50 border border-gray-200 focus:border-primary focus:ring-2 focus:ring-violet-100 outline-none transition-all text-base"
-                    />
-                  </div>
-                </div>
-
-                <label className="flex items-center gap-2.5 text-sm cursor-pointer select-none">
-                  <input
-                    type="checkbox"
-                    checked={telegram}
-                    onChange={(e) => setTelegram(e.target.checked)}
-                    className="w-4 h-4 accent-primary"
-                  />
-                  <Send className="w-4 h-4 text-primary" />
-                  Связаться со мной в Telegram
-                </label>
-
-                <label className="flex items-start gap-2.5 text-xs text-muted-foreground cursor-pointer">
-                  <input
-                    type="checkbox"
-                    required
-                    checked={consent}
-                    onChange={(e) => setConsent(e.target.checked)}
-                    className="mt-0.5 w-4 h-4 accent-primary"
-                  />
-                  <span>
-                    Я согласен на обработку персональных данных и ознакомлен с{" "}
-                    <a
-                      href="/privacy/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline hover:text-foreground"
-                    >
-                      политикой в отношении обработки персональных данных
-                    </a>
-                  </span>
-                </label>
-
-                {error && (
-                  <div className="text-sm text-red-600 bg-red-50 border border-red-100 rounded-xl p-3">
-                    {error}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="w-full rounded-xl h-14 text-base gradient-violet text-white shadow-lg shadow-violet-500/25 font-semibold transition-opacity hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
-                >
-                  {submitting ? "Отправляем…" : "Отправить заявку"}
-                </button>
-              </form>
-            )}
+                Оставить заявку
+              </button>
+              <p className="text-xs text-muted-foreground mt-3 text-center">
+                Займёт меньше минуты — заполняется в один экран
+              </p>
+            </div>
           </motion.div>
 
           {/* Contact info */}
@@ -453,6 +186,40 @@ export function ContactForm() {
           </motion.div>
         </div>
       </div>
+
+      {/* Модальное окно с формой Яндекса */}
+      {open && (
+        <div
+          className="fixed inset-0 z-[100] flex items-start sm:items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto"
+          onClick={() => setOpen(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Форма заявки"
+        >
+          <div
+            className="relative bg-white rounded-2xl shadow-2xl w-full max-w-[680px] my-6 sm:my-8"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="Закрыть"
+              className="absolute -top-3 -right-3 w-9 h-9 rounded-full bg-white shadow-md border border-gray-100 flex items-center justify-center text-foreground hover:bg-gray-50 transition-colors z-10"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="p-3 sm:p-5">
+              <iframe
+                src={YANDEX_FORM_SRC}
+                name={`ya-form-${YANDEX_FORM_ID}`}
+                title="Форма заявки"
+                className="w-full rounded-xl"
+                style={{ width: "100%", minHeight: 620, border: 0 }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
