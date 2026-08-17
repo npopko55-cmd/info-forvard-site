@@ -23,7 +23,7 @@ export function LandingPage({ slug }: { slug: string }) {
     <>
       <ScrollToTop />
       <AnalyticsTracker />
-      <LandingNavbar />
+      <LandingNavbar navItems={L.nav} />
       <main>
         <LandingHero hero={L.hero} />
         <LandingServices services={L.services} />

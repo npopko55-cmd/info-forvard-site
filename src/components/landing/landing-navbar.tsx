@@ -5,14 +5,11 @@ import { Menu, X, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Img } from "@/components/img";
 
-const navItems = [
-  { label: "Услуги", href: "#services" },
-  { label: "Кому нужен", href: "#criteria" },
-  { label: "Аудиторы", href: "#team" },
-  { label: "Вопросы", href: "#faq" },
-];
-
-export function LandingNavbar() {
+export function LandingNavbar({
+  navItems,
+}: {
+  navItems: { label: string; href: string }[];
+}) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
