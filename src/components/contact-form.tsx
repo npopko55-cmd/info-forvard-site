@@ -7,16 +7,30 @@ import { ymGoal } from "@/lib/metrika";
 
 // Форма заявок — Яндекс Формы (РФ, данные хранятся в Яндексе). Открывается в модальном окне.
 const YANDEX_FORM_ID = "6a58f4a902848f3f2ed77079";
-const YANDEX_FORM_SRC = `https://forms.yandex.ru/u/${YANDEX_FORM_ID}?iframe=1`;
 
-const benefits = [
+const defaultBenefits = [
   "Бесплатная консультация — обсудим задачу и сроки",
   "Перезвоним за 15 минут в рабочее время",
   "Без обязательств",
 ];
 
-export function ContactForm() {
+export function ContactForm({
+  source,
+  heading = "Перезвоним за 15 минут",
+  lead = "Оставьте заявку — обсудим вашу задачу на бесплатной консультации и договоримся о следующем шаге. Без обязательств.",
+  benefits = defaultBenefits,
+}: {
+  /** Метка лендинга: попадает в Метрику и в адрес формы */
+  source?: string;
+  heading?: string;
+  lead?: string;
+  benefits?: string[];
+}) {
   const [open, setOpen] = useState(false);
+
+  const formSrc =
+    `https://forms.yandex.ru/u/${YANDEX_FORM_ID}?iframe=1` +
+    (source ? `&source=${encodeURIComponent(source)}` : "");
 
   // Скрипт авто-ресайза формы Яндекса (подтягиваем при первом открытии)
   useEffect(() => {
@@ -46,7 +60,7 @@ export function ContactForm() {
   }, [open]);
 
   const openForm = () => {
-    ymGoal("form_open");
+    ymGoal("form_open", source ? { landing: source } : undefined);
     setOpen(true);
   };
 
@@ -60,12 +74,9 @@ export function ContactForm() {
           className="text-center max-w-2xl mx-auto mb-10"
         >
           <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold mb-3 leading-[1.1]">
-            Перезвоним за 15 минут
+            {heading}
           </h2>
-          <p className="text-lg text-muted-foreground">
-            Оставьте заявку — обсудим вашу задачу на бесплатной консультации и
-            договоримся о следующем шаге. Без обязательств.
-          </p>
+          <p className="text-lg text-muted-foreground">{lead}</p>
         </motion.div>
 
         <div className="grid lg:grid-cols-[1fr_400px] gap-6 items-stretch">
@@ -210,7 +221,7 @@ export function ContactForm() {
             </button>
             <div className="p-3 sm:p-5">
               <iframe
-                src={YANDEX_FORM_SRC}
+                src={formSrc}
                 name={`ya-form-${YANDEX_FORM_ID}`}
                 title="Форма заявки"
                 className="w-full rounded-xl"
