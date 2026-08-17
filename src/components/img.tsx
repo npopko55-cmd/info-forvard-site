@@ -1,10 +1,12 @@
+import { withBase } from "@/lib/prefix";
+
 type ImgProps = React.ImgHTMLAttributes<HTMLImageElement> & {
   fill?: boolean;
 };
 
 export function Img({ src, fill, className, style, ...props }: ImgProps) {
   const s = typeof src === "string" ? src : "";
-  const fullSrc = s;
+  const fullSrc = withBase(s);
 
   if (fill) {
     return (

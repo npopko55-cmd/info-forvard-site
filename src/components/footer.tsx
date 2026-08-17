@@ -1,3 +1,5 @@
+import { withBase } from "@/lib/prefix";
+
 export function Footer() {
   return (
     <footer className="border-t border-border py-12">
@@ -6,7 +8,7 @@ export function Footer() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <img
-                src={`/images/logo-v2.png`}
+                src={withBase("/images/logo-v2.png")}
                 alt="ИНФО ФОРВАРД"
                 className="h-9 w-auto object-contain"
               />
@@ -51,7 +53,7 @@ export function Footer() {
               Контакты
             </a>
             <a
-              href={`/disclosure.pdf`}
+              href={withBase("/disclosure.pdf")}
               target="_blank"
               rel="noopener noreferrer"
               className="text-muted-foreground hover:text-foreground transition-colors"
@@ -67,7 +69,7 @@ export function Footer() {
           </div>
           <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
             <a
-              href={`/disclosure.pdf`}
+              href={withBase("/disclosure.pdf")}
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-foreground transition-colors"
@@ -75,7 +77,7 @@ export function Footer() {
               Раскрытие информации аудиторскими организациями
             </a>
             <a
-              href="/privacy/"
+              href={withBase("/privacy/")}
               className="hover:text-foreground transition-colors"
             >
               Политика обработки персональных данных

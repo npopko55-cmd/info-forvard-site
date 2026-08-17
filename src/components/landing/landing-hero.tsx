@@ -67,48 +67,56 @@ export function LandingHero({ hero }: { hero: Landing["hero"] }) {
             </div>
           </motion.div>
 
-          {/* Карточка доверия */}
+          {/* Сова — символ точного взгляда аудитора */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="hidden lg:block"
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="hidden lg:block relative"
           >
-            <div className="rounded-2xl overflow-hidden bg-white border border-gray-200 shadow-premium">
-              <div className="relative w-full aspect-[4/5]">
-                <Img
-                  src="/images/oleynikova-v2.jpg"
-                  alt="Наталья Олейникова, главный аудитор"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-5">
-                <div className="text-base font-semibold leading-tight">
-                  Наталья Олейникова
-                </div>
-                <div className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
-                  Главный аудитор практики · Судебный эксперт
-                </div>
-                <div className="mt-4 pt-4 border-t border-gray-100 grid grid-cols-2 gap-3">
-                  <div>
-                    <div className="font-heading text-xl font-semibold text-primary">
-                      30+
-                    </div>
-                    <div className="text-[11px] text-muted-foreground leading-tight mt-0.5">
-                      лет опыта
-                    </div>
+            {/* Фиолетовое свечение за совой */}
+            <div
+              aria-hidden
+              className="absolute inset-0 -m-16 rounded-full blur-3xl opacity-70 pointer-events-none"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(167,139,250,0.4) 0%, rgba(196,181,253,0.15) 45%, transparent 72%)",
+              }}
+            />
+
+            <div
+              className="relative w-full h-[420px]"
+              style={{
+                maskImage:
+                  "linear-gradient(180deg, transparent 0%, #000 12%, #000 84%, transparent 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(180deg, transparent 0%, #000 12%, #000 84%, transparent 100%)",
+              }}
+            >
+              <Img
+                src="/images/owl-cutout.png"
+                alt="Скульптура совы — символ точного взгляда аудитора"
+                fill
+                className="object-contain drop-shadow-[0_30px_60px_rgba(76,29,149,0.22)]"
+              />
+            </div>
+
+            {/* Цифры под совой */}
+            <div className="relative grid grid-cols-3 gap-2 mt-2">
+              {[
+                { v: "30+", l: "лет опыта" },
+                { v: "500+", l: "проверок" },
+                { v: "СРО", l: "ААС" },
+              ].map((s) => (
+                <div key={s.l} className="text-center">
+                  <div className="font-heading text-2xl font-semibold text-primary">
+                    {s.v}
                   </div>
-                  <div>
-                    <div className="font-heading text-xl font-semibold text-primary">
-                      500+
-                    </div>
-                    <div className="text-[11px] text-muted-foreground leading-tight mt-0.5">
-                      проверок
-                    </div>
+                  <div className="text-[11px] text-muted-foreground leading-tight mt-0.5">
+                    {s.l}
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </motion.div>
         </div>

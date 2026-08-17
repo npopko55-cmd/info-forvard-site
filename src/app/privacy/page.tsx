@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { withBase } from "@/lib/prefix";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -14,7 +15,7 @@ export default function PrivacyPage() {
     <main className="py-16 sm:py-24 bg-white">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <Link
-          href="/"
+          href={withBase("/")}
           className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
