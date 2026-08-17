@@ -81,51 +81,94 @@ const reviews = [
   }
 ];
 
-function plural(n: number) {
-  const mod10 = n % 10;
-  const mod100 = n % 100;
-  if (mod10 === 1 && mod100 !== 11) return "отзыв";
-  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return "отзыва";
-  return "отзывов";
-}
+// Лента рендерится тремя копиями: пользователь всегда в средней,
+// а выход за её границы компенсируется мгновенным сдвигом на ширину копии.
+// Копии одинаковые, поэтому сдвиг незаметен — скролл выглядит бесконечным.
+const COPIES = [0, 1, 2];
 
 export function ForDirector() {
   const trackRef = useRef<HTMLDivElement>(null);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
+  const animatingRef = useRef(false);
   const [active, setActive] = useState(0);
 
-  const update = useCallback(() => {
+  /** Ширина одной копии ленты в пикселях */
+  const setWidth = useCallback(() => {
     const el = trackRef.current;
-    if (!el) return;
-    const { scrollLeft, scrollWidth, clientWidth } = el;
-    setAtStart(scrollLeft < 8);
-    setAtEnd(scrollLeft + clientWidth >= scrollWidth - 8);
-    const card = el.firstElementChild as HTMLElement | null;
-    if (card) {
-      const step = card.offsetWidth + 20;
-      setActive(Math.min(reviews.length - 1, Math.round(scrollLeft / step)));
-    }
+    if (!el) return 0;
+    const first = el.children[0] as HTMLElement | undefined;
+    const secondCopyStart = el.children[reviews.length] as HTMLElement | undefined;
+    if (!first || !secondCopyStart) return 0;
+    return secondCopyStart.offsetLeft - first.offsetLeft;
   }, []);
 
-  useEffect(() => {
-    update();
+  /** Возвращает пользователя в среднюю копию, если он ушёл в крайние */
+  const normalize = useCallback(() => {
     const el = trackRef.current;
     if (!el) return;
-    el.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
-    return () => {
-      el.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-    };
-  }, [update]);
+    const w = setWidth();
+    if (!w) return;
+    let shifted = false;
+    if (el.scrollLeft < w * 0.5) {
+      el.style.scrollBehavior = "auto";
+      el.scrollLeft += w;
+      shifted = true;
+    } else if (el.scrollLeft > w * 1.5) {
+      el.style.scrollBehavior = "auto";
+      el.scrollLeft -= w;
+      shifted = true;
+    }
+    if (shifted) {
+      void el.offsetWidth; // применяем позицию до возврата плавности
+      el.style.scrollBehavior = "";
+    }
+  }, [setWidth]);
 
-  const scrollBy = (dir: 1 | -1) => {
+  const onScroll = useCallback(() => {
     const el = trackRef.current;
     if (!el) return;
-    const card = el.firstElementChild as HTMLElement | null;
-    const step = card ? card.offsetWidth + 20 : el.clientWidth * 0.8;
+    if (!animatingRef.current) normalize();
+
+    const w = setWidth();
+    const card = el.children[0] as HTMLElement | undefined;
+    if (!w || !card) return;
+    const step = w / reviews.length;
+    const rel = ((el.scrollLeft - w) % w + w) % w;
+    setActive(Math.round(rel / step) % reviews.length);
+  }, [normalize, setWidth]);
+
+  // Стартуем со средней копии
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const start = () => {
+      const w = setWidth();
+      if (!w) return;
+      el.style.scrollBehavior = "auto";
+      el.scrollLeft = w;
+      void el.offsetWidth;
+      el.style.scrollBehavior = "";
+    };
+    start();
+    el.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", start);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", start);
+    };
+  }, [onScroll, setWidth]);
+
+  const scrollByCard = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    if (!el) return;
+    normalize(); // сдвигаем до анимации, чтобы её не прервать
+    const w = setWidth();
+    const step = w ? w / reviews.length : el.clientWidth * 0.8;
+    animatingRef.current = true;
     el.scrollBy({ left: dir * step, behavior: "smooth" });
+    window.setTimeout(() => {
+      animatingRef.current = false;
+      normalize();
+    }, 450);
   };
 
   return (
@@ -151,7 +194,7 @@ export function ForDirector() {
         <MagicBento items={stats} />
       </div>
 
-      {/* Testimonials — горизонтальная лента */}
+      {/* Отзывы — бесконечная лента */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -163,27 +206,22 @@ export function ForDirector() {
             <div className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
               Отзывы клиентов говорят сами за себя
             </div>
-            <span className="shrink-0 rounded-full bg-violet-100 border border-violet-200 px-3 py-1 text-xs font-semibold text-violet-800 tabular-nums">
-              {reviews.length} {plural(reviews.length)}
-            </span>
             <div className="h-px flex-1 bg-gray-300" />
 
             <div className="hidden sm:flex items-center gap-2 shrink-0">
               <button
                 type="button"
-                onClick={() => scrollBy(-1)}
-                disabled={atStart}
+                onClick={() => scrollByCard(-1)}
                 aria-label="Предыдущий отзыв"
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-foreground transition-all hover:border-primary hover:text-primary disabled:opacity-35 disabled:hover:border-gray-200 disabled:hover:text-foreground disabled:cursor-not-allowed"
+                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-foreground transition-all hover:border-primary hover:text-primary"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 type="button"
-                onClick={() => scrollBy(1)}
-                disabled={atEnd}
+                onClick={() => scrollByCard(1)}
                 aria-label="Следующий отзыв"
-                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-foreground transition-all hover:border-primary hover:text-primary disabled:opacity-35 disabled:hover:border-gray-200 disabled:hover:text-foreground disabled:cursor-not-allowed"
+                className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-foreground transition-all hover:border-primary hover:text-primary"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -193,55 +231,55 @@ export function ForDirector() {
 
         {/* Лента */}
         <div className="relative">
-          {/* затемнение по краям — подсказка, что лента продолжается */}
+          {/* Затемнение по краям — подсказка, что лента продолжается */}
           <div
             aria-hidden
-            className={`pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-16 z-10 bg-gradient-to-r from-gray-50 to-transparent transition-opacity duration-300 ${
-              atStart ? "opacity-0" : "opacity-100"
-            }`}
+            className="pointer-events-none absolute inset-y-0 left-0 w-10 sm:w-16 z-10 bg-gradient-to-r from-gray-50 to-transparent"
           />
           <div
             aria-hidden
-            className={`pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-16 z-10 bg-gradient-to-l from-gray-50 to-transparent transition-opacity duration-300 ${
-              atEnd ? "opacity-0" : "opacity-100"
-            }`}
+            className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-16 z-10 bg-gradient-to-l from-gray-50 to-transparent"
           />
 
           <div
             ref={trackRef}
-            className="flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex gap-5 overflow-x-auto pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             style={{
               paddingInline: "max(1rem, calc((100vw - 72rem) / 2 + 1rem))",
             }}
           >
-            {reviews.map((r) => (
-              <div
-                key={r.pdf}
-                className="snap-start shrink-0 w-[290px] sm:w-[380px] relative rounded-3xl bg-white border border-violet-100 shadow-premium p-7 sm:p-8 flex flex-col"
-              >
-                <Quote className="absolute -top-4 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
-                <p className="text-[15px] leading-relaxed text-foreground flex-1">
-                  {r.text}
-                </p>
-                <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col gap-3">
-                  <div>
-                    <div className="font-semibold text-sm">{r.name}</div>
-                    <div className="text-sm text-muted-foreground leading-snug">
-                      {r.role}
+            {COPIES.map((copy) =>
+              reviews.map((r) => (
+                <div
+                  key={`${copy}-${r.pdf}`}
+                  aria-hidden={copy !== 1}
+                  className="shrink-0 w-[290px] sm:w-[380px] relative rounded-3xl bg-white border border-violet-100 shadow-premium p-7 sm:p-8 flex flex-col"
+                >
+                  <Quote className="absolute -top-4 left-7 w-10 h-10 text-primary bg-gray-50 p-1.5 rounded-full border border-violet-100" />
+                  <p className="text-[15px] leading-relaxed text-foreground flex-1">
+                    {r.text}
+                  </p>
+                  <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col gap-3">
+                    <div>
+                      <div className="font-semibold text-sm">{r.name}</div>
+                      <div className="text-sm text-muted-foreground leading-snug">
+                        {r.role}
+                      </div>
                     </div>
+                    <a
+                      href={withBase(r.pdf)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      tabIndex={copy === 1 ? 0 : -1}
+                      className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-primary self-start whitespace-nowrap"
+                    >
+                      Читать полный отзыв
+                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                    </a>
                   </div>
-                  <a
-                    href={withBase(r.pdf)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group/link inline-flex items-center gap-1.5 text-sm font-medium text-primary self-start whitespace-nowrap"
-                  >
-                    Читать полный отзыв
-                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
-                  </a>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
 
@@ -258,7 +296,7 @@ export function ForDirector() {
             ))}
           </div>
           <span className="text-xs text-muted-foreground">
-            Листайте, чтобы посмотреть остальные
+            Листайте — отзывы идут по кругу
           </span>
         </div>
       </motion.div>
