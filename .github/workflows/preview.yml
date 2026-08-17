@@ -27,7 +27,8 @@ jobs:
         env:
           NEXT_PUBLIC_BASE_PATH: /info-forvard-site
       - name: Закрыть превью от поисковиков
-        run: printf 'User-agent: *\nDisallow: /\n' > out/robots.txt
+        run: |
+          printf 'User-agent: *\nDisallow: /\n' > out/robots.txt
       - uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
