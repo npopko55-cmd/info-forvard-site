@@ -50,10 +50,10 @@ export function CtaStrip({
         className={
           isPrimary
             ? "group inline-flex items-center justify-center gap-2 rounded-full px-7 h-12 bg-[#16162B] hover:bg-[#26263F] text-white font-medium text-sm transition-all shadow-[0_8px_24px_rgba(22,22,43,0.2)] hover:shadow-[0_12px_32px_rgba(22,22,43,0.3)]"
-            : "group inline-flex items-center justify-center gap-2 rounded-full px-7 h-12 border border-[#16162B]/20 hover:border-primary hover:bg-violet-50 bg-white text-foreground font-medium text-sm transition-all"
+            : "group inline-flex items-center justify-center gap-2 rounded-full px-7 h-12 border-2 border-primary bg-violet-50 text-primary font-semibold text-sm transition-all shadow-[0_6px_20px_rgba(91,33,182,0.14)] hover:bg-primary hover:text-white hover:shadow-[0_10px_28px_rgba(91,33,182,0.28)]"
         }
       >
-        <Icon className={`w-4 h-4 ${isPrimary ? "" : "text-primary"}`} />
+        <Icon className="w-4 h-4" />
         {v.label}
         <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
       </a>
