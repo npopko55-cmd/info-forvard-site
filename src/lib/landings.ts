@@ -147,6 +147,14 @@ export const auditLanding: Landing = {
         icon: Calculator,
       },
       {
+        id: "review",
+        title: "Обзорная проверка отчётности",
+        description:
+          "Проверка отчётности в сокращённом объёме, когда полный аудит по закону не требуется: банку, инвестору или собственнику для промежуточной отчётности. Заключение и перечень найденных рисков.",
+        timeline: "от 3 дней",
+        icon: FileSearch,
+      },
+      {
         id: "forensic",
         title: "Форензик",
         description:

@@ -103,6 +103,7 @@ const services: ServiceItem[] = [
 const moreServices: ServiceItem[] = [
   {
     id: "review",
+    href: "/audit/",
     title: "Обзорная проверка отчётности",
     description:
       "Экспресс-анализ БФО без полного аудита. Выявление рисков за 3–5 дней.",
