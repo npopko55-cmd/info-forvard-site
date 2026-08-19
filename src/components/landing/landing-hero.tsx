@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Check, Phone, ArrowRight, ShieldCheck } from "lucide-react";
 import { Img } from "@/components/img";
 import type { Landing } from "@/lib/landings";
+import { handleLeadClick } from "@/lib/lead-form";
 
 export function LandingHero({ hero }: { hero: Landing["hero"] }) {
   return (
@@ -52,6 +53,7 @@ export function LandingHero({ hero }: { hero: Landing["hero"] }) {
             <div className="flex flex-col sm:flex-row gap-3">
               <a
                 href="#contact"
+                onClick={handleLeadClick}
                 className="group inline-flex items-center justify-center gap-2 rounded-xl h-14 px-8 gradient-violet text-white font-semibold text-base shadow-lg shadow-violet-500/25 transition-opacity hover:opacity-90"
               >
                 Получить консультацию

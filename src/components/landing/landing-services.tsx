@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import type { Landing } from "@/lib/landings";
+import { handleLeadClick } from "@/lib/lead-form";
 
 export function LandingServices({
   services,
@@ -29,6 +30,7 @@ export function LandingServices({
             <motion.a
               key={service.id}
               href="#contact"
+              onClick={handleLeadClick}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

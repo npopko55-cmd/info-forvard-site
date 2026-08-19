@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Clock, Check, X } from "lucide-react";
 import { ymGoal } from "@/lib/metrika";
+import { LEAD_FORM_EVENT } from "@/lib/lead-form";
 
 // Форма заявок — Яндекс Формы (РФ, данные хранятся в Яндексе). Открывается в модальном окне.
 const YANDEX_FORM_ID = "6a58f4a902848f3f2ed77079";
@@ -59,10 +60,17 @@ export function ContactForm({
     };
   }, [open]);
 
-  const openForm = () => {
+  const openForm = useCallback(() => {
     ymGoal("form_open", source ? { landing: source } : undefined);
     setOpen(true);
-  };
+  }, [source]);
+
+  // Форму можно открыть любой кнопкой на странице
+  useEffect(() => {
+    const onOpen = () => openForm();
+    window.addEventListener(LEAD_FORM_EVENT, onOpen);
+    return () => window.removeEventListener(LEAD_FORM_EVENT, onOpen);
+  }, [openForm]);
 
   return (
     <section id="contact" className="py-20 sm:py-28 bg-gray-50">

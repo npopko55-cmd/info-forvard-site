@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Img } from "@/components/img";
+import { handleLeadClick } from "@/lib/lead-form";
 
 export function LandingNavbar({
   navItems,
@@ -57,6 +58,7 @@ export function LandingNavbar({
           </a>
           <a
             href="#contact"
+            onClick={handleLeadClick}
             className="inline-flex items-center justify-center rounded-full bg-primary hover:bg-primary/90 text-white px-6 h-10 text-sm font-medium transition-colors"
           >
             Оставить заявку
@@ -92,7 +94,10 @@ export function LandingNavbar({
           </a>
           <a
             href="#contact"
-            onClick={() => setMobileOpen(false)}
+            onClick={(e) => {
+              setMobileOpen(false);
+              handleLeadClick(e);
+            }}
             className="block w-full text-center rounded-full bg-primary text-white py-3 text-sm font-medium"
           >
             Оставить заявку

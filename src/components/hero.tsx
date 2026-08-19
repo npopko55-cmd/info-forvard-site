@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, TrendingUp, Phone } from "lucide-react";
 import { motion } from "framer-motion";
 import { Img } from "@/components/img";
+import { handleLeadClick } from "@/lib/lead-form";
 
 function CountUp({ target, suffix = "" }: { target: number; suffix?: string }) {
   const [count, setCount] = useState(0);
@@ -150,6 +151,7 @@ export function Hero() {
             >
               <a
                 href="#contact"
+                onClick={handleLeadClick}
                 className="group inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 bg-[#16162B] hover:bg-[#26263F] text-white font-medium text-sm transition-all shadow-[0_8px_24px_rgba(22,22,43,0.25)] hover:shadow-[0_12px_32px_rgba(22,22,43,0.35)]"
               >
                 Рассчитать стоимость
