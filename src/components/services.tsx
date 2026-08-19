@@ -13,12 +13,28 @@ import {
   ClipboardList,
   Building2,
   ChevronDown,
+  type LucideIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { withBase } from "@/lib/prefix";
+import { handleLeadClick } from "@/lib/lead-form";
 
-const services = [
+type ServiceItem = {
+  id: string;
+  title: string;
+  description: string;
+  timeline: string;
+  price: string;
+  popular?: boolean;
+  icon: LucideIcon;
+  /** Адрес посадочной страницы. Если не задан — карточка открывает форму. */
+  href?: string;
+};
+
+const services: ServiceItem[] = [
   {
     id: "mandatory",
+    href: "/audit/",
     title: "Обязательный аудит БФО",
     description:
       "Проверка бухгалтерской отчётности по ФЗ-307. Аудиторское заключение для ФНС, банков и акционеров. Сдаём в срок.",
@@ -29,6 +45,7 @@ const services = [
   },
   {
     id: "tax",
+    href: "/audit/",
     title: "Налоговый аудит",
     description:
       "Проверка налогового учёта и первички. Выявим риски доначислений до камералки.",
@@ -39,6 +56,7 @@ const services = [
   },
   {
     id: "initiative",
+    href: "/audit/",
     title: "Инициативный аудит",
     description:
       "Проверка отчётности и учётной политики по вашей инициативе — до внешней проверки.",
@@ -49,6 +67,7 @@ const services = [
   },
   {
     id: "dd",
+    href: "/forensic/",
     title: "Due Diligence",
     description:
       "Проверка перед сделкой: БФО, налоговые риски, правовая экспертиза. Одна команда.",
@@ -59,6 +78,7 @@ const services = [
   },
   {
     id: "forensic",
+    href: "/forensic/",
     title: "Судебная экспертиза и форензик",
     description:
       "Финансово-экономическая экспертиза для суда. Расследование хищений и корпоративных злоупотреблений.",
@@ -69,6 +89,7 @@ const services = [
   },
   {
     id: "consulting",
+    href: "/buhuchet/",
     title: "Консультации и сопровождение",
     description:
       "Разовые консультации аудитора, абонентское сопровождение, восстановление учёта, проверка проводок.",
@@ -79,7 +100,7 @@ const services = [
   },
 ];
 
-const moreServices = [
+const moreServices: ServiceItem[] = [
   {
     id: "review",
     title: "Обзорная проверка отчётности",
@@ -91,6 +112,7 @@ const moreServices = [
   },
   {
     id: "recovery",
+    href: "/buhuchet/",
     title: "Восстановление учёта",
     description:
       "Восстановление бухгалтерии за прошлые периоды. Приведение в порядок перед аудитом.",
@@ -100,6 +122,7 @@ const moreServices = [
   },
   {
     id: "outsourcing",
+    href: "/buhuchet/",
     title: "Аутсорсинг главного бухгалтера",
     description:
       "Абонентское ведение учёта, отчётность, консультации по налогообложению.",
@@ -135,7 +158,8 @@ export function Services() {
           {services.map((service, i) => (
             <motion.a
               key={service.id}
-              href="#contact"
+              href={service.href ? withBase(service.href) : "#contact"}
+              onClick={service.href ? undefined : handleLeadClick}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -172,7 +196,7 @@ export function Services() {
                 </div>
 
                 <div className="flex items-center gap-2 text-sm font-medium pt-2 text-primary">
-                  Рассчитать стоимость
+                  {service.href ? "Подробнее об услуге" : "Рассчитать стоимость"}
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </div>
               </div>
@@ -195,7 +219,8 @@ export function Services() {
                 {moreServices.map((service, i) => (
                   <motion.a
                     key={service.id}
-                    href="#contact"
+                    href={service.href ? withBase(service.href) : "#contact"}
+                    onClick={service.href ? undefined : handleLeadClick}
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: i * 0.06 }}
@@ -222,7 +247,7 @@ export function Services() {
                         </div>
                       </div>
                       <div className="flex items-center gap-2 text-sm font-medium pt-2 text-primary">
-                        Рассчитать стоимость
+                        {service.href ? "Подробнее об услуге" : "Рассчитать стоимость"}
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                       </div>
                     </div>
