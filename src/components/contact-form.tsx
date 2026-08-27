@@ -7,7 +7,7 @@ import { ymGoal } from "@/lib/metrika";
 import { LEAD_FORM_EVENT } from "@/lib/lead-form";
 
 // Форма заявок — Яндекс Формы (РФ, данные хранятся в Яндексе). Открывается в модальном окне.
-const YANDEX_FORM_ID = "6a58f4a902848f3f2ed77079";
+const YANDEX_FORM_ID = "6a8d946002848fe6ed2fa42d";
 
 const defaultBenefits = [
   "Бесплатная консультация — обсудим задачу и сроки",
