@@ -77,6 +77,14 @@ export function Footer() {
               Раскрытие информации аудиторскими организациями
             </a>
             <a
+              href={withBase("/sout.pdf")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-foreground transition-colors"
+            >
+              Специальная оценка условий труда
+            </a>
+            <a
               href={withBase("/privacy/")}
               className="hover:text-foreground transition-colors"
             >
