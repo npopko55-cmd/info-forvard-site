@@ -1,6 +1,6 @@
 import { withBase } from "@/lib/prefix";
 
-export function Footer() {
+export function Footer({ sectionBase = "" }: { sectionBase?: string }) {
   return (
     <footer className="border-t border-border py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,22 +35,28 @@ export function Footer() {
 
           <nav className="flex flex-col sm:flex-row gap-4 sm:gap-6 text-sm">
             <a
-              href="#services"
+              href={`${sectionBase}#services`}
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               Услуги
             </a>
             <a
-              href="#team"
+              href={`${sectionBase}#team`}
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               О компании
             </a>
             <a
-              href="#contact"
+              href={`${sectionBase}#contact`}
               className="text-muted-foreground hover:text-foreground transition-colors"
             >
               Контакты
+            </a>
+            <a
+              href={withBase("/articles/")}
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Статьи
             </a>
             <a
               href={withBase("/disclosure.pdf")}
