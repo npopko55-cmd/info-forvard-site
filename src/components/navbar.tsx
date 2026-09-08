@@ -5,11 +5,13 @@ import { Menu, X, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Img } from "@/components/img";
 import { handleLeadClick } from "@/lib/lead-form";
+import { withBase } from "@/lib/prefix";
 
 const navItems = [
   { label: "Услуги", href: "#services" },
   { label: "О компании", href: "#team" },
   { label: "Как работаем", href: "#process" },
+  { label: "Статьи", href: "/articles/" },
   { label: "Контакты", href: "#contact" },
 ];
 
@@ -43,7 +45,7 @@ export function Navbar() {
           {navItems.map((item) => (
             <a
               key={item.href}
-              href={item.href}
+              href={item.href.startsWith("#") ? item.href : withBase(item.href)}
               className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
             >
               {item.label}
@@ -81,7 +83,7 @@ export function Navbar() {
           {navItems.map((item) => (
             <a
               key={item.href}
-              href={item.href}
+              href={item.href.startsWith("#") ? item.href : withBase(item.href)}
               className="block py-2 text-sm font-medium text-foreground"
               onClick={() => setMobileOpen(false)}
             >

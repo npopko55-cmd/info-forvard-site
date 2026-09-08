@@ -11,6 +11,7 @@ import { FAQ } from "@/components/faq";
 import { ContactForm } from "@/components/contact-form";
 import { Footer } from "@/components/footer";
 import { ClientsSlider } from "@/components/clients-slider";
+import { ArticlesPreview } from "@/components/articles-preview";
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
         <ForDirector />
         <ContactForm />
         <FAQ />
+        <ArticlesPreview />
       </main>
       <Footer />
     </>

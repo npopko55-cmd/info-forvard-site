@@ -48,8 +48,8 @@ export default function ArticlesIndexPage() {
                 <h2 className="font-heading text-xl sm:text-2xl font-semibold leading-snug mb-3">
                   {a.cardTitle}
                 </h2>
-                <p className="text-[15px] leading-relaxed text-muted-foreground line-clamp-3">
-                  {a.lead}
+                <p className="text-[15px] leading-relaxed text-muted-foreground">
+                  {a.excerpt}
                 </p>
 
                 <span className="inline-flex items-center gap-2 text-sm font-medium text-primary mt-5">
