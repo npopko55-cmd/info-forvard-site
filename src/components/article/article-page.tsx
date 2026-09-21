@@ -2,6 +2,7 @@ import { ArrowLeft, Clock, CalendarDays, Phone } from "lucide-react";
 import { ArticleNavbar } from "@/components/article/article-navbar";
 import { ArticleBody } from "@/components/article/article-body";
 import { Footer } from "@/components/footer";
+import { Img } from "@/components/img";
 import { withBase } from "@/lib/prefix";
 import type { Article } from "@/lib/articles";
 
@@ -37,6 +38,14 @@ export function ArticlePage({ article }: { article: Article }) {
             </span>
           </div>
 
+          {article.cover && (
+            <Img
+              src={article.cover.src}
+              alt={article.cover.alt}
+              className="w-full aspect-[16/9] object-cover rounded-2xl mb-8"
+            />
+          )}
+
           <p className="text-lg leading-[1.7] text-foreground mb-8 pl-5 border-l-2 border-primary">
             {article.lead}
           </p>
@@ -46,12 +55,10 @@ export function ArticlePage({ article }: { article: Article }) {
           {/* Призыв к действию */}
           <aside className="mt-14 rounded-2xl border border-violet-100 bg-violet-50 p-7 sm:p-9">
             <h2 className="font-heading text-2xl font-semibold mb-3 leading-snug">
-              Не уверены, что резерв в вашем учёте сформирован верно?
+              {article.cta.title}
             </h2>
             <p className="text-[16px] leading-relaxed text-foreground/85 mb-6">
-              Проверим методологию учёта до того, как на неё укажет аудитор или
-              налоговая. Разберём вашу ситуацию на бесплатной консультации —
-              без обязательств.
+              {article.cta.text}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <a
