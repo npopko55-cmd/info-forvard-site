@@ -196,37 +196,53 @@ export function ArticleBody({ blocks }: { blocks: ArticleBlock[] }) {
           );
         }
 
-        if (b.type === "table" && b.layout === "text") {
+        if (b.type === "table" && (b.layout === "text" || b.layout === "plain")) {
+          const plain = b.layout === "plain";
           return (
-            <div key={i} className="my-2 overflow-x-auto rounded-2xl border border-gray-200">
-              <table className="w-full border-collapse text-[15px] min-w-[520px]">
-                <thead>
-                  <tr className="bg-violet-50">
-                    {b.head.map((h) => (
-                      <th key={h} className="px-4 py-3 text-left font-semibold text-violet-900 border-b border-violet-100">
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {b.rows.map((row, ri) => (
-                    <tr key={ri} className="border-b border-gray-100 last:border-0">
-                      {row.map((cell, ci) => (
-                        <td
-                          key={ci}
-                          className={`px-4 py-3 align-top leading-snug ${
-                            ci === 0 ? "w-[34%] font-semibold text-foreground" : "text-foreground/85"
-                          }`}
-                        >
-                          {withLinks(cell)}
-                        </td>
+            <figure key={i} className="my-2">
+              {b.caption && (
+                <figcaption className="text-sm font-semibold text-foreground mb-2.5">
+                  {b.caption}
+                </figcaption>
+              )}
+              <div className="overflow-x-auto rounded-2xl border border-gray-200">
+                <table className="w-full border-collapse text-[15px] min-w-[520px]">
+                  <thead>
+                    <tr className="bg-violet-50">
+                      {b.head.map((h) => (
+                        <th key={h} className="px-4 py-3 text-left font-semibold text-violet-900 border-b border-violet-100">
+                          {h}
+                        </th>
                       ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody>
+                    {b.rows.map((row, ri) => (
+                      <tr key={ri} className="border-b border-gray-100 last:border-0">
+                        {row.map((cell, ci) => (
+                          <td
+                            key={ci}
+                            className={`px-4 py-3 align-top leading-snug ${
+                              ci === 0
+                                ? plain
+                                  ? "w-[55%] text-foreground/85"
+                                  : "w-[34%] font-semibold text-foreground"
+                                : "text-foreground/85"
+                            }`}
+                          >
+                            {cell.split("\n").map((lineText, li) => (
+                              <span key={li} className={li ? "block mt-2" : "block"}>
+                                {withLinks(lineText)}
+                              </span>
+                            ))}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </figure>
           );
         }
 
